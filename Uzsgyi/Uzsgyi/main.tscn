@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbk7urls8ksb8"]
+
+[ext_resource type="Script" uid="uid://d3qlg523dqkeq" path="res://Scripts/Main.cs" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://bsq5qk14dynyn" path="res://Assets/images.png" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://ci7scjkmyew7x" path="res://Assets/Macskamage.png" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://clpox0h5koelb" path="res://Assets/fel.jpg" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://cr5ulbbp4sbnh" path="res://Assets/icon.svg" id="5_lquwl"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("ScoreLabel", "CoinLabel", "HPLabel", "HPBar", "LevelLabel", "LevelPrice", "Enemy")]
+script = ExtResource("1_0xm2m")
+ScoreLabel = NodePath("Pontok")
+CoinLabel = NodePath("Coins")
+HPLabel = NodePath("Health")
+HPBar = NodePath("Health/ProgressBar")
+LevelLabel = NodePath("Level")
+LevelPrice = NodePath("LevelPrice")
+Enemy = NodePath("suti")
+
+[node name="suti" type="Sprite2D" parent="."]
+position = Vector2(413, 258)
+texture = ExtResource("1_ig7tw")
+centered = false
+
+[node name="TextureButton" type="TextureButton" parent="suti"]
+offset_right = 192.0
+offset_bottom = 186.0
+scale = Vector2(0.975217, 1.02818)
+action_mode = 0
+
+[node name="LvlButton" type="Sprite2D" parent="."]
+position = Vector2(1055, 228)
+scale = Vector2(0.370695, 0.370695)
+texture = ExtResource("4_1bvp3")
+
+[node name="button" type="TextureButton" parent="LvlButton"]
+offset_left = -178.0
+offset_top = -181.0
+offset_right = 176.0
+offset_bottom = 181.0
+
+[node name="dummy" type="Sprite2D" parent="."]
+position = Vector2(747, 327)
+scale = Vector2(4.24, 3.57834)
+texture = ExtResource("3_h2yge")
+
+[node name="Save" type="Sprite2D" parent="."]
+position = Vector2(170, 381)
+texture = ExtResource("5_lquwl")
+
+[node name="Savebutton" type="TextureButton" parent="Save"]
+offset_left = -63.0
+offset_top = -63.0
+offset_right = 63.0
+offset_bottom = 64.0
+
+[node name="Pontok" type="Label" parent="."]
+offset_right = 80.0
+offset_bottom = 23.0
+text = "PONTOK:  "
+
+[node name="Coins" type="Label" parent="."]
+offset_left = 730.0
+offset_top = 182.0
+offset_right = 880.0
+offset_bottom = 205.0
+text = "Coins: "
+
+[node name="Health" type="Label" parent="."]
+offset_left = 412.0
+offset_top = 191.0
+offset_right = 596.0
+offset_bottom = 214.0
+text = "Health: "
+
+[node name="ProgressBar" type="ProgressBar" parent="Health"]
+modulate = Color(0.942835, 0.461345, 0.461946, 1)
+self_modulate = Color(0.845121, 0.617763, 0.881698, 1)
+layout_mode = 0
+offset_top = 27.0
+offset_right = 172.0
+offset_bottom = 54.0
+step = 10.0
+value = 100.0
+show_percentage = false
+
+[node name="Level" type="Label" parent="."]
+offset_left = 729.0
+offset_top = 233.0
+offset_right = 815.0
+offset_bottom = 256.0
+text = "Level:"
+
+[node name="LevelPrice" type="Label" parent="."]
+offset_left = 985.0
+offset_top = 132.0
+offset_right = 1120.0
+offset_bottom = 155.0
+text = "Price: "
+
+[node name="Mentés" type="Label" parent="."]
+offset_left = 110.0
+offset_top = 286.0
+offset_right = 223.0
+offset_bottom = 309.0
+text = "Mentés"
+
+[connection signal="pressed" from="suti/TextureButton" to="." method="OnClickButton"]
+[connection signal="pressed" from="LvlButton/button" to="." method="OnLevelClickButton"]
+[connection signal="pressed" from="Save/Savebutton" to="." method="SaveGame"]
