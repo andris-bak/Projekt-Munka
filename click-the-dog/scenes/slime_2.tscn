@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://cj5ttqnmcntyg"]
+
+[ext_resource type="Texture2D" uid="uid://b2fp53ae7psh" path="res://enemies/slime_dog2-Sheet.png" id="1_t08y7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p3y8"]
+atlas = ExtResource("1_t08y7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwie8"]
+atlas = ExtResource("1_t08y7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgku2"]
+atlas = ExtResource("1_t08y7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w05tn"]
+atlas = ExtResource("1_t08y7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11h6u"]
+atlas = ExtResource("1_t08y7")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgxtn"]
+atlas = ExtResource("1_t08y7")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vsae"]
+atlas = ExtResource("1_t08y7")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge2rc"]
+atlas = ExtResource("1_t08y7")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ut7lr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p3y8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwie8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgku2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w05tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11h6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgxtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vsae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge2rc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="slime_2" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(301, 138)
+scale = Vector2(1.586, 1.586)
+sprite_frames = SubResource("SpriteFrames_ut7lr")
+animation = &"idle"

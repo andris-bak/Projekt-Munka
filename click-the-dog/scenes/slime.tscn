@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://cfhsot07vgrnr"]
+
+[ext_resource type="Texture2D" uid="uid://cd7e7tblif4bl" path="res://enemies/slime_dog-Sheet.png" id="1_371uh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2gj0"]
+atlas = ExtResource("1_371uh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6pvg"]
+atlas = ExtResource("1_371uh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjw23"]
+atlas = ExtResource("1_371uh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2npkn"]
+atlas = ExtResource("1_371uh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd6lc"]
+atlas = ExtResource("1_371uh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gstla"]
+atlas = ExtResource("1_371uh")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5wyi"]
+atlas = ExtResource("1_371uh")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l8pv"]
+atlas = ExtResource("1_371uh")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vnioy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2gj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6pvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjw23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2npkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd6lc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gstla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5wyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l8pv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="slime" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(301, 138)
+scale = Vector2(1.58594, 1.58594)
+sprite_frames = SubResource("SpriteFrames_vnioy")
+animation = &"idle"
