@@ -155,10 +155,9 @@ public partial class Main : Node2D
 			else
 			{
 				GD.Print("5. szint elérve! BOSS BETÖLTVE!");
-				hp = 1000;
+				hp = 2000;
 				HPBar.MaxValue = hp;
 				UpdateHP();
-				
 			}
 		}
 		
