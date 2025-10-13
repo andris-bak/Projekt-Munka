@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://bla6t6qp38sla"]
+[gd_scene load_steps=32 format=4 uid="uid://bla6t6qp38sla"]
 
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
@@ -17,6 +17,22 @@
 [ext_resource type="Texture2D" uid="uid://cod3xur5jcbdt" path="res://assets/lvlup_button_colored.png" id="10_ti7n2"]
 [ext_resource type="Texture2D" uid="uid://bypdqnrxyajj7" path="res://assets/exit_button.png" id="12_g6mq7"]
 [ext_resource type="Texture2D" uid="uid://byt8mjrbo8u1n" path="res://assets/margo.png" id="12_ti7n2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyre6"]
+atlas = ExtResource("5_pyre6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7supi"]
+atlas = ExtResource("5_pyre6")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgbfl"]
+atlas = ExtResource("6_wgbfl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf8k4"]
+atlas = ExtResource("6_wgbfl")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qg8qh"]
 atlas = ExtResource("5_pyre6")
@@ -50,16 +66,30 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("6_wgbfl")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pyre6"]
-atlas = ExtResource("5_pyre6")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7supi"]
-atlas = ExtResource("5_pyre6")
-region = Rect2(64, 0, 64, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_7supi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyre6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7supi")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgbfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf8k4")
+}],
+"loop": true,
+"name": &"Idle2",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qg8qh")
@@ -105,17 +135,6 @@ animations = [{
 "loop": false,
 "name": &"attack2",
 "speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pyre6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7supi")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aluu1"]

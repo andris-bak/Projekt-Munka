@@ -76,6 +76,11 @@ public partial class Main : Node2D
 		ChangeEnemyScene();
 	}
 	
+	public override void _Process(double delta)
+	{
+		ChangePosition(); 
+	}
+	
 	public void OnClickButton()
 	{
 		score++;
@@ -83,9 +88,13 @@ public partial class Main : Node2D
 		UpdateHP();
 		UpdateScoreLabel();
 
-		if (PlayerSprite != null)
+		if(PlayerSprite != null &&  PlayerSprite.Position == new Vector2(435,173))
 		{
 			PlayerSprite.Play("attack"); 
+		}
+		if( PlayerSprite != null && PlayerSprite.Position == new Vector2(205,173))
+		{
+			PlayerSprite.Play("attack2");
 		}
 		hitSound.Play();
 		
@@ -195,6 +204,13 @@ public partial class Main : Node2D
 		if (PlayerSprite != null && PlayerSprite.Animation != "Idle")
 		{
 			PlayerSprite.Play("Idle"); 
+		}
+		if 
+		(PlayerSprite.Position == new Vector2(435,173)
+		&& PlayerSprite != null 
+		&& PlayerSprite.Animation != "Idle2")
+		{
+			PlayerSprite.Play("Idle2");
 		}
 	}
 	
@@ -368,6 +384,23 @@ public partial class Main : Node2D
 		else
 		{
 			GD.Print("Nincs mentési fájl a törléshez.");
+		}
+	}
+	
+	
+	
+	public void ChangePosition()
+	{
+
+		if (Input.IsActionJustPressed("switchLeft"))
+		{
+			PlayerSprite.Position = new Vector2(205,173);
+			PlayerSprite.Play("Idle2");
+		}
+		if (Input.IsActionJustPressed("switchRight"))
+		{
+			PlayerSprite.Position = new Vector2(435,173);
+			PlayerSprite.Play("Idle");
 		}
 	}
 }
