@@ -10,7 +10,6 @@ public partial class Animation : AnimatedSprite2D
 	{
 		if (EnemyAnimator != null)
 		{
-	   
 			EnemyAnimator.Play("idle"); 
    		}
 	

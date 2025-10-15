@@ -3,73 +3,58 @@ using System;
 
 public partial class Main : Node2D
 {
-	Random rnd = new Random();
-	private int score = 0;
-	private int coin = 0;
-	private int hp = 10;
-	private int level = 1;
-	private int levelprice = 2;
-	private int min = 10;
-	private int max = 20;
-	private int counter = 1;
-	private Player player;
-	private Enemy enemy;
-	private AudioStreamPlayer bgmPlayer; 
-	private AudioStreamPlayer hitSound; 
-	private PackedScene[] enemyScenes; 
-	private Node2D currentEnemy; 
-	private AnimatedSprite2D maincat;
-	private int currentEnemyIndex = 0;
+	private GameManager GM;
+
+	private AudioStreamPlayer bgmPlayer; 
+	private AudioStreamPlayer hitSound; 
+	private PackedScene[] enemyScenes; 
+	private Node2D currentEnemy; 
+	private AnimatedSprite2D maincat; 
+	private int currentEnemyIndex = 0; 
 	
-	[Export]
-	public Label ScoreLabel;
-	[Export]
-	public Label CoinLabel;
-	[Export]
-	public Label HPLabel;
-	[Export]
-	public ProgressBar HPBar;
-	[Export]
-	public Label LevelLabel;
-	[Export]
-	public Label LevelPrice;
-	[Export]
-	public Sprite2D Enemy;
-	[Export]
-	public AnimatedSprite2D PlayerSprite;
+	[Export] public Label ScoreLabel;
+	[Export] public Label CoinLabel;
+	[Export] public Label HPLabel;
+	[Export] public ProgressBar HPBar;
+	[Export] public Label LevelLabel;
+	[Export] public Label LevelPrice;
+	[Export] public Sprite2D Enemy;
+	[Export] public AnimatedSprite2D PlayerSprite;
 	
 	public override void _Ready()
 	{
-		player = new Player();
-		enemy = new Enemy();
-		hp = enemy.Health;
-		HPBar.MaxValue = enemy.Health;
-		HPBar.Value = enemy.Health;
-		HPBar.Step = player.Damage;
+		GM = GetNode<GameManager>("/root/GameManager");
+		GM.HP = GM.EnemyData.Health;
+		LoadGame();
+
+		HPBar.MaxValue = GM.MaxHP;
+		HPBar.Value = GM.HP;
+		HPBar.Step = GM.PlayerData.Damage; 
+		
 		UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateHP();
 		UpdateLevel();
 		UpdateLevelPrice();
-		LoadGame();
+
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
 		
 		if(bgmPlayer != null)
 		{
 			bgmPlayer.Play();
-			bgmPlayer.Finished += OnMusicFinished; 
+			bgmPlayer.Finished += OnMusicFinished; 
 		}
-		 
+		 
 		
 		enemyScenes = new PackedScene[]
 		{
-			 GD.Load<PackedScene>("res://scenes/slime.tscn"), 
-			 GD.Load<PackedScene>("res://scenes/slime_2.tscn"), 
+			 GD.Load<PackedScene>("res://scenes/slime.tscn"), 
+			 GD.Load<PackedScene>("res://scenes/slime_2.tscn"), 
 			 GD.Load<PackedScene>("res://scenes/slime_3.tscn"),
 			
 			//Boss:
-			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"), 
+			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"), 
 
 		};
 		
@@ -78,112 +63,122 @@ public partial class Main : Node2D
 	
 	public override void _Process(double delta)
 	{
-		ChangePosition(); 
+		ChangePosition(); 
 	}
 	
 	public void OnClickButton()
 	{
-		score++;
-		hp -= player.Damage;
+		// GM.Score, GM.HP és GM.PlayerData használata
+		GM.Score++;
+		GM.HP -= GM.PlayerData.Damage;
+		
 		UpdateHP();
 		UpdateScoreLabel();
 
-		if(PlayerSprite != null &&  PlayerSprite.Position == new Vector2(435,173))
+		// Animációk
+		if(PlayerSprite != null)
 		{
-			PlayerSprite.Play("attack"); 
+			if (PlayerSprite.Position == new Vector2(435, 173))
+			{
+				PlayerSprite.Play("attack"); 
+			}
+			else if (PlayerSprite.Position == new Vector2(205, 173))
+			{
+				PlayerSprite.Play("attack2");
+			}
 		}
-		if( PlayerSprite != null && PlayerSprite.Position == new Vector2(205,173))
-		{
-			PlayerSprite.Play("attack2");
-		}
+		
 		hitSound.Play();
 		
-		if(hp <= 0)
+		if(GM.HP <= 0)
 		{
-			coin += counter;
-			score = 0;
-			hp = rnd.Next(min,max);
-			HPBar.MaxValue = hp;
+			// GM.Coin, GM.Counter, GM.Rnd, GM.MinHP, GM.MaxHP használata
+			GM.Coin += GM.Counter;
+			GM.Score = 0;
+			
+			GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
+			HPBar.MaxValue = GM.HP;
 			
 			UpdateScoreLabel();
 			UpdateCoinLabel();
 			UpdateHP();
-			ChangeEnemyScene(); 
+			ChangeEnemyScene(); 
 			
 		}
 	}
 	
 	public void OnLevelClickButton()
 	{
-		if (coin >= levelprice)
+		// GM.Coin, GM.LevelPrice és GM.Level használata
+		if (GM.Coin >= GM.LevelPrice)
 		{
-			if(level == 5)
+			if(GM.Level == 5)
 			{
 				GD.Print("Elérted a maximális szintet te termesz");
 			}
 			else
 			{
-				min = min * 2;
-				max = max * 2;
-				level++;
-				player.LevelUp();
-				coin = coin-levelprice;
-				levelprice = levelprice * 2;
-				counter++;
-				hp = rnd.Next(min, max);
-				HPBar.MaxValue = hp;
+				// GM.MinHP és GM.MaxHP növelése
+				GM.MinHP = GM.MinHP * 2;
+				GM.MaxHP = GM.MaxHP * 2;
+				GM.Level++;
+				GM.PlayerData.LevelUp(); 
+				GM.Coin = GM.Coin - GM.LevelPrice;
+				GM.LevelPrice = GM.LevelPrice * 2;
+				GM.Counter++;
+				
+				// GM.Rnd használata
+				GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
+				HPBar.MaxValue = GM.HP;
 
 				UpdateCoinLabel();
 				UpdateLevel();
 				UpdateLevelPrice();
 				UpdateHP();
-				
 			}
-			
 		}
-		
 	}
 	
 	public void OnQuitButtonPressed()
 	{
+		SaveGame();
 		GetTree().Quit();
 	}
 	
 	private void ChangeEnemyScene()
 	{
-		currentEnemyIndex = rnd.Next(0,4);
-		int bossIndex = enemyScenes.Length - 1; 
+		// GM.Rnd és GM.Level használata
+		currentEnemyIndex = GM.Rnd.Next(0, enemyScenes.Length); 
+		int bossIndex = enemyScenes.Length - 1; 
 
 		if (currentEnemyIndex == bossIndex)
 		{
-			if (level < 5) 
+			if (GM.Level < 5) 
 			{
-				currentEnemyIndex = 0; 
+				currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
 				GD.Print("Boss kihagyva: Először el kell érned a(z) 5. szintet!");
 			}
 			else
 			{
 				GD.Print("5. szint elérve! BOSS BETÖLTVE!");
-				hp = 2000;
-				HPBar.MaxValue = hp;
+				GM.HP = 2000;
+				HPBar.MaxValue = GM.HP;
 				UpdateHP();
 			}
 		}
 		
-		// C. Előző Ellenség Törlése
 		if (currentEnemy != null)
 		{
 		 	 currentEnemy.QueueFree();
 			 currentEnemy = null;
 		}
 
-
-		PackedScene newEnemyScene = enemyScenes[currentEnemyIndex]; 
+		PackedScene newEnemyScene = enemyScenes[currentEnemyIndex]; 
 		currentEnemy = newEnemyScene.Instantiate<Node2D>();
 		
 
-		AddChild(currentEnemy); 
-		currentEnemy.Position = new Vector2(19, 11); 
+		AddChild(currentEnemy); 
+		currentEnemy.Position = new Vector2(19, 11); 
 		
 		GD.Print($"Új ellenség betöltve: {currentEnemy.Name}");
 		
@@ -201,16 +196,16 @@ public partial class Main : Node2D
 		
 	private void OnPlayerAnimationFinished()
 	{
-		if (PlayerSprite != null && PlayerSprite.Animation != "Idle")
+		if (PlayerSprite != null)
 		{
-			PlayerSprite.Play("Idle"); 
-		}
-		if 
-		(PlayerSprite.Position == new Vector2(435,173)
-		&& PlayerSprite != null 
-		&& PlayerSprite.Animation != "Idle2")
-		{
-			PlayerSprite.Play("Idle2");
+			if (PlayerSprite.Position == new Vector2(435, 173) && PlayerSprite.Animation != "Idle")
+			{
+				PlayerSprite.Play("Idle"); 
+			}
+			else if (PlayerSprite.Position == new Vector2(205, 173) && PlayerSprite.Animation != "Idle2")
+			{
+				PlayerSprite.Play("Idle2");
+			}
 		}
 	}
 	
@@ -219,11 +214,13 @@ public partial class Main : Node2D
 		bgmPlayer.Play();
 	}
 		
+	// --- UI Frissítő Metódusok (GM. adatok alapján) ---
+		
 	private void UpdateScoreLabel()
 	{
 		if (ScoreLabel != null)
 		{
-			ScoreLabel.Text = "Pontok: " + score.ToString();
+			ScoreLabel.Text = "Pontok: " + GM.Score.ToString();
 		}
 		
 	}
@@ -232,7 +229,7 @@ public partial class Main : Node2D
 	{
 		if (LevelLabel != null)
 		{
-			LevelLabel.Text = "Level: " + level.ToString();
+			LevelLabel.Text = "Level: " + GM.Level.ToString();
 		}
 		
 	}
@@ -241,9 +238,9 @@ public partial class Main : Node2D
 	{
 		if (LevelPrice != null)
 		{
-			LevelPrice.Text = "Price: " + levelprice.ToString();
+			LevelPrice.Text = "Price: " + GM.LevelPrice.ToString();
 		}
-		if(level == 5)
+		if(GM.Level == 5)
 		{
 			LevelPrice.Text = "Elérted a maximális szintet! ";
 		}
@@ -254,7 +251,7 @@ public partial class Main : Node2D
 	{
 		if(CoinLabel != null)
 		{
-			CoinLabel.Text = coin.ToString();
+			CoinLabel.Text = GM.Coin.ToString();
 		}
 	}
 	
@@ -263,38 +260,41 @@ public partial class Main : Node2D
 		if (HPBar == null)
 		{
 			GD.PrintErr("HIBA: A HPBar null az UpdateHP-ben!");
-			return; 
-   	 	}
-		if(hp <= HPBar.MaxValue && hp >= 0)
+			return; 
+   	 	}
+		if(GM.HP <= HPBar.MaxValue && GM.HP >= 0)
 		{
 			if (HPLabel != null)
 			{
-				HPLabel.Text = "Health: " + hp.ToString();
+				HPLabel.Text = "Health: " + GM.HP.ToString();
 			}
 		}
 		if (HPBar != null)
 		{
-			HPBar.Value = Math.Max(0, hp);
+			HPBar.Value = Math.Max(0, GM.HP);
 		}
 	}
 	
+	// --- Mentés / Betöltés Metódusok (GM. adatok kezelése) ---
+
 	private const string SAVE_PATH = "user://clicker_save.json";
 	
 	public void SaveGame()
 	{
-		Godot.Collections.Dictionary dataDict = new Godot.Collections.Dictionary 
+		// GM adatok mentése
+		Godot.Collections.Dictionary dataDict = new Godot.Collections.Dictionary 
 		{
-			{"Score", score},
-			{"Coin", coin},
-			{"Level", level},
-			{"LevelPrice", levelprice},
-			{"MinHP", min},
-			{"MaxHP", max},
-			{"Counter", counter},
+			{"Score", GM.Score},
+			{"Coin", GM.Coin},
+			{"Level", GM.Level},
+			{"LevelPrice", GM.LevelPrice},
+			{"MinHP", GM.MinHP},
+			{"MaxHP", GM.MaxHP},
+			{"Counter", GM.Counter},
 
 		
-			{"PlayerLevel", player.Level},
-			{"PlayerDamage", player.Damage}
+			{"PlayerLevel", GM.PlayerData.Level},
+			{"PlayerDamage", GM.PlayerData.Damage}
 		};
 		
 		string jsonString = Json.Stringify(dataDict);
@@ -303,8 +303,8 @@ public partial class Main : Node2D
 		if (file != null)
 		{
 			file.StoreString(jsonString);
-	   	 	GD.Print("Játék elmentve! " + SAVE_PATH + " útvonalra");
-   	 	}
+	   	 	GD.Print("Játék elmentve! " + SAVE_PATH + " útvonalra");
+   	 	}
 		else
 		{
 			GD.PrintErr("Hiba a mentéskor: Nem lehet megnyitni a fájlt.");
@@ -315,8 +315,8 @@ public partial class Main : Node2D
 	{
 		if (!Godot.FileAccess.FileExists(SAVE_PATH))
 		{
-	   	 	GD.Print("Mentési fájl nem található, új játék indul.");
-			return; 
+	   	 	GD.Print("Mentési fájl nem található, új játék indul.");
+			return; 
 		}	
 
 		using var file = Godot.FileAccess.Open(SAVE_PATH, Godot.FileAccess.ModeFlags.Read);
@@ -333,24 +333,25 @@ public partial class Main : Node2D
 		{
 			GD.PrintErr("Hiba a betöltéskor: Sérült mentési fájl formátum.");
 			return;
-   		}
+   		}
 	
 		Godot.Collections.Dictionary dataDict = dataVariant.As<Godot.Collections.Dictionary>();
 
-		score = (int)(long)dataDict["Score"];
-		coin = (int)(long)dataDict["Coin"];
-   		level = (int)(long)dataDict["Level"];
-		levelprice = (int)(long)dataDict["LevelPrice"];
-		min = (int)(long)dataDict["MinHP"];
-		max = (int)(long)dataDict["MaxHP"];
-		counter = (int)(long)dataDict["Counter"];
+		// GM adatok betöltése
+		GM.Score = (int)(long)dataDict["Score"];
+		GM.Coin = (int)(long)dataDict["Coin"];
+   		GM.Level = (int)(long)dataDict["Level"];
+		GM.LevelPrice = (int)(long)dataDict["LevelPrice"];
+		GM.MinHP = (int)(long)dataDict["MinHP"];
+		GM.MaxHP = (int)(long)dataDict["MaxHP"];
+		GM.Counter = (int)(long)dataDict["Counter"];
 
-		player.Level = (int)(long)dataDict["PlayerLevel"];
-	
+		// GM.PlayerData adatok betöltése
+		GM.PlayerData.Level = (int)(long)dataDict["PlayerLevel"];
+		GM.PlayerData.Damage = (int)(long)dataDict["PlayerDamage"]; 
 
-		player.Damage = (int)(long)dataDict["PlayerDamage"]; 
-
-		hp = rnd.Next(min, max); 
+		// GM.Rnd és GM.Min/MaxHP használata
+		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
 
 		UpdateScoreLabel();
 		UpdateCoinLabel();
@@ -359,8 +360,9 @@ public partial class Main : Node2D
 	
 		if (HPBar != null)
 		{
-			 HPBar.MaxValue = max; 
-   		}
+			 // Itt a MaxHP-ra frissítjük a MaxValue-t, ahogy a _Ready-ben is volt
+			 HPBar.MaxValue = GM.MaxHP; 
+   		}
 		UpdateHP();
 
 		GD.Print("Játék sikeresen betöltve a mentésből.");
@@ -391,7 +393,8 @@ public partial class Main : Node2D
 	
 	public void ChangePosition()
 	{
-
+		if (PlayerSprite == null) return;
+		
 		if (Input.IsActionJustPressed("switchLeft"))
 		{
 			PlayerSprite.Position = new Vector2(205,173);
