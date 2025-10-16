@@ -3,8 +3,7 @@ using System;
 
 public partial class Paladin : Sprite2D
 {
-	[Export]
-	public Label DialogueLabel;
+	[Export] public Label DialogueLabel;
 	public AudioStreamPlayer hang;
 	
 	public override void _Ready()

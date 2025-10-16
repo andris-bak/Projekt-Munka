@@ -4,7 +4,8 @@ using System;
 public partial class Main : Node2D
 {
 	private GameManager GM;
-
+	
+	// Jelenethez kötött Node hivatkozások
 	private AudioStreamPlayer bgmPlayer; 
 	private AudioStreamPlayer hitSound; 
 	private PackedScene[] enemyScenes; 
@@ -12,14 +13,17 @@ public partial class Main : Node2D
 	private AnimatedSprite2D maincat; 
 	private int currentEnemyIndex = 0; 
 	
+	// Exportált Node hivatkozások...
 	[Export] public Label ScoreLabel;
 	[Export] public Label CoinLabel;
 	[Export] public Label HPLabel;
-	[Export] public ProgressBar HPBar;
+	[Export] public Label bossLabel; // Ez a BOSS IDŐZÍTŐ címkéje
 	[Export] public Label LevelLabel;
 	[Export] public Label LevelPrice;
 	[Export] public Sprite2D Enemy;
+	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
+	
 	
 	public override void _Ready()
 	{
@@ -29,13 +33,14 @@ public partial class Main : Node2D
 
 		HPBar.MaxValue = GM.MaxHP;
 		HPBar.Value = GM.HP;
-		HPBar.Step = GM.PlayerData.Damage; 
+		HPBar.Step = GM.PlayerData.Damage; 
 		
 		UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateHP();
 		UpdateLevel();
 		UpdateLevelPrice();
+		UpdateTimerLabel(); // Frissítés a kezdeti állapotra (rejtett)
 
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
@@ -64,6 +69,19 @@ public partial class Main : Node2D
 	public override void _Process(double delta)
 	{
 		ChangePosition(); 
+		
+		// --- IDŐZÍTŐ LOGIKA ---
+		if (GM.IsBossFight)
+		{
+			GM.BossTimeLeft -= delta;
+			
+			if (GM.BossTimeLeft <= 0)
+			{
+				GM.BossTimeLeft = 0;
+				BossWins(); // FIX: Meghívjuk az idő lejárását kezelő metódust
+			}
+			UpdateTimerLabel();
+		}
 	}
 	
 	public void OnClickButton()
@@ -92,8 +110,15 @@ public partial class Main : Node2D
 		
 		if(GM.HP <= 0)
 		{
+			// FIX: Ha a boss-t vertük meg, kapcsoljuk ki az időzítőt
+			if (GM.IsBossFight)
+			{
+				GM.IsBossFight = false;
+				GD.Print("BOSS LEGYŐZVE!");
+			}
+			
 			// GM.Coin, GM.Counter, GM.Rnd, GM.MinHP, GM.MaxHP használata
-			GM.Coin += GM.Counter;
+			GM.Coin += 1000;//GM.Counter;
 			GM.Score = 0;
 			
 			GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
@@ -107,12 +132,33 @@ public partial class Main : Node2D
 		}
 	}
 	
+	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
+	private void BossWins()
+	{
+		GD.Print("AZ IDŐ LEJÁRT! A BOSS MEGNYERTE A HARCOT!");
+		GM.IsBossFight = false;
+		
+		// Veszteség büntetés: elveszíti az aktuális aranyat, de megtartja a szintjét
+		// Mivel GM.Counter nincs a LoadGame-ben, a 1000-et használom a példa kedvéért.
+		GM.Coin = Math.Max(0, GM.Coin - 1000); 
+		GM.Score = 0; // Pontok elvesztése
+		
+		// Új, normál ellenség betöltése
+		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
+		HPBar.MaxValue = GM.HP;
+		
+		UpdateScoreLabel();
+		UpdateCoinLabel();
+		UpdateHP();
+		ChangeEnemyScene(); 
+	}
+	
 	public void OnLevelClickButton()
 	{
 		// GM.Coin, GM.LevelPrice és GM.Level használata
 		if (GM.Coin >= GM.LevelPrice)
 		{
-			if(GM.Level == 5)
+			if(GM.Level == 12)
 			{
 				GD.Print("Elérted a maximális szintet te termesz");
 			}
@@ -122,7 +168,7 @@ public partial class Main : Node2D
 				GM.MinHP = GM.MinHP * 2;
 				GM.MaxHP = GM.MaxHP * 2;
 				GM.Level++;
-				GM.PlayerData.LevelUp(); 
+				GM.PlayerData.LevelUp(); 
 				GM.Coin = GM.Coin - GM.LevelPrice;
 				GM.LevelPrice = GM.LevelPrice * 2;
 				GM.Counter++;
@@ -141,30 +187,40 @@ public partial class Main : Node2D
 	
 	public void OnQuitButtonPressed()
 	{
-		SaveGame();
+		// SaveGame();
 		GetTree().Quit();
 	}
 	
 	private void ChangeEnemyScene()
 	{
 		// GM.Rnd és GM.Level használata
-		currentEnemyIndex = GM.Rnd.Next(0, enemyScenes.Length); 
+		currentEnemyIndex = GM.Rnd.Next(0, enemyScenes.Length); 
 		int bossIndex = enemyScenes.Length - 1; 
 
 		if (currentEnemyIndex == bossIndex)
 		{
-			if (GM.Level < 5) 
+			if (GM.Level < 10) 
 			{
 				currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
 				GD.Print("Boss kihagyva: Először el kell érned a(z) 5. szintet!");
+				GM.IsBossFight = false; // FIX: Normálra váltás, ha még nincs meg a szint
 			}
 			else
 			{
-				GD.Print("5. szint elérve! BOSS BETÖLTVE!");
-				GM.HP = 2000;
+				GD.Print("10. szint elérve! BOSS BETÖLTVE!");
+				GM.HP = 170000;
 				HPBar.MaxValue = GM.HP;
+				
+				// --- BOSS IDŐZÍTŐ INDÍTÁSA --- (FIX)
+				GM.IsBossFight = true;
+				GM.BossTimeLeft = GameManager.BOSS_TIME_LIMIT; // Beállítjuk a max időt
+				
+				UpdateTimerLabel();
 				UpdateHP();
 			}
+		} else {
+			// Normál ellenség betöltése esetén mindig kapcsoljuk ki a boss módot
+			GM.IsBossFight = false;
 		}
 		
 		if (currentEnemy != null)
@@ -240,7 +296,7 @@ public partial class Main : Node2D
 		{
 			LevelPrice.Text = "Price: " + GM.LevelPrice.ToString();
 		}
-		if(GM.Level == 5)
+		if(GM.Level == 12)
 		{
 			LevelPrice.Text = "Elérted a maximális szintet! ";
 		}
@@ -254,6 +310,7 @@ public partial class Main : Node2D
 			CoinLabel.Text = GM.Coin.ToString();
 		}
 	}
+	
 	
 	private void UpdateHP()
 	{
@@ -389,7 +446,32 @@ public partial class Main : Node2D
 		}
 	}
 	
-	
+	private void UpdateTimerLabel()
+		{
+			if (bossLabel == null) return;
+			
+			if (GM.IsBossFight)
+			{
+				// Az időt két tizedesjegyre kerekítjük és megjelenítjük
+				bossLabel.Text = $"IDŐ: {GM.BossTimeLeft:0.00} mp";
+				bossLabel.Show();
+				
+				// Szín változtatása, ha már csak kevés idő van hátra
+				if (GM.BossTimeLeft <= 5.0)
+				{
+					bossLabel.Modulate = new Color(1, 0.2f, 0.2f); // Pirosas, vészjelzés
+				}
+				else
+				{
+					bossLabel.Modulate = new Color(1, 1, 1); // Fehér
+				}
+			}
+			else
+			{
+				bossLabel.Text = "";
+				bossLabel.Hide();
+			}
+		}
 	
 	public void ChangePosition()
 	{
@@ -406,4 +488,5 @@ public partial class Main : Node2D
 			PlayerSprite.Play("Idle");
 		}
 	}
+	
 }

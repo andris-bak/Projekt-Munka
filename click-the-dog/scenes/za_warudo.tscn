@@ -139,13 +139,14 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aluu1"]
 
-[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "HPBar", "LevelLabel", "LevelPrice", "PlayerSprite")]
+[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "HPBar", "PlayerSprite")]
 script = ExtResource("1_qvfia")
 CoinLabel = NodePath("Coins")
 HPLabel = NodePath("Health")
-HPBar = NodePath("ProgressBar")
+bossLabel = NodePath("Time")
 LevelLabel = NodePath("Level")
 LevelPrice = NodePath("Price")
+HPBar = NodePath("ProgressBar")
 PlayerSprite = NodePath("MC")
 
 [node name="ground" type="TileMapLayer" parent="."]
@@ -171,7 +172,7 @@ stream = ExtResource("5_qg8qh")
 position = Vector2(435, 173)
 scale = Vector2(1.125, 1.10938)
 sprite_frames = SubResource("SpriteFrames_7supi")
-animation = &"attack"
+animation = &"Idle"
 
 [node name="Paladin" type="Sprite2D" parent="." node_paths=PackedStringArray("DialogueLabel")]
 position = Vector2(475, 95)
@@ -237,7 +238,7 @@ offset_right = 7.0
 offset_bottom = 7.0
 
 [node name="DeleteSave" type="Sprite2D" parent="."]
-position = Vector2(57, 17)
+position = Vector2(69, 17)
 scale = Vector2(2.0625, 2.0625)
 texture = ExtResource("9_ti7n2")
 
@@ -275,11 +276,11 @@ value = 100.0
 show_percentage = false
 
 [node name="Health" type="Label" parent="."]
-offset_left = 272.0
-offset_top = 190.0
-offset_right = 314.0
-offset_bottom = 209.0
-scale = Vector2(2.5, 2.5)
+offset_left = 273.0
+offset_top = 202.0
+offset_right = 322.12
+offset_bottom = 221.0
+scale = Vector2(1.41, 1.41)
 theme_override_fonts/font = ExtResource("10_7supi")
 text = "Health: "
 
@@ -309,6 +310,16 @@ offset_bottom = 111.0
 scale = Vector2(1.095, 1.095)
 theme_override_fonts/font = ExtResource("10_7supi")
 text = "Price:"
+
+[node name="Time" type="Label" parent="."]
+visible = false
+offset_left = 284.0
+offset_top = 244.0
+offset_right = 333.12
+offset_bottom = 263.0
+scale = Vector2(1.41, 1.41)
+theme_override_fonts/font = ExtResource("10_7supi")
+text = "Time: "
 
 [node name="LvlupButtonColored" type="Sprite2D" parent="."]
 position = Vector2(460, 161)
