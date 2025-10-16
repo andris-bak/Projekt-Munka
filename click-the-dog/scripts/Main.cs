@@ -9,9 +9,12 @@ public partial class Main : Node2D
 	private AudioStreamPlayer bgmPlayer; 
 	private AudioStreamPlayer hitSound; 
 	private PackedScene[] enemyScenes; 
+	private PackedScene[] shieldScenes; 
 	private Node2D currentEnemy; 
-	private AnimatedSprite2D maincat; 
-	private int currentEnemyIndex = 0; 
+	private Node2D currentShield; // <- Kezeljük a pajzsot is Node-ként
+	private AnimatedSprite2D maincat; 
+	private int currentEnemyIndex = 0; 
+	private int currentShieldIndex = 0;
 	
 	// Exportált Node hivatkozások...
 	[Export] public Label ScoreLabel;
@@ -21,6 +24,7 @@ public partial class Main : Node2D
 	[Export] public Label LevelLabel;
 	[Export] public Label LevelPrice;
 	[Export] public Sprite2D Enemy;
+	[Export] public Sprite2D Shield;
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
 	
@@ -63,7 +67,14 @@ public partial class Main : Node2D
 
 		};
 		
+		shieldScenes = new PackedScene[]
+		{
+			GD.Load<PackedScene>("res://scenes/shield_bal.tscn"), 
+			GD.Load<PackedScene>("res://scenes/shield_jobb.tscn"), 
+		};
+		
 		ChangeEnemyScene();
+		ChangeShield();
 	}
 	
 	public override void _Process(double delta)
@@ -86,9 +97,37 @@ public partial class Main : Node2D
 	
 	public void OnClickButton()
 	{
+		int actualDamage = GM.PlayerData.Damage;
+		Vector2 playerPos = PlayerSprite.Position;
+		
+		// Player pozíciók (ahol a PlayerSprite áll)
+		Vector2 leftPlayerPos = new Vector2(205, 173); // Bal oldal
+		Vector2 rightPlayerPos = new Vector2(435, 173); // Jobb oldal
+
+		// Ellenőrizzük, hogy aktív-e a pajzs, és a játékos a megfelelő oldalon van-e
+		if (currentShield != null)
+		{
+			// Pajzs a bal oldalon (Index 0)
+			bool shieldIsLeft = currentShieldIndex == 0;
+			// Pajzs a jobb oldalon (Index 1)
+			bool shieldIsRight = currentShieldIndex == 1;
+
+			// Játékos a bal oldalon ÉS a pajzs is ott van
+			bool blockedByLeftShield = playerPos == leftPlayerPos && shieldIsLeft;
+			
+			// Játékos a jobb oldalon ÉS a pajzs is ott van
+			bool blockedByRightShield = playerPos == rightPlayerPos && shieldIsRight;
+
+			if (blockedByLeftShield || blockedByRightShield)
+			{
+				// A pajzs blokkolja a támadást
+				actualDamage = 0;
+				GD.Print("TÁMADÁS BLOKKOLVA! Pajzs oldala: " + (currentShieldIndex == 0 ? "BAL" : "JOBB"));
+			}
+		}
 		// GM.Score, GM.HP és GM.PlayerData használata
 		GM.Score++;
-		GM.HP -= GM.PlayerData.Damage;
+		GM.HP -= actualDamage;
 		
 		UpdateHP();
 		UpdateScoreLabel();
@@ -127,6 +166,7 @@ public partial class Main : Node2D
 			UpdateScoreLabel();
 			UpdateCoinLabel();
 			UpdateHP();
+			ChangeShield(); // Pajzs frissítése/cseréje
 			ChangeEnemyScene(); 
 			
 		}
@@ -140,17 +180,18 @@ public partial class Main : Node2D
 		
 		// Veszteség büntetés: elveszíti az aktuális aranyat, de megtartja a szintjét
 		// Mivel GM.Counter nincs a LoadGame-ben, a 1000-et használom a példa kedvéért.
-		GM.Coin = Math.Max(0, GM.Coin - 1000); 
+		GM.Coin = Math.Max(0, GM.Coin - 1000); 
 		GM.Score = 0; // Pontok elvesztése
 		
 		// Új, normál ellenség betöltése
-		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
+		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
 		HPBar.MaxValue = GM.HP;
 		
 		UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateHP();
-		ChangeEnemyScene(); 
+		ChangeShield(); // Pajzs frissítése/cseréje
+		ChangeEnemyScene(); 
 	}
 	
 	public void OnLevelClickButton()
@@ -203,7 +244,7 @@ public partial class Main : Node2D
 			{
 				currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
 				GD.Print("Boss kihagyva: Először el kell érned a(z) 5. szintet!");
-				GM.IsBossFight = false; // FIX: Normálra váltás, ha még nincs meg a szint
+				GM.IsBossFight = false; 
 			}
 			else
 			{
@@ -211,14 +252,17 @@ public partial class Main : Node2D
 				GM.HP = 170000;
 				HPBar.MaxValue = GM.HP;
 				
-				// --- BOSS IDŐZÍTŐ INDÍTÁSA --- (FIX)
+				// --- BOSS IDŐZÍTŐ INDÍTÁSA ---
 				GM.IsBossFight = true;
 				GM.BossTimeLeft = GameManager.BOSS_TIME_LIMIT; // Beállítjuk a max időt
 				
 				UpdateTimerLabel();
 				UpdateHP();
 			}
-		} else {
+		} 
+		
+		else 
+		{
 			// Normál ellenség betöltése esetén mindig kapcsoljuk ki a boss módot
 			GM.IsBossFight = false;
 		}
@@ -247,6 +291,58 @@ public partial class Main : Node2D
 		{
 			GD.PrintErr("HIBA: Nem található AnimatedSprite2D nevű gyermek Node az új ellenségen!");
 		}
+	}
+	
+	private void ChangeShield()
+	{
+		if(GM.Level >= 3)
+		{
+				// 1. ELŐZŐ PAJZS TÖRLÉSE (ha volt)
+			if (currentShield != null)
+			{
+			 	 currentShield.QueueFree();
+				 currentShield = null; // Biztos, ami biztos
+			}
+			
+			// 2. RANDOM VÁLASZTÁS ÉS INSTANTIALIZÁLÁS
+			// currentShieldIndex = 0 (shield_bal) vagy 1 (shield_jobb)
+			currentShieldIndex = GM.Rnd.Next(0, shieldScenes.Length); 
+			
+			PackedScene newShieldScene = shieldScenes[currentShieldIndex]; 
+			Node2D instantiatedShield = newShieldScene.Instantiate<Node2D>();
+			
+			// 3. POZÍCIÓ BEÁLLÍTÁSA
+			if (instantiatedShield != null)
+			{
+				int currentDamage = GM.PlayerData.Damage;
+				if (currentShieldIndex == 0)
+				{
+					// Ez a BAL pajzs pozíciója
+					instantiatedShield.Position = new Vector2(250, 160); 
+					
+				} 
+				else // currentShieldIndex == 1
+				{
+					// Ez a JOBB pajzs pozíciója
+					instantiatedShield.Position = new Vector2(0, 0); 
+				}
+				
+				// 4. ÚJ PAJZS HOZZÁADÁSA
+				currentShield = instantiatedShield; // Eltároljuk a hivatkozást
+				AddChild(currentShield); 
+				GD.Print($"Új pajzs betöltve: {currentShield.Name} a(z) {currentShield.Position} pozícióra.");
+			}
+			else
+			{
+				GD.PrintErr("HIBA: Nem sikerült a pajzs jelenetet létrehozni/példányosítani.");
+			}
+		}
+		else
+		{
+			GD.Print("Mákos fasz");
+		}
+		
+		
 	}
 		
 		
@@ -475,6 +571,7 @@ public partial class Main : Node2D
 	
 	public void ChangePosition()
 	{
+
 		if (PlayerSprite == null) return;
 		
 		if (Input.IsActionJustPressed("switchLeft"))
