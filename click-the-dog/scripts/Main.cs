@@ -97,6 +97,13 @@ public partial class Main : Node2D
 	
 	public void OnClickButton()
 	{
+		GM.ClickCounter++;
+		if(GM.ClickCounter == 5)
+		{
+			currentShieldIndex = GM.Rnd.Next(0, shieldScenes.Length);
+			ChangeShield();
+			GM.ClickCounter = 0;
+		}
 		int actualDamage = GM.PlayerData.Damage;
 		Vector2 playerPos = PlayerSprite.Position;
 		
@@ -149,6 +156,7 @@ public partial class Main : Node2D
 		
 		if(GM.HP <= 0)
 		{
+			GM.ClickCounter = 0;
 			// FIX: Ha a boss-t vertük meg, kapcsoljuk ki az időzítőt
 			if (GM.IsBossFight)
 			{
