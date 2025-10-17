@@ -13,8 +13,7 @@ public partial class Main : Node2D
 	private Node2D currentEnemy; 
 	private Node2D currentShield; // <- Kezeljük a pajzsot is Node-ként
 	private AnimatedSprite2D maincat; 
-	private int currentEnemyIndex = 0; 
-	private int currentShieldIndex = 0;
+
 	
 	// Exportált Node hivatkozások...
 	[Export] public Label ScoreLabel;
@@ -98,9 +97,9 @@ public partial class Main : Node2D
 	public void OnClickButton()
 	{
 		GM.ClickCounter++;
-		if(GM.ClickCounter == 5)
+		if(GM.ClickCounter == 3)
 		{
-			currentShieldIndex = GM.Rnd.Next(0, shieldScenes.Length);
+			GM.currentShieldIndex = GM.Rnd.Next(0, shieldScenes.Length);
 			ChangeShield();
 			GM.ClickCounter = 0;
 		}
@@ -115,9 +114,9 @@ public partial class Main : Node2D
 		if (currentShield != null)
 		{
 			// Pajzs a bal oldalon (Index 0)
-			bool shieldIsLeft = currentShieldIndex == 0;
+			bool shieldIsLeft = GM.currentShieldIndex == 0;
 			// Pajzs a jobb oldalon (Index 1)
-			bool shieldIsRight = currentShieldIndex == 1;
+			bool shieldIsRight = GM.currentShieldIndex == 1;
 
 			// Játékos a bal oldalon ÉS a pajzs is ott van
 			bool blockedByLeftShield = playerPos == leftPlayerPos && shieldIsLeft;
@@ -129,7 +128,7 @@ public partial class Main : Node2D
 			{
 				// A pajzs blokkolja a támadást
 				actualDamage = 0;
-				GD.Print("TÁMADÁS BLOKKOLVA! Pajzs oldala: " + (currentShieldIndex == 0 ? "BAL" : "JOBB"));
+				GD.Print("TÁMADÁS BLOKKOLVA! Pajzs oldala: " + (GM.currentShieldIndex == 0 ? "BAL" : "JOBB"));
 			}
 		}
 		// GM.Score, GM.HP és GM.PlayerData használata
@@ -243,14 +242,14 @@ public partial class Main : Node2D
 	private void ChangeEnemyScene()
 	{
 		// GM.Rnd és GM.Level használata
-		currentEnemyIndex = GM.Rnd.Next(0, enemyScenes.Length); 
+		GM.currentEnemyIndex = GM.Rnd.Next(0, enemyScenes.Length); 
 		int bossIndex = enemyScenes.Length - 1; 
 
-		if (currentEnemyIndex == bossIndex)
+		if (GM.currentEnemyIndex == bossIndex)
 		{
 			if (GM.Level < 10) 
 			{
-				currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
+				GM.currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
 				GD.Print("Boss kihagyva: Először el kell érned a(z) 5. szintet!");
 				GM.IsBossFight = false; 
 			}
@@ -281,7 +280,7 @@ public partial class Main : Node2D
 			 currentEnemy = null;
 		}
 
-		PackedScene newEnemyScene = enemyScenes[currentEnemyIndex]; 
+		PackedScene newEnemyScene = enemyScenes[GM.currentEnemyIndex]; 
 		currentEnemy = newEnemyScene.Instantiate<Node2D>();
 		
 
@@ -314,16 +313,16 @@ public partial class Main : Node2D
 			
 			// 2. RANDOM VÁLASZTÁS ÉS INSTANTIALIZÁLÁS
 			// currentShieldIndex = 0 (shield_bal) vagy 1 (shield_jobb)
-			currentShieldIndex = GM.Rnd.Next(0, shieldScenes.Length); 
+			GM.currentShieldIndex = GM.Rnd.Next(0, shieldScenes.Length); 
 			
-			PackedScene newShieldScene = shieldScenes[currentShieldIndex]; 
+			PackedScene newShieldScene = shieldScenes[GM.currentShieldIndex]; 
 			Node2D instantiatedShield = newShieldScene.Instantiate<Node2D>();
 			
 			// 3. POZÍCIÓ BEÁLLÍTÁSA
 			if (instantiatedShield != null)
 			{
 				int currentDamage = GM.PlayerData.Damage;
-				if (currentShieldIndex == 0)
+				if (GM.currentShieldIndex == 0)
 				{
 					// Ez a BAL pajzs pozíciója
 					instantiatedShield.Position = new Vector2(250, 160); 
