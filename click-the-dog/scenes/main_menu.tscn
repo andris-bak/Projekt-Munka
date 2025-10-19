@@ -16,26 +16,27 @@ scale = Vector2(0.337331, 0.272464)
 texture = ExtResource("1_l6cm7")
 
 [node name="Titlebox" type="Sprite2D" parent="Forest"]
-position = Vector2(-53.36, -216.956)
+position = Vector2(0.000143051, -230.809)
 scale = Vector2(6.46789, 1.93288)
 texture = ExtResource("3_rtw2f")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Forest"]
 self_modulate = Color(0.466666, 0.2, 1, 1)
-offset_left = -237.156
-offset_top = -260.585
-offset_right = -175.156
-offset_bottom = -241.585
+offset_left = -183.796
+offset_top = -274.438
+offset_right = -121.796
+offset_bottom = -255.438
 scale = Vector2(6.105, 6.105)
 theme_override_fonts/normal_font = ExtResource("5_8ln24")
 text = "Click The Dog"
 fit_content = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Zene" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_bqqt6")
 
 [node name="Menubox1" type="Sprite2D" parent="."]
-position = Vector2(208, 187)
+position = Vector2(245, 188)
 texture = ExtResource("4_wu84c")
 
 [node name="Start" type="RichTextLabel" parent="Menubox1"]
@@ -53,17 +54,18 @@ metadata/_edit_use_anchors_ = true
 [node name="StartButton" type="TextureButton" parent="Menubox1/Start"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.391304
-anchor_top = -0.285714
-anchor_right = -0.391304
-anchor_bottom = -0.285714
-offset_left = -10.0
-offset_right = 50.0
-offset_bottom = 28.0
+anchor_left = 0.25
+anchor_top = 0.207
+anchor_right = 0.239261
+anchor_bottom = 0.185429
+offset_left = -20.5
+offset_top = -10.245
+offset_right = 20.994
+offset_bottom = 10.51
 metadata/_edit_use_anchors_ = true
 
 [node name="Menubox2" type="Sprite2D" parent="."]
-position = Vector2(300, 187)
+position = Vector2(325, 188)
 texture = ExtResource("4_wu84c")
 
 [node name="Load" type="RichTextLabel" parent="Menubox2"]
@@ -81,17 +83,18 @@ metadata/_edit_use_anchors_ = true
 [node name="Load" type="TextureButton" parent="Menubox2/Load"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.456522
-anchor_top = -0.314286
-anchor_right = -0.456522
-anchor_bottom = -0.314286
-offset_left = -10.0
-offset_right = 50.0
-offset_bottom = 28.0
+anchor_left = 0.207
+anchor_top = 0.229
+anchor_right = 0.207
+anchor_bottom = 0.229
+offset_left = -19.522
+offset_top = -9.015
+offset_right = 19.478
+offset_bottom = 8.985
 metadata/_edit_use_anchors_ = true
 
 [node name="Menubox3" type="Sprite2D" parent="."]
-position = Vector2(394, 187)
+position = Vector2(402, 187)
 scale = Vector2(0.955, 0.955)
 texture = ExtResource("4_wu84c")
 
@@ -110,14 +113,14 @@ metadata/_edit_use_anchors_ = true
 [node name="QuitButton" type="TextureButton" parent="Menubox3/Quit"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.521739
-anchor_top = -0.342857
-anchor_right = -0.521739
-anchor_bottom = -0.342857
-offset_left = -12.0
-offset_top = -1.0
-offset_right = 50.0
-offset_bottom = 28.0
+anchor_left = 0.196
+anchor_top = 0.214
+anchor_right = 0.196
+anchor_bottom = 0.214
+offset_left = -17.016
+offset_top = -8.49
+offset_right = 16.984
+offset_bottom = 8.51
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Menubox1/Start/StartButton" to="." method="OnStartButtonPressed"]
