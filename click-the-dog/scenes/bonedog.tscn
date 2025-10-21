@@ -62,7 +62,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_spjcn")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"Idle",
 "speed": 10.0
 }]
 
@@ -72,6 +72,4 @@ animations = [{
 position = Vector2(303, 129)
 scale = Vector2(1.6875, 1.6875)
 sprite_frames = SubResource("SpriteFrames_p8twn")
-animation = &"idle"
-frame = 1
-frame_progress = 0.904908
+animation = &"Idle"

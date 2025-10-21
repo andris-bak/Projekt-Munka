@@ -62,7 +62,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ge2rc")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"Idle",
 "speed": 10.0
 }]
 
@@ -72,4 +72,4 @@ animations = [{
 position = Vector2(301, 138)
 scale = Vector2(1.586, 1.586)
 sprite_frames = SubResource("SpriteFrames_ut7lr")
-animation = &"idle"
+animation = &"Idle"

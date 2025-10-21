@@ -22,7 +22,7 @@ public partial class Main : Node2D
 	[Export] public Label bossLabel; // Ez a BOSS IDŐZÍTŐ címkéje
 	[Export] public Label LevelLabel;
 	[Export] public Label LevelPrice;
-	[Export] public Sprite2D Enemy;
+	[Export] public AnimatedSprite2D Enemy;
 	[Export] public Sprite2D Shield;
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
@@ -71,6 +71,11 @@ public partial class Main : Node2D
 			GD.Load<PackedScene>("res://scenes/shield_bal.tscn"), 
 			GD.Load<PackedScene>("res://scenes/shield_jobb.tscn"), 
 		};
+		
+		if (PlayerSprite != null)
+		{
+			PlayerSprite.Play("Idle"); 
+		}
 		
 		ChangeEnemyScene();
 		ChangeShield();
@@ -292,7 +297,8 @@ public partial class Main : Node2D
 		AnimatedSprite2D sprite = currentEnemy.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D"); 
 		if (sprite != null)
 		{
-			sprite.Play("idle"); 
+			// A korábbi hibaforrás javítva: "idle" helyett "Idle" (Nagybetűs I)
+			sprite.Play("Idle"); 
 		}
 		else
 		{
