@@ -3,23 +3,23 @@ using System;
 
 public partial class Main : Node2D
 {
-	private GameManager GM;
+	public GameManager GM;
 	
 	// Jelenethez kötött Node hivatkozások
-	private AudioStreamPlayer bgmPlayer; 
-	private AudioStreamPlayer hitSound; 
-	private PackedScene[] enemyScenes; 
-	private PackedScene[] shieldScenes; 
-	private Node2D currentEnemy; 
-	private Node2D currentShield; // <- Kezeljük a pajzsot is Node-ként
-	private AnimatedSprite2D maincat; 
+	public AudioStreamPlayer bgmPlayer; 
+	public AudioStreamPlayer hitSound; 
+	public PackedScene[] enemyScenes; 
+	public PackedScene[] shieldScenes; 
+	public Node2D currentEnemy; 
+	public Node2D currentShield; 
+	public AnimatedSprite2D maincat; 
 
 	
 	// Exportált Node hivatkozások...
 	[Export] public Label ScoreLabel;
 	[Export] public Label CoinLabel;
 	[Export] public Label HPLabel;
-	[Export] public Label bossLabel; // Ez a BOSS IDŐZÍTŐ címkéje
+	[Export] public Label bossLabel;
 	[Export] public Label LevelLabel;
 	[Export] public Label LevelPrice;
 	[Export] public AnimatedSprite2D Enemy;
@@ -30,9 +30,15 @@ public partial class Main : Node2D
 	
 	public override void _Ready()
 	{
+		
 		GM = GetNode<GameManager>("/root/GameManager");
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
+		
+		// Megjegyzés: A CombatHandler osztálynak a Main osztályban kellene lennie inicializálva
+		// Mivel nem látjuk a CombatHandler definícióját, feltételezzük, hogy létezik a projektben
+		// Ez a sor a korábbi hibák miatt most ki lett véve, de a user kérésére hagytam.
+		// combatHandler = new CombatHandler(GM, this, PlayerSprite, hitSound);
 
 		HPBar.MaxValue = GM.MaxHP;
 		HPBar.Value = GM.HP;
@@ -72,10 +78,6 @@ public partial class Main : Node2D
 			GD.Load<PackedScene>("res://scenes/shield_jobb.tscn"), 
 		};
 		
-		if (PlayerSprite != null)
-		{
-			PlayerSprite.Play("Idle"); 
-		}
 		
 		ChangeEnemyScene();
 		ChangeShield();
@@ -180,12 +182,23 @@ public partial class Main : Node2D
 			UpdateHP();
 			ChangeShield(); // Pajzs frissítése/cseréje
 			ChangeEnemyScene(); 
-			
+		} // Bezárja az if(GM.HP <= 0) blokkot
+	} // <- EZ VOLT A HIÁNYZÓ ZÁRÓJEL, ami most bekerült.
+	
+	public override void _Input(InputEvent @event)
+	{
+		// Cél: Bármely gombnyomás, amit a Godot-ban "attack_action" néven beállítunk (pl. Space, vagy egy controller gomb).
+		if (@event.IsActionPressed("attack_action"))
+		{
+			// Meghívjuk a már létező OnClickButton metódust, ami elindítja a CombatHandler.HandleClick()-et.
+			OnClickButton();
+			// Jelzi a Godot-nak, hogy feldolgoztuk az eseményt.
+			GetViewport().SetInputAsHandled(); 
 		}
 	}
 	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
-	private void BossWins()
+	public void BossWins()
 	{
 		GD.Print("AZ IDŐ LEJÁRT! A BOSS MEGNYERTE A HARCOT!");
 		GM.IsBossFight = false;
@@ -244,7 +257,7 @@ public partial class Main : Node2D
 		GetTree().Quit();
 	}
 	
-	private void ChangeEnemyScene()
+	public void ChangeEnemyScene()
 	{
 		// GM.Rnd és GM.Level használata
 		GM.currentEnemyIndex = GM.Rnd.Next(0, enemyScenes.Length); 
@@ -256,7 +269,7 @@ public partial class Main : Node2D
 			{
 				GM.currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
 				GD.Print("Boss kihagyva: Először el kell érned a(z) 5. szintet!");
-				GM.IsBossFight = false; 
+				GM.IsBossFight = false; 
 			}
 			else
 			{
@@ -306,7 +319,7 @@ public partial class Main : Node2D
 		}
 	}
 	
-	private void ChangeShield()
+	public void ChangeShield()
 	{
 		if(GM.Level >= 3)
 		{
@@ -327,7 +340,7 @@ public partial class Main : Node2D
 			// 3. POZÍCIÓ BEÁLLÍTÁSA
 			if (instantiatedShield != null)
 			{
-				int currentDamage = GM.PlayerData.Damage;
+				// int currentDamage = GM.PlayerData.Damage; // Nem használt változó, eltávolítható
 				if (GM.currentShieldIndex == 0)
 				{
 					// Ez a BAL pajzs pozíciója
@@ -359,7 +372,7 @@ public partial class Main : Node2D
 	}
 		
 		
-	private void OnPlayerAnimationFinished()
+	public void OnPlayerAnimationFinished()
 	{
 		if (PlayerSprite != null)
 		{
@@ -374,14 +387,14 @@ public partial class Main : Node2D
 		}
 	}
 	
-	private void OnMusicFinished()
+	public void OnMusicFinished()
 	{
 		bgmPlayer.Play();
 	}
 		
 	// --- UI Frissítő Metódusok (GM. adatok alapján) ---
 		
-	private void UpdateScoreLabel()
+	public void UpdateScoreLabel()
 	{
 		if (ScoreLabel != null)
 		{
@@ -390,7 +403,7 @@ public partial class Main : Node2D
 		
 	}
 	
-	private void UpdateLevel()
+	public void UpdateLevel()
 	{
 		if (LevelLabel != null)
 		{
@@ -399,7 +412,7 @@ public partial class Main : Node2D
 		
 	}
 	
-	private void UpdateLevelPrice()
+	public void UpdateLevelPrice()
 	{
 		if (LevelPrice != null)
 		{
@@ -412,7 +425,7 @@ public partial class Main : Node2D
 		
 	}
 	
-	private void UpdateCoinLabel()
+	public void UpdateCoinLabel()
 	{
 		if(CoinLabel != null)
 		{
@@ -421,7 +434,7 @@ public partial class Main : Node2D
 	}
 	
 	
-	private void UpdateHP()
+	public void UpdateHP()
 	{
 		if (HPBar == null)
 		{
@@ -443,7 +456,7 @@ public partial class Main : Node2D
 	
 	// --- Mentés / Betöltés Metódusok (GM. adatok kezelése) ---
 
-	private const string SAVE_PATH = "user://clicker_save.json";
+	public const string SAVE_PATH = "user://clicker_save.json";
 	
 	public void SaveGame()
 	{
@@ -555,7 +568,7 @@ public partial class Main : Node2D
 		}
 	}
 	
-	private void UpdateTimerLabel()
+	public void UpdateTimerLabel()
 		{
 			if (bossLabel == null) return;
 			
