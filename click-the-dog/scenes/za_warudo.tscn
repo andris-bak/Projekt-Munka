@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://bla6t6qp38sla"]
+[gd_scene load_steps=33 format=4 uid="uid://bla6t6qp38sla"]
 
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cod3xur5jcbdt" path="res://assets/lvlup_button_colored.png" id="10_ti7n2"]
 [ext_resource type="Texture2D" uid="uid://bypdqnrxyajj7" path="res://assets/exit_button.png" id="12_g6mq7"]
 [ext_resource type="Texture2D" uid="uid://byt8mjrbo8u1n" path="res://assets/margo.png" id="12_ti7n2"]
+[ext_resource type="Texture2D" uid="uid://3m63lbapm6k1" path="res://assets/menu.png" id="18_hfhyq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyre6"]
 atlas = ExtResource("5_pyre6")
@@ -352,6 +353,22 @@ grow_vertical = 2
 
 [node name="Shield" type="Sprite2D" parent="."]
 position = Vector2(205.5, 178.5)
+
+[node name="Menu" type="Sprite2D" parent="."]
+position = Vector2(581, 23)
+scale = Vector2(1.125, 1.09375)
+texture = ExtResource("18_hfhyq")
+
+[node name="TextureButton" type="TextureButton" parent="Menu"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.406
+anchor_right = 0.5
+anchor_bottom = 0.406
+offset_left = -48.0
+offset_top = -41.984
+offset_right = -16.0
+offset_bottom = -21.984
 
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/TextureButton" to="." method="OnClickButton"]
