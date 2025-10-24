@@ -26,6 +26,7 @@ public partial class Main : Node2D
 	[Export] public Sprite2D Shield;
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
+	[Export] public CanvasLayer optionsMenuLayer;
 	
 	
 	public override void _Ready()
@@ -34,11 +35,6 @@ public partial class Main : Node2D
 		GM = GetNode<GameManager>("/root/GameManager");
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
-		
-		// Megjegyzés: A CombatHandler osztálynak a Main osztályban kellene lennie inicializálva
-		// Mivel nem látjuk a CombatHandler definícióját, feltételezzük, hogy létezik a projektben
-		// Ez a sor a korábbi hibák miatt most ki lett véve, de a user kérésére hagytam.
-		// combatHandler = new CombatHandler(GM, this, PlayerSprite, hitSound);
 
 		HPBar.MaxValue = GM.MaxHP;
 		HPBar.Value = GM.HP;
@@ -609,6 +605,15 @@ public partial class Main : Node2D
 		{
 			PlayerSprite.Position = new Vector2(435,173);
 			PlayerSprite.Play("Idle");
+		}
+	}
+	
+	public void MenuOpened()
+	{
+		if (optionsMenuLayer != null)
+		{
+			optionsMenuLayer.Visible = true;
+			GD.Print("Opciók menü megnyitva.");
 		}
 	}
 	

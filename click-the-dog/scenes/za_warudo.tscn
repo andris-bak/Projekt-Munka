@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://bla6t6qp38sla"]
+[gd_scene load_steps=34 format=4 uid="uid://bla6t6qp38sla"]
 
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bypdqnrxyajj7" path="res://assets/exit_button.png" id="12_g6mq7"]
 [ext_resource type="Texture2D" uid="uid://byt8mjrbo8u1n" path="res://assets/margo.png" id="12_ti7n2"]
 [ext_resource type="Texture2D" uid="uid://3m63lbapm6k1" path="res://assets/menu.png" id="18_hfhyq"]
+[ext_resource type="Texture2D" uid="uid://c5ih4ddfig66o" path="res://icon.svg" id="19_eroyx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyre6"]
 atlas = ExtResource("5_pyre6")
@@ -359,16 +360,26 @@ position = Vector2(581, 23)
 scale = Vector2(1.125, 1.09375)
 texture = ExtResource("18_hfhyq")
 
-[node name="TextureButton" type="TextureButton" parent="Menu"]
+[node name="OptionsMenuLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MenuBackground" type="TextureRect" parent="OptionsMenuLayer"]
+offset_left = 478.0
+offset_top = 2.0
+offset_right = 606.0
+offset_bottom = 130.0
+texture = ExtResource("19_eroyx")
+
+[node name="OpenMenu" type="TextureButton" parent="OptionsMenuLayer"]
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.406
-anchor_right = 0.5
-anchor_bottom = 0.406
-offset_left = -48.0
-offset_top = -41.984
-offset_right = -16.0
-offset_bottom = -21.984
+anchor_left = 0.907
+anchor_top = 0.044
+anchor_right = 0.907
+anchor_bottom = 0.044
+offset_left = -17.48
+offset_top = -9.84
+offset_right = 17.52
+offset_bottom = 10.16
 
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/TextureButton" to="." method="OnClickButton"]
@@ -376,3 +387,4 @@ offset_bottom = -21.984
 [connection signal="pressed" from="ExitButton/TextureButton" to="." method="OnQuitButtonPressed"]
 [connection signal="pressed" from="DeleteSave/Delete" to="." method="DeleteSave"]
 [connection signal="pressed" from="LvlupButtonColored/TextureButton" to="." method="OnLevelClickButton"]
+[connection signal="pressed" from="OptionsMenuLayer/OpenMenu" to="." method="MenuOpened"]
