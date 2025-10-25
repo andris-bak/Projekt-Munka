@@ -4,7 +4,7 @@ using System;
 public partial class Main : Node2D
 {
 	public GameManager GM;
-	private int Tick = 10;
+	private int Tick = 100;
 	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
@@ -28,6 +28,7 @@ public partial class Main : Node2D
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
+	[Export] public Timer HealthRegen;
 	
 	
 	public override void _Ready()
@@ -623,7 +624,7 @@ public partial class Main : Node2D
 	
 	public void OnMenuClosed()
 	{
-				if (optionsMenuLayer != null)
+		if (optionsMenuLayer != null)
 		{
 			optionsMenuLayer.Visible = false;
 			GD.Print("Opciók menü bezárva.");
@@ -632,6 +633,23 @@ public partial class Main : Node2D
 	
 	public void GetHealth()
 	{
-		GM.HP = GM.HP + Tick;
+		// Csak akkor adjon HP-t, ha nem maximális az életerő
+		if (GM.HP < GM.MaxHP)
+		{
+			GM.HP = GM.HP + Tick;
+			
+			// Ne engedje túllépni a maximumot
+			if (GM.HP > GM.MaxHP)
+			{
+				GM.HP = GM.MaxHP;
+			}
+			
+			UpdateHP();
+		}
+	}
+	
+	private void _on_HealthRegenTimer_timeout()
+	{
+		GetHealth(); // Meghívja a te metódusodat minden másodpercben
 	}
 }
