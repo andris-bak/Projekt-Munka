@@ -4,6 +4,7 @@ using System;
 public partial class Main : Node2D
 {
 	public GameManager GM;
+	private int Tick = 10;
 	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
@@ -46,6 +47,7 @@ public partial class Main : Node2D
 		UpdateLevel();
 		UpdateLevelPrice();
 		UpdateTimerLabel(); // Frissítés a kezdeti állapotra (rejtett)
+
 
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
@@ -94,7 +96,9 @@ public partial class Main : Node2D
 				BossWins(); // FIX: Meghívjuk az idő lejárását kezelő metódust
 			}
 			UpdateTimerLabel();
+			
 		}
+
 	}
 	
 	public void OnClickButton()
@@ -608,7 +612,7 @@ public partial class Main : Node2D
 		}
 	}
 	
-	public void MenuOpened()
+	public void OnMenuOpened()
 	{
 		if (optionsMenuLayer != null)
 		{
@@ -617,4 +621,17 @@ public partial class Main : Node2D
 		}
 	}
 	
+	public void OnMenuClosed()
+	{
+				if (optionsMenuLayer != null)
+		{
+			optionsMenuLayer.Visible = false;
+			GD.Print("Opciók menü bezárva.");
+		}
+	}
+	
+	public void GetHealth()
+	{
+		GM.HP = GM.HP + Tick;
+	}
 }
