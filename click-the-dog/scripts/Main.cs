@@ -4,7 +4,7 @@ using System;
 public partial class Main : Node2D
 {
 	public GameManager GM;
-	private int Tick = 100;
+
 	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
@@ -102,6 +102,29 @@ public partial class Main : Node2D
 
 	}
 	
+	public override void _Input(InputEvent @event)
+	{
+		// Cél: Bármely gombnyomás, amit a Godot-ban "attack_action" néven beállítunk (pl. Space, vagy egy controller gomb).
+		if (@event.IsActionPressed("attack_action"))
+		{
+			// Meghívjuk a már létező OnClickButton metódust, ami elindítja a CombatHandler.HandleClick()-et.
+			OnClickButton();
+			// Jelzi a Godot-nak, hogy feldolgoztuk az eseményt.
+			GetViewport().SetInputAsHandled(); 
+		}
+		
+		if (@event.IsActionPressed("openMenu"))
+		{
+			if (optionsMenuLayer != null)
+			{
+				// A menü láthatóságát az ellenkezőjére állítjuk (toggle)
+				optionsMenuLayer.Visible = !optionsMenuLayer.Visible;
+				GD.Print($"Opciók menü váltva: {(optionsMenuLayer.Visible ? "MEGNYITVA" : "BEZÁRVA")}");
+			}
+			GetViewport().SetInputAsHandled(); 
+		}
+	}
+	
 	public void OnClickButton()
 	{
 		GM.ClickCounter++;
@@ -186,17 +209,7 @@ public partial class Main : Node2D
 		} // Bezárja az if(GM.HP <= 0) blokkot
 	} // <- EZ VOLT A HIÁNYZÓ ZÁRÓJEL, ami most bekerült.
 	
-	public override void _Input(InputEvent @event)
-	{
-		// Cél: Bármely gombnyomás, amit a Godot-ban "attack_action" néven beállítunk (pl. Space, vagy egy controller gomb).
-		if (@event.IsActionPressed("attack_action"))
-		{
-			// Meghívjuk a már létező OnClickButton metódust, ami elindítja a CombatHandler.HandleClick()-et.
-			OnClickButton();
-			// Jelzi a Godot-nak, hogy feldolgoztuk az eseményt.
-			GetViewport().SetInputAsHandled(); 
-		}
-	}
+
 	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
 	public void BossWins()
@@ -636,7 +649,7 @@ public partial class Main : Node2D
 		// Csak akkor adjon HP-t, ha nem maximális az életerő
 		if (GM.HP < GM.MaxHP)
 		{
-			GM.HP = GM.HP + Tick;
+			GM.HP = GM.HP + GM.Tick;
 			
 			// Ne engedje túllépni a maximumot
 			if (GM.HP > GM.MaxHP)
