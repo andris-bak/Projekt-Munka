@@ -379,7 +379,7 @@ public partial class Main : Node2D
 		}
 		else
 		{
-			GD.Print("Mákos fasz");
+			
 		}
 		
 		

@@ -6,13 +6,12 @@ public partial class MainMenu : Node2D
 	private const string SAVE_PATH = "user://clicker_save.json"; 
 	private AudioStreamPlayer zene; 
 	
-	[Export]
-	public TextureButton loadButton; 
+	[Export] public TextureButton loadButton; 
 	
 	public override void _Ready()
 	{
-		 CheckSaveFile(); 
-		 zene = GetNode<AudioStreamPlayer>("Zene");
+		CheckSaveFile(); 
+		zene = GetNode<AudioStreamPlayer>("Zene");
 		if(zene != null)
 		{
 			zene.Play();
