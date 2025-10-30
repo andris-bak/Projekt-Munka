@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://bla6t6qp38sla"]
+[gd_scene load_steps=39 format=4 uid="uid://bla6t6qp38sla"]
 
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
@@ -20,6 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://3m63lbapm6k1" path="res://assets/menu.png" id="18_hfhyq"]
 [ext_resource type="Texture2D" uid="uid://c5ih4ddfig66o" path="res://icon.svg" id="19_eroyx"]
 [ext_resource type="Texture2D" uid="uid://bqx56k13lucm" path="res://assets/close.png" id="20_8luvg"]
+[ext_resource type="Texture2D" uid="uid://w1u8rp7ki44t" path="res://assets/szaros.png" id="21_sqr6f"]
+[ext_resource type="Texture2D" uid="uid://do4a2vrrhksyk" path="res://assets/fire.png" id="21_wkb8g"]
+[ext_resource type="Texture2D" uid="uid://vgam332cqdxg" path="res://assets/szél.png" id="23_i1piu"]
+[ext_resource type="Texture2D" uid="uid://ct8ttfigavqld" path="res://assets/víz.png" id="24_kttba"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyre6"]
 atlas = ExtResource("5_pyre6")
@@ -142,15 +146,18 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aluu1"]
 
-[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "Enemy", "Shield", "HPBar", "PlayerSprite", "optionsMenuLayer", "HealthRegen")]
+[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "HealthRegen")]
 script = ExtResource("1_qvfia")
 CoinLabel = NodePath("Coins")
 HPLabel = NodePath("Health")
 bossLabel = NodePath("Time")
 LevelLabel = NodePath("Level")
 LevelPrice = NodePath("Price")
-Enemy = NodePath("Enemy")
 Shield = NodePath("Shield")
+Fire = NodePath("Fire")
+Earth = NodePath("Earth")
+Air = NodePath("Air")
+Water = NodePath("Water")
 HPBar = NodePath("ProgressBar")
 PlayerSprite = NodePath("MC")
 optionsMenuLayer = NodePath("OptionsMenuLayer")
@@ -403,6 +410,26 @@ grow_vertical = 2
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="Fire" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(320, 276)
+texture = ExtResource("21_wkb8g")
+
+[node name="Earth" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(325, 256)
+texture = ExtResource("21_sqr6f")
+
+[node name="Air" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(318, 280)
+texture = ExtResource("23_i1piu")
+
+[node name="Water" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(319, 274)
+texture = ExtResource("24_kttba")
 
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/Click" to="." method="OnClickButton"]
