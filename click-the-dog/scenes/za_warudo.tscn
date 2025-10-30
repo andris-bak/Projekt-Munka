@@ -207,12 +207,11 @@ offset_bottom = 15.7747
 [node name="Hang" type="AudioStreamPlayer" parent="Paladin"]
 stream = ExtResource("8_jtjaw")
 
-[node name="Enemy" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("EnemyAnimator")]
+[node name="Enemy" type="AnimatedSprite2D" parent="."]
 position = Vector2(318, 140)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_aluu1")
 script = ExtResource("6_aluu1")
-EnemyAnimator = NodePath(".")
 
 [node name="Click" type="TextureButton" parent="Enemy"]
 offset_left = -33.0

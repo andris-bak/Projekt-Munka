@@ -17,7 +17,7 @@ public partial class GameManager : Node
 	public int ClickCounter {get; set;} = 0;
 	public int currentEnemyIndex {get; set;} = 0; 
 	public int currentShieldIndex {get; set;} = 0;
-	public int Tick {get; set;} = 5;
+	public int Tick {get; set;} = 3;
 	
 	// A Player és Enemy objektumok maradnak példányként a GM-ben
 	// (Feltételezem, hogy a Player és Enemy is osztályok, amelyek RefCounted-től örökölnek, vagy csak egyszerű C# osztályok)
