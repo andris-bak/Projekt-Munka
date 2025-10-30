@@ -179,7 +179,7 @@ stream = ExtResource("5_qg8qh")
 position = Vector2(435, 173)
 scale = Vector2(1.125, 1.10938)
 sprite_frames = SubResource("SpriteFrames_7supi")
-animation = &"Idle"
+animation = &"attack"
 
 [node name="Paladin" type="Sprite2D" parent="." node_paths=PackedStringArray("DialogueLabel")]
 position = Vector2(475, 95)
