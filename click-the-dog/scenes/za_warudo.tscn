@@ -381,7 +381,6 @@ offset_right = -15.0
 offset_bottom = -21.984
 
 [node name="OptionsMenuLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="MenuBackground" type="TextureRect" parent="OptionsMenuLayer"]
 offset_left = 430.0
@@ -407,6 +406,42 @@ offset_right = 2.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Master" type="HSlider" parent="OptionsMenuLayer/Close"]
+anchors_preset = -1
+anchor_left = 1.754
+anchor_top = 1.049
+anchor_right = 1.754
+anchor_bottom = 1.049
+offset_left = -84.0207
+offset_top = -40.0301
+offset_right = 19.9793
+offset_bottom = -24.0301
+rounded = true
+
+[node name="Sound Effects" type="HSlider" parent="OptionsMenuLayer/Close"]
+anchors_preset = -1
+anchor_left = 1.754
+anchor_top = 0.716
+anchor_right = 1.754
+anchor_bottom = 0.716
+offset_left = -84.0207
+offset_top = -40.0156
+offset_right = 19.9793
+offset_bottom = -24.0156
+rounded = true
+
+[node name="Music" type="HSlider" parent="OptionsMenuLayer/Close"]
+anchors_preset = -1
+anchor_left = 1.754
+anchor_top = 1.321
+anchor_right = 1.754
+anchor_bottom = 1.321
+offset_left = -84.0207
+offset_top = -40.0129
+offset_right = 19.9793
+offset_bottom = -24.0129
+rounded = true
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
