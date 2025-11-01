@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Click the DOG"
+config/version="0.1.5"
 run/main_scene="uid://ctmawrq6now4d"
-config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -25,10 +26,15 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/mode=3
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://4b8mv4mnmp5y"
 
 [dotnet]
 
 project/assembly_name="Click the DOG"
+
+[filesystem]
+
+import/custom_image="uid://cxyddaqmg8bht"
 
 [input]
 

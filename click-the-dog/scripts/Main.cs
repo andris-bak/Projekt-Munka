@@ -4,7 +4,7 @@ using System;
 public partial class Main : Node2D
 {
 	public GameManager GM;
-
+	
 	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
@@ -23,8 +23,12 @@ public partial class Main : Node2D
 	[Export] public Label bossLabel;
 	[Export] public Label LevelLabel;
 	[Export] public Label LevelPrice;
-	[Export] public AnimatedSprite2D Enemy;
+	// [Export] public AnimatedSprite2D Enemy;
 	[Export] public Sprite2D Shield;
+	[Export] public Sprite2D Fire;
+	[Export] public Sprite2D Earth;
+	[Export] public Sprite2D Air;
+	[Export] public Sprite2D Water;
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
@@ -111,6 +115,14 @@ public partial class Main : Node2D
 			OnClickButton();
 			// Jelzi a Godot-nak, hogy feldolgoztuk az eseményt.
 			GetViewport().SetInputAsHandled(); 
+			if(GM.PlayerData.PlayerDamageType == Player.DamageType.NONE)
+			{
+				GD.Print($"Enum működik");
+			}
+			if(GM.EnemyData.EnemyResistance == Enemy.DefenseType.FIRE)
+			{
+				GD.Print($"Enemy Enum működik");
+			}
 		}
 		
 		if (@event.IsActionPressed("openMenu"))
@@ -200,6 +212,42 @@ public partial class Main : Node2D
 			
 			GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
 			HPBar.MaxValue = GM.HP;
+			
+			int element = GM.Rnd.Next(0, 4);
+			switch(element)
+			{
+				case 0 :
+					Water.Visible = false;
+					Earth.Visible = false;
+					Air.Visible = false;
+					Fire.Visible = true;
+					GM.EnemyData.EnemyResistance = Enemy.DefenseType.FIRE;
+					break;
+				case 1 :
+					Earth.Visible = false;
+					Air.Visible = false;
+					Fire.Visible = false;
+					Water.Visible = true;
+					GM.EnemyData.EnemyResistance = Enemy.DefenseType.WATER;
+					break;
+				case 2 :
+					Earth.Visible = false;
+					Fire.Visible = false;
+					Water.Visible = false;
+					Air.Visible = true;
+					GM.EnemyData.EnemyResistance = Enemy.DefenseType.AIR;
+					break;
+				case 3 :
+					Fire.Visible = false;
+					Water.Visible = false;
+					Air.Visible = false;
+					Earth.Visible = true;
+					GM.EnemyData.EnemyResistance = Enemy.DefenseType.EARTH;
+					break;
+				default:
+					break;
+				
+			}
 			
 			UpdateScoreLabel();
 			UpdateCoinLabel();
@@ -464,7 +512,7 @@ public partial class Main : Node2D
 		}
 		if (HPBar != null)
 		{
-			HPBar.Value = Math.Max(0, GM.HP);
+			HPBar.Value = GM.HP; //Math.Max(0, GM.HP);
 		}
 	}
 	
@@ -542,6 +590,7 @@ public partial class Main : Node2D
 		// GM.PlayerData adatok betöltése
 		GM.PlayerData.Level = (int)(long)dataDict["PlayerLevel"];
 		GM.PlayerData.Damage = (int)(long)dataDict["PlayerDamage"]; 
+		
 
 		// GM.Rnd és GM.Min/MaxHP használata
 		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
@@ -659,10 +708,11 @@ public partial class Main : Node2D
 			
 			UpdateHP();
 		}
+		UpdateHP();
 	}
 	
 	private void _on_HealthRegenTimer_timeout()
 	{
-		GetHealth(); // Meghívja a te metódusodat minden másodpercben
+		GetHealth();
 	}
 }
