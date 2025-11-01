@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btvgfikj1tpy2"
-path="res://.godot/imported/dabloon.png-566b4ae58f602dd76eaec3da8fe1b578.ctex"
+uid="uid://cod3xur5jcbdt"
+path="res://.godot/imported/lvlup_button_colored.png-27e3c9d65e00f6364a5af86ab89c914e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dabloon.png"
-dest_files=["res://.godot/imported/dabloon.png-566b4ae58f602dd76eaec3da8fe1b578.ctex"]
+source_file="res://assets/Button/lvlup_button_colored.png"
+dest_files=["res://.godot/imported/lvlup_button_colored.png-27e3c9d65e00f6364a5af86ab89c914e.ctex"]
 
 [params]
 

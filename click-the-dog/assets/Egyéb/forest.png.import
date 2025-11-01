@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct8ttfigavqld"
-path="res://.godot/imported/víz.png-8585fb7725b45a25054ad51ead2a36d1.ctex"
+uid="uid://ckbj5nwtfff0t"
+path="res://.godot/imported/forest.png-87023b03430229916ca92c1b1e97a4c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/víz.png"
-dest_files=["res://.godot/imported/víz.png-8585fb7725b45a25054ad51ead2a36d1.ctex"]
+source_file="res://assets/Egyéb/forest.png"
+dest_files=["res://.godot/imported/forest.png-87023b03430229916ca92c1b1e97a4c9.ctex"]
 
 [params]
 

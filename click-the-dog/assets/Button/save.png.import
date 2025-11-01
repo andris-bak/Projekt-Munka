@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmfh8nfw6ymtl"
-path="res://.godot/imported/windy.png-3e31c276cbbab283e8a3de83480c88ee.ctex"
+uid="uid://cusiw7yhn1kcw"
+path="res://.godot/imported/save.png-2610be0c11f3d0fd87b59a6f2f8437cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/windy.png"
-dest_files=["res://.godot/imported/windy.png-3e31c276cbbab283e8a3de83480c88ee.ctex"]
+source_file="res://assets/Button/save.png"
+dest_files=["res://.godot/imported/save.png-2610be0c11f3d0fd87b59a6f2f8437cc.ctex"]
 
 [params]
 

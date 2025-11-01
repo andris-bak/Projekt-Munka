@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqx56k13lucm"
-path="res://.godot/imported/close.png-5dfda58792925f4ecef1b7dd0e814906.ctex"
+uid="uid://ct8ttfigavqld"
+path="res://.godot/imported/víz.png-f944153a0604e7f6e2980071505c1f46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/close.png"
-dest_files=["res://.godot/imported/close.png-5dfda58792925f4ecef1b7dd0e814906.ctex"]
+source_file="res://assets/Elements/víz.png"
+dest_files=["res://.godot/imported/víz.png-f944153a0604e7f6e2980071505c1f46.ctex"]
 
 [params]
 

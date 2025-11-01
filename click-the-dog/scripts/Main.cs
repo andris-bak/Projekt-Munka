@@ -512,7 +512,7 @@ public partial class Main : Node2D
 		}
 		if (HPBar != null)
 		{
-			HPBar.Value = Math.Max(0, GM.HP);
+			HPBar.Value = GM.HP; //Math.Max(0, GM.HP);
 		}
 	}
 	
@@ -708,10 +708,11 @@ public partial class Main : Node2D
 			
 			UpdateHP();
 		}
+		UpdateHP();
 	}
 	
 	private void _on_HealthRegenTimer_timeout()
 	{
-		GetHealth(); // Meghívja a te metódusodat minden másodpercben
+		GetHealth();
 	}
 }

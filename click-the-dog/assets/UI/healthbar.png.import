@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5qk8qqqsdtei"
-path="res://.godot/imported/save_button.png-77229e3ab1402190126d682b4f233746.ctex"
+uid="uid://t2mumdw1msn"
+path="res://.godot/imported/healthbar.png-102952f312bff365105c21903cd064c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/save_button.png"
-dest_files=["res://.godot/imported/save_button.png-77229e3ab1402190126d682b4f233746.ctex"]
+source_file="res://assets/UI/healthbar.png"
+dest_files=["res://.godot/imported/healthbar.png-102952f312bff365105c21903cd064c3.ctex"]
 
 [params]
 

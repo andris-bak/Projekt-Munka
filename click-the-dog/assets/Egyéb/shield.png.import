@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceaxci2mbnii7"
-path="res://.godot/imported/menubox.png-af82ec73b0f1274c058824c6eb793d5a.ctex"
+uid="uid://cdkywatc3bhpa"
+path="res://.godot/imported/shield.png-24c3908a1cb6e67007d0ad39bc84827a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/menubox.png"
-dest_files=["res://.godot/imported/menubox.png-af82ec73b0f1274c058824c6eb793d5a.ctex"]
+source_file="res://assets/Egyéb/shield.png"
+dest_files=["res://.godot/imported/shield.png-24c3908a1cb6e67007d0ad39bc84827a.ctex"]
 
 [params]
 
