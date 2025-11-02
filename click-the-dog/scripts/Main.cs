@@ -17,7 +17,7 @@ public partial class Main : Node2D
 
 	
 	// Exportált Node hivatkozások...
-	[Export] public Label ScoreLabel;
+	// [Export] public Label ScoreLabel;
 	[Export] public Label CoinLabel;
 	[Export] public Label HPLabel;
 	[Export] public Label bossLabel;
@@ -32,7 +32,7 @@ public partial class Main : Node2D
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
-	[Export] public Timer HealthRegen;
+	// [Export] public Timer HealthRegen;
 	
 	
 	public override void _Ready()
@@ -42,16 +42,16 @@ public partial class Main : Node2D
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
 
-		HPBar.MaxValue = GM.MaxHP;
+		HPBar.MaxValue = GM.HP;
 		HPBar.Value = GM.HP;
 		HPBar.Step = GM.PlayerData.Damage; 
 		
-		UpdateScoreLabel();
+		//UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateHP();
 		UpdateLevel();
 		UpdateLevelPrice();
-		UpdateTimerLabel(); // Frissítés a kezdeti állapotra (rejtett)
+		UpdateTimerLabel();
 
 
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
@@ -102,6 +102,27 @@ public partial class Main : Node2D
 			}
 			UpdateTimerLabel();
 			
+		}
+		
+		if(GM.Tick > 0 && GM.HP < GM.MaxHP && GM.HP > 0)
+		{
+			GM.regenTimer += GM.Tick * (float)delta;
+			if(GM.regenTimer > 0.5f)
+			{
+				int regenMennyiseg = Mathf.FloorToInt(GM.regenTimer);
+				
+				// Kivonjuk a hozzáadott értéket az akkumulátorból
+				GM.regenTimer -= regenMennyiseg;
+				
+				// Hozzáadjuk a HP-hoz
+				GM.HP += regenMennyiseg;
+
+				// FONTOS: Soha ne engedjük MaxHp fölé menni
+				GM.HP = Mathf.Min(GM.HP, GM.MaxHP);
+
+				// Frissítjük a látványt
+				UpdateHP();
+			}
 		}
 
 	}
@@ -179,7 +200,7 @@ public partial class Main : Node2D
 		GM.HP -= actualDamage;
 		
 		UpdateHP();
-		UpdateScoreLabel();
+		//UpdateScoreLabel();
 
 		// Animációk
 		if(PlayerSprite != null)
@@ -249,7 +270,7 @@ public partial class Main : Node2D
 				
 			}
 			
-			UpdateScoreLabel();
+			//UpdateScoreLabel();
 			UpdateCoinLabel();
 			UpdateHP();
 			ChangeShield(); // Pajzs frissítése/cseréje
@@ -274,7 +295,7 @@ public partial class Main : Node2D
 		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
 		HPBar.MaxValue = GM.HP;
 		
-		UpdateScoreLabel();
+		//UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateHP();
 		ChangeShield(); // Pajzs frissítése/cseréje
@@ -456,14 +477,7 @@ public partial class Main : Node2D
 		
 	// --- UI Frissítő Metódusok (GM. adatok alapján) ---
 		
-	public void UpdateScoreLabel()
-	{
-		if (ScoreLabel != null)
-		{
-			ScoreLabel.Text = "Pontok: " + GM.Score.ToString();
-		}
-		
-	}
+	
 	
 	public void UpdateLevel()
 	{
@@ -595,7 +609,7 @@ public partial class Main : Node2D
 		// GM.Rnd és GM.Min/MaxHP használata
 		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
 
-		UpdateScoreLabel();
+		//UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateLevel();
 		UpdateLevelPrice();
@@ -693,26 +707,5 @@ public partial class Main : Node2D
 		}
 	}
 	
-	public void GetHealth()
-	{
-		// Csak akkor adjon HP-t, ha nem maximális az életerő
-		if (GM.HP < GM.MaxHP)
-		{
-			GM.HP = GM.HP + GM.Tick;
-			
-			// Ne engedje túllépni a maximumot
-			if (GM.HP > GM.MaxHP)
-			{
-				GM.HP = GM.MaxHP;
-			}
-			
-			UpdateHP();
-		}
-		UpdateHP();
-	}
-	
-	private void _on_HealthRegenTimer_timeout()
-	{
-		GetHealth();
-	}
+
 }

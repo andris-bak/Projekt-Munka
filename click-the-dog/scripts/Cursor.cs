@@ -5,21 +5,14 @@ public partial class Cursor : TextureButton
 	// --- HOVER KURZOR (amit mutasson, ha felette van) ---
 	// Az [ExportGroup] szebben rendezi az Inspectorban
 	[ExportGroup("Hover Kurzor")]
-	[Export]
-	private Texture2D _hoverCursorTexture;
-	
-	[Export]
-	private Vector2 _hoverHotspot = Vector2.Zero;
-
+	[Export] private Texture2D _hoverCursorTexture;
+	[Export] private Vector2 _hoverHotspot = Vector2.Zero;
 
 	// --- ALAPÉRTELMEZETT KURZOR (amire váltson vissza) ---
 	// Ide húzd be az alapértelmezett, "normál" játék-kurzorodat
 	[ExportGroup("Alapértelmezett Kurzor")]
-	[Export]
-	private Texture2D _defaultCursorTexture;
-	
-	[Export]
-	private Vector2 _defaultHotspot = Vector2.Zero;
+	[Export] private Texture2D _defaultCursorTexture;
+	[Export] private Vector2 _defaultHotspot = Vector2.Zero;
 
 
 	public override void _Ready()
