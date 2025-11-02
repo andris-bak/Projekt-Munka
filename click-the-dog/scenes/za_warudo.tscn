@@ -138,7 +138,7 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aluu1"]
 
-[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "HealthRegen")]
+[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "Shield", "HPBar", "PlayerSprite", "optionsMenuLayer", "HealthRegen")]
 script = ExtResource("1_qvfia")
 CoinLabel = NodePath("Coins")
 HPLabel = NodePath("Health")
@@ -146,10 +146,6 @@ bossLabel = NodePath("Time")
 LevelLabel = NodePath("Level")
 LevelPrice = NodePath("Price")
 Shield = NodePath("Shield")
-Fire = NodePath("Fire")
-Earth = NodePath("Earth")
-Air = NodePath("Air")
-Water = NodePath("Water")
 HPBar = NodePath("ProgressBar")
 PlayerSprite = NodePath("MC")
 optionsMenuLayer = NodePath("OptionsMenuLayer")
