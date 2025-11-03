@@ -69,6 +69,7 @@ public partial class Main : Node2D
 			 GD.Load<PackedScene>("res://scenes/slime.tscn"), 
 			 GD.Load<PackedScene>("res://scenes/slime_2.tscn"), 
 			 GD.Load<PackedScene>("res://scenes/slime_3.tscn"),
+			GD.Load<PackedScene>("res://scenes/clowndog.tscn"),
 			
 			//Boss:
 			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"), 
@@ -106,7 +107,7 @@ public partial class Main : Node2D
 		
 		if(GM.Tick > 0 && GM.HP < GM.MaxHP && GM.HP > 0)
 		{
-			GM.regenTimer += GM.Tick + (float)delta;
+			GM.regenTimer += GM.Tick * (float)delta;
 			if(GM.regenTimer > 1.0f)
 			{
 				int regenMennyiseg = Mathf.FloorToInt(GM.regenTimer);
@@ -233,6 +234,7 @@ public partial class Main : Node2D
 			
 			GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
 			HPBar.MaxValue = GM.HP;
+			//HPBar.Value = GM.HP;
 			
 			int element = GM.Rnd.Next(0, 4);
 			switch(element)
