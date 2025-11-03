@@ -106,8 +106,8 @@ public partial class Main : Node2D
 		
 		if(GM.Tick > 0 && GM.HP < GM.MaxHP && GM.HP > 0)
 		{
-			GM.regenTimer += GM.Tick * (float)delta;
-			if(GM.regenTimer > 0.5f)
+			GM.regenTimer += GM.Tick + (float)delta;
+			if(GM.regenTimer > 1.0f)
 			{
 				int regenMennyiseg = Mathf.FloorToInt(GM.regenTimer);
 				
