@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckbj5nwtfff0t"
-path="res://.godot/imported/forest.png-3b217249c881492c4f7ec73306a77592.ctex"
+uid="uid://btvgfikj1tpy2"
+path="res://.godot/imported/dabloon.png-320d699b4298069408577e31db047146.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/forest.png"
-dest_files=["res://.godot/imported/forest.png-3b217249c881492c4f7ec73306a77592.ctex"]
+source_file="res://assets/Egyéb/dabloon.png"
+dest_files=["res://.godot/imported/dabloon.png-320d699b4298069408577e31db047146.ctex"]
 
 [params]
 

@@ -2,24 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdkywatc3bhpa"
-path="res://.godot/imported/shield.png-46d74908b0ac118b50397d7021ae31f8.ctex"
+uid="uid://chrmwcn4eday1"
+path="res://.godot/imported/message_dots_square.png-1889b653902e7ffa8aca6a174ac008b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/shield.png"
-dest_files=["res://.godot/imported/shield.png-46d74908b0ac118b50397d7021ae31f8.ctex"]
+source_file="res://assets/Cursors/message_dots_square.png"
+dest_files=["res://.godot/imported/message_dots_square.png-1889b653902e7ffa8aca6a174ac008b0.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
-compress/uastc_level=0
-compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -27,10 +25,6 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/channel_remap/red=0
-process/channel_remap/green=1
-process/channel_remap/blue=2
-process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

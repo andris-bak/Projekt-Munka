@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciettlpyttqk4"
-path="res://.godot/imported/objectsSnowVersion.png-a6aca8210235f50d70091bea0d2ece5f.ctex"
+uid="uid://dngwle342ple8"
+path="res://.godot/imported/clowndog-Sheet.png-c57feacf29615cff5c81313c595f3187.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/objectsSnowVersion.png"
-dest_files=["res://.godot/imported/objectsSnowVersion.png-a6aca8210235f50d70091bea0d2ece5f.ctex"]
+source_file="res://enemies/clowndog-Sheet.png"
+dest_files=["res://.godot/imported/clowndog-Sheet.png-c57feacf29615cff5c81313c595f3187.ctex"]
 
 [params]
 

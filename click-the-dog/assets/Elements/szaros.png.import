@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byt8mjrbo8u1n"
-path="res://.godot/imported/margo.png-bb075cf792a9315e063774365a5c447f.ctex"
+uid="uid://w1u8rp7ki44t"
+path="res://.godot/imported/szaros.png-f769b33cf24658d58811c18f1ea5e217.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/margo.png"
-dest_files=["res://.godot/imported/margo.png-bb075cf792a9315e063774365a5c447f.ctex"]
+source_file="res://assets/Elements/szaros.png"
+dest_files=["res://.godot/imported/szaros.png-f769b33cf24658d58811c18f1ea5e217.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btvgfikj1tpy2"
-path="res://.godot/imported/dabloon.png-566b4ae58f602dd76eaec3da8fe1b578.ctex"
+uid="uid://ct8ttfigavqld"
+path="res://.godot/imported/víz.png-f944153a0604e7f6e2980071505c1f46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dabloon.png"
-dest_files=["res://.godot/imported/dabloon.png-566b4ae58f602dd76eaec3da8fe1b578.ctex"]
+source_file="res://assets/Elements/víz.png"
+dest_files=["res://.godot/imported/víz.png-f944153a0604e7f6e2980071505c1f46.ctex"]
 
 [params]
 
