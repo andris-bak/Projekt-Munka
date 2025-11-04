@@ -5,7 +5,6 @@ public partial class Main : Node2D
 {
 	public GameManager GM;
 	
-	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
 	public AudioStreamPlayer hitSound; 
@@ -69,7 +68,7 @@ public partial class Main : Node2D
 			 GD.Load<PackedScene>("res://scenes/slime.tscn"), 
 			 GD.Load<PackedScene>("res://scenes/slime_2.tscn"), 
 			 GD.Load<PackedScene>("res://scenes/slime_3.tscn"),
-			GD.Load<PackedScene>("res://scenes/clowndog.tscn"),
+			 GD.Load<PackedScene>("res://scenes/clowndog.tscn"),
 			
 			//Boss:
 			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"), 
@@ -371,7 +370,7 @@ public partial class Main : Node2D
 			}
 		} 
 		
-		else 
+		else
 		{
 			// Normál ellenség betöltése esetén mindig kapcsoljuk ki a boss módot
 			GM.IsBossFight = false;
@@ -385,7 +384,6 @@ public partial class Main : Node2D
 
 		PackedScene newEnemyScene = enemyScenes[GM.currentEnemyIndex]; 
 		currentEnemy = newEnemyScene.Instantiate<Node2D>();
-		
 
 		AddChild(currentEnemy); 
 		currentEnemy.Position = new Vector2(19, 11); 
@@ -452,8 +450,6 @@ public partial class Main : Node2D
 		{
 			
 		}
-		
-		
 	}
 		
 		
