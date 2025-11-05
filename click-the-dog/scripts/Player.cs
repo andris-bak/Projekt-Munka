@@ -15,7 +15,6 @@ public partial class Player
 		EARTH
 	}
 	
-	
 	public DamageType PlayerDamageType {get; set;}
 	
 	public Player()
@@ -29,6 +28,5 @@ public partial class Player
 	{
 		Level++;
 		Damage = Damage * 2;
-		
 	}
 }

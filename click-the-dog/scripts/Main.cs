@@ -14,7 +14,6 @@ public partial class Main : Node2D
 	public Node2D currentShield; 
 	public AnimatedSprite2D maincat; 
 
-	
 	// Exportált Node hivatkozások...
 	// [Export] public Label ScoreLabel;
 	[Export] public Label CoinLabel;
@@ -33,10 +32,8 @@ public partial class Main : Node2D
 	[Export] public CanvasLayer optionsMenuLayer;
 	// [Export] public Timer HealthRegen;
 	
-	
 	public override void _Ready()
 	{
-		
 		GM = GetNode<GameManager>("/root/GameManager");
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
@@ -52,7 +49,6 @@ public partial class Main : Node2D
 		UpdateLevelPrice();
 		UpdateTimerLabel();
 
-
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
 		
@@ -62,7 +58,6 @@ public partial class Main : Node2D
 			bgmPlayer.Finished += OnMusicFinished; 
 		}
 		 
-		
 		enemyScenes = new PackedScene[]
 		{
 			 GD.Load<PackedScene>("res://scenes/slime.tscn"), 
@@ -72,7 +67,6 @@ public partial class Main : Node2D
 			
 			//Boss:
 			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"), 
-
 		};
 		
 		shieldScenes = new PackedScene[]
@@ -80,8 +74,7 @@ public partial class Main : Node2D
 			GD.Load<PackedScene>("res://scenes/shield_bal.tscn"), 
 			GD.Load<PackedScene>("res://scenes/shield_jobb.tscn"), 
 		};
-		
-		
+	
 		ChangeEnemyScene();
 		ChangeShield();
 	}
@@ -89,7 +82,6 @@ public partial class Main : Node2D
 	public override void _Process(double delta)
 	{
 		ChangePosition(); 
-		
 		// --- IDŐZÍTŐ LOGIKA ---
 		if (GM.IsBossFight)
 		{
@@ -103,7 +95,6 @@ public partial class Main : Node2D
 			UpdateTimerLabel();
 			
 		}
-		
 		if(GM.Tick > 0 && GM.HP < GM.MaxHP && GM.HP > 0)
 		{
 			GM.regenTimer += GM.Tick * (float)delta;
@@ -120,11 +111,9 @@ public partial class Main : Node2D
 				// FONTOS: Soha ne engedjük MaxHp fölé menni
 				GM.HP = Mathf.Min(GM.HP, GM.MaxHP);
 
-				// Frissítjük a látványt
 				UpdateHP();
 			}
 		}
-
 	}
 	
 	public override void _Input(InputEvent @event)
@@ -200,8 +189,6 @@ public partial class Main : Node2D
 		GM.HP -= actualDamage;
 		
 		UpdateHP();
-		//UpdateScoreLabel();
-
 		// Animációk
 		if(PlayerSprite != null)
 		{
@@ -268,9 +255,7 @@ public partial class Main : Node2D
 					break;
 				default:
 					break;
-				
 			}
-			
 			//UpdateScoreLabel();
 			UpdateCoinLabel();
 			UpdateHP();
@@ -278,8 +263,6 @@ public partial class Main : Node2D
 			ChangeEnemyScene(); 
 		} // Bezárja az if(GM.HP <= 0) blokkot
 	} // <- EZ VOLT A HIÁNYZÓ ZÁRÓJEL, ami most bekerült.
-	
-
 	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
 	public void BossWins()
@@ -406,7 +389,7 @@ public partial class Main : Node2D
 	{
 		if(GM.Level >= 3)
 		{
-				// 1. ELŐZŐ PAJZS TÖRLÉSE (ha volt)
+			// 1. ELŐZŐ PAJZS TÖRLÉSE (ha volt)
 			if (currentShield != null)
 			{
 			 	 currentShield.QueueFree();
@@ -452,7 +435,6 @@ public partial class Main : Node2D
 		}
 	}
 		
-		
 	public void OnPlayerAnimationFinished()
 	{
 		if (PlayerSprite != null)
@@ -472,10 +454,6 @@ public partial class Main : Node2D
 	{
 		bgmPlayer.Play();
 	}
-		
-	// --- UI Frissítő Metódusok (GM. adatok alapján) ---
-		
-	
 	
 	public void UpdateLevel()
 	{
@@ -506,7 +484,6 @@ public partial class Main : Node2D
 			CoinLabel.Text = GM.Coin.ToString();
 		}
 	}
-	
 	
 	public void UpdateHP()
 	{
@@ -644,35 +621,34 @@ public partial class Main : Node2D
 	}
 	
 	public void UpdateTimerLabel()
-		{
-			if (bossLabel == null) return;
+	{
+		if (bossLabel == null) return;
 			
-			if (GM.IsBossFight)
-			{
-				// Az időt két tizedesjegyre kerekítjük és megjelenítjük
-				bossLabel.Text = $"IDŐ: {GM.BossTimeLeft:0.00} mp";
-				bossLabel.Show();
+		if (GM.IsBossFight)
+		{
+			// Az időt két tizedesjegyre kerekítjük és megjelenítjük
+			bossLabel.Text = $"IDŐ: {GM.BossTimeLeft:0.00} mp";
+			bossLabel.Show();
 				
-				// Szín változtatása, ha már csak kevés idő van hátra
-				if (GM.BossTimeLeft <= 5.0)
-				{
-					bossLabel.Modulate = new Color(1, 0.2f, 0.2f); // Pirosas, vészjelzés
-				}
-				else
-				{
-					bossLabel.Modulate = new Color(1, 1, 1); // Fehér
-				}
+			// Szín változtatása, ha már csak kevés idő van hátra
+			if (GM.BossTimeLeft <= 5.0)
+			{
+				bossLabel.Modulate = new Color(1, 0.2f, 0.2f); // Pirosas, vészjelzés
+			}
+			else
+			{
+				bossLabel.Modulate = new Color(1, 1, 1); // Fehér
+			}
 			}
 			else
 			{
 				bossLabel.Text = "";
 				bossLabel.Hide();
 			}
-		}
+	}
 	
 	public void ChangePosition()
 	{
-
 		if (PlayerSprite == null) return;
 		
 		if (Input.IsActionJustPressed("switchLeft"))
@@ -704,6 +680,4 @@ public partial class Main : Node2D
 			GD.Print("Opciók menü bezárva.");
 		}
 	}
-	
-
 }
