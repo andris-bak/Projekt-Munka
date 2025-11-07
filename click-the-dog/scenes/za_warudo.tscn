@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bqx56k13lucm" path="res://assets/Button/close.png" id="20_8luvg"]
 [ext_resource type="Texture2D" uid="uid://dgarpv17xoor8" path="res://assets/UI/Options_Button.png" id="21_3xnty"]
 [ext_resource type="Script" uid="uid://dvgkyd51kxiwx" path="res://scripts/VolumeSlider.cs" id="21_i1piu"]
-[ext_resource type="Texture2D" uid="uid://w1u8rp7ki44t" path="res://assets/Elements/szaros.png" id="21_sqr6f"]
+[ext_resource type="Texture2D" uid="uid://w1u8rp7ki44t" path="res://assets/Elements/earth.png" id="21_sqr6f"]
 [ext_resource type="Texture2D" uid="uid://do4a2vrrhksyk" path="res://assets/Elements/fire.png" id="21_wkb8g"]
 [ext_resource type="Texture2D" uid="uid://wkl1ve5n8yj3" path="res://assets/UI/options_menu.png" id="22_3xnty"]
 [ext_resource type="Texture2D" uid="uid://vgam332cqdxg" path="res://assets/Elements/szél.png" id="23_i1piu"]
