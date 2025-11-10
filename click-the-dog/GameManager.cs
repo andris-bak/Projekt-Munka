@@ -20,6 +20,7 @@ public partial class GameManager : Node
 	public int Tick {get; set;} = 3;
 	public float regenTimer {get; set;} = 0.0f;
 	
+	
 	// A Player és Enemy objektumok maradnak példányként a GM-ben
 	// (Feltételezem, hogy a Player és Enemy is osztályok, amelyek RefCounted-től örökölnek, vagy csak egyszerű C# osztályok)
 	public Player PlayerData { get; set; }

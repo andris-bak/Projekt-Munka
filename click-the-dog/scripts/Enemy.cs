@@ -27,6 +27,4 @@ public partial class Enemy : Node
 		EnemyResistance = DefenseType.NONE;
 		
 	}
-
-	
 }

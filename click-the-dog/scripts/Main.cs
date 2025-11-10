@@ -3,7 +3,9 @@ using System;
 
 public partial class Main : Node2D
 {
+	
 	public GameManager GM;
+	public int element = -1;
 	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
@@ -37,11 +39,9 @@ public partial class Main : Node2D
 		GM = GetNode<GameManager>("/root/GameManager");
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
-
 		HPBar.MaxValue = GM.HP;
 		HPBar.Value = GM.HP;
 		HPBar.Step = GM.PlayerData.Damage; 
-		
 		//UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateHP();
@@ -149,6 +149,7 @@ public partial class Main : Node2D
 	
 	public void OnClickButton()
 	{
+		
 		GM.ClickCounter++;
 		if(GM.ClickCounter == 3)
 		{
@@ -170,7 +171,6 @@ public partial class Main : Node2D
 			bool shieldIsLeft = GM.currentShieldIndex == 0;
 			// Pajzs a jobb oldalon (Index 1)
 			bool shieldIsRight = GM.currentShieldIndex == 1;
-
 			// Játékos a bal oldalon ÉS a pajzs is ott van
 			bool blockedByLeftShield = playerPos == leftPlayerPos && shieldIsLeft;
 			
@@ -183,6 +183,37 @@ public partial class Main : Node2D
 				actualDamage = 0;
 				GD.Print("TÁMADÁS BLOKKOLVA! Pajzs oldala: " + (GM.currentShieldIndex == 0 ? "BAL" : "JOBB"));
 			}
+		}
+		
+		Player.DamageType tes = Player.DamageType.NONE;
+		//Enemy.DefenseType tes2 = Enemy.DefenseType.AIR;
+		switch(element)
+			{
+				case 0 :
+					GM.EnemyData.EnemyResistance = Enemy.DefenseType.FIRE;
+					break;
+				case 1 :
+					GM.EnemyData.EnemyResistance = Enemy.DefenseType.WATER;
+					break;
+				case 2 :
+					GM.EnemyData.EnemyResistance = Enemy.DefenseType.AIR;
+					break;
+				case 3 :
+					GM.EnemyData.EnemyResistance = Enemy.DefenseType.EARTH;
+					break;
+				default:
+					break;
+			}
+		
+		
+		if(tes == Player.DamageType.NONE && GM.EnemyData.EnemyResistance == Enemy.DefenseType.FIRE)
+		{
+			GD.Print($"type  működik");
+			actualDamage *= 5;
+		}
+		else
+		{
+			actualDamage = GM.PlayerData.Damage;
 		}
 		// GM.Score, GM.HP és GM.PlayerData használata
 		GM.Score++;
@@ -222,7 +253,8 @@ public partial class Main : Node2D
 			HPBar.MaxValue = GM.HP;
 			//HPBar.Value = GM.HP;
 			
-			int element = GM.Rnd.Next(0, 4);
+			element = GM.Rnd.Next(0,4);
+			
 			switch(element)
 			{
 				case 0 :
