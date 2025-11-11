@@ -19,6 +19,7 @@ public partial class GameManager : Node
 	public int currentShieldIndex {get; set;} = 0;
 	public int Tick {get; set;} = 3;
 	public float regenTimer {get; set;} = 0.0f;
+	public int element {get; set;} = -1;
 	
 	
 	// A Player és Enemy objektumok maradnak példányként a GM-ben

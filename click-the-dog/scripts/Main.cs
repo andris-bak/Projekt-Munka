@@ -3,9 +3,8 @@ using System;
 
 public partial class Main : Node2D
 {
-	
 	public GameManager GM;
-	public int element = -1;
+	public Methods Method;
 	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
@@ -37,25 +36,25 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 		GM = GetNode<GameManager>("/root/GameManager");
+		Method = GetNode<Methods>("/root/Methods");
+		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
+		hitSound = GetNode<AudioStreamPlayer>("hitfx");
+		
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
 		HPBar.MaxValue = GM.HP;
 		HPBar.Value = GM.HP;
 		HPBar.Step = GM.PlayerData.Damage; 
-		//UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateHP();
 		UpdateLevel();
 		UpdateLevelPrice();
 		UpdateTimerLabel();
 
-		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
-		hitSound = GetNode<AudioStreamPlayer>("hitfx");
-		
 		if(bgmPlayer != null)
 		{
 			bgmPlayer.Play();
-			bgmPlayer.Finished += OnMusicFinished; 
+			bgmPlayer.Finished += () => Method.MusicFinished(bgmPlayer);
 		}
 		 
 		enemyScenes = new PackedScene[]
@@ -149,7 +148,6 @@ public partial class Main : Node2D
 	
 	public void OnClickButton()
 	{
-		
 		GM.ClickCounter++;
 		if(GM.ClickCounter == 3)
 		{
@@ -187,7 +185,7 @@ public partial class Main : Node2D
 		
 		Player.DamageType tes = Player.DamageType.NONE;
 		//Enemy.DefenseType tes2 = Enemy.DefenseType.AIR;
-		switch(element)
+		switch(GM.element)
 			{
 				case 0 :
 					GM.EnemyData.EnemyResistance = Enemy.DefenseType.FIRE;
@@ -204,7 +202,6 @@ public partial class Main : Node2D
 				default:
 					break;
 			}
-		
 		
 		if(tes == Player.DamageType.NONE && GM.EnemyData.EnemyResistance == Enemy.DefenseType.FIRE)
 		{
@@ -253,9 +250,9 @@ public partial class Main : Node2D
 			HPBar.MaxValue = GM.HP;
 			//HPBar.Value = GM.HP;
 			
-			element = GM.Rnd.Next(0,4);
+			GM.element = GM.Rnd.Next(0,4);
 			
-			switch(element)
+			switch(GM.element)
 			{
 				case 0 :
 					Water.Visible = false;
@@ -288,13 +285,18 @@ public partial class Main : Node2D
 				default:
 					break;
 			}
-			//UpdateScoreLabel();
 			UpdateCoinLabel();
 			UpdateHP();
 			ChangeShield(); // Pajzs frissítése/cseréje
 			ChangeEnemyScene(); 
 		} // Bezárja az if(GM.HP <= 0) blokkot
-	} // <- EZ VOLT A HIÁNYZÓ ZÁRÓJEL, ami most bekerült.
+	} 
+	
+	public void OnQuitButtonPressed()
+	{
+		// SaveGame();
+		Method.Quit();
+	}
 	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
 	public void BossWins()
@@ -311,7 +313,6 @@ public partial class Main : Node2D
 		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
 		HPBar.MaxValue = GM.HP;
 		
-		//UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateHP();
 		ChangeShield(); // Pajzs frissítése/cseréje
@@ -350,11 +351,7 @@ public partial class Main : Node2D
 		}
 	}
 	
-	public void OnQuitButtonPressed()
-	{
-		// SaveGame();
-		GetTree().Quit();
-	}
+
 	
 	public void ChangeEnemyScene()
 	{
@@ -443,7 +440,6 @@ public partial class Main : Node2D
 				{
 					// Ez a BAL pajzs pozíciója
 					instantiatedShield.Position = new Vector2(250, 160); 
-					
 				} 
 				else // currentShieldIndex == 1
 				{
@@ -482,18 +478,13 @@ public partial class Main : Node2D
 		}
 	}
 	
-	public void OnMusicFinished()
-	{
-		bgmPlayer.Play();
-	}
-	
 	public void UpdateLevel()
 	{
 		if (LevelLabel != null)
 		{
 			LevelLabel.Text = "Level: " + GM.Level.ToString();
 		}
-		
+		//Method.LevelUp(LevelLabel);
 	}
 	
 	public void UpdateLevelPrice()
@@ -554,7 +545,6 @@ public partial class Main : Node2D
 			{"MaxHP", GM.MaxHP},
 			{"Counter", GM.Counter},
 
-		
 			{"PlayerLevel", GM.PlayerData.Level},
 			{"PlayerDamage", GM.PlayerData.Damage}
 		};
@@ -612,11 +602,9 @@ public partial class Main : Node2D
 		GM.PlayerData.Level = (int)(long)dataDict["PlayerLevel"];
 		GM.PlayerData.Damage = (int)(long)dataDict["PlayerDamage"]; 
 		
-
 		// GM.Rnd és GM.Min/MaxHP használata
 		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
 
-		//UpdateScoreLabel();
 		UpdateCoinLabel();
 		UpdateLevel();
 		UpdateLevelPrice();

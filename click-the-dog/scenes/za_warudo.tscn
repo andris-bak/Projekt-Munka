@@ -256,7 +256,7 @@ position = Vector2(623, 15)
 scale = Vector2(2.3125, 2.28039)
 texture = ExtResource("12_g6mq7")
 
-[node name="TextureButton" type="TextureButton" parent="ExitButton"]
+[node name="Exit" type="TextureButton" parent="ExitButton"]
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.531
@@ -552,7 +552,7 @@ texture = ExtResource("24_kttba")
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/Click" to="." method="OnClickButton"]
 [connection signal="pressed" from="Save/Savebutton" to="." method="SaveGame"]
-[connection signal="pressed" from="ExitButton/TextureButton" to="." method="OnQuitButtonPressed"]
+[connection signal="pressed" from="ExitButton/Exit" to="." method="OnQuitButtonPressed"]
 [connection signal="pressed" from="DeleteSave/Delete" to="." method="DeleteSave"]
 [connection signal="pressed" from="LvlupButtonColored/TextureButton" to="." method="OnLevelClickButton"]
 [connection signal="pressed" from="Menu/OpenMenu" to="." method="OnMenuOpened"]
