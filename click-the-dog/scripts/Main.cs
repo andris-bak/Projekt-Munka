@@ -17,12 +17,13 @@ public partial class Main : Node2D
 
 	// Exportált Node hivatkozások...
 	// [Export] public Label ScoreLabel;
+	// [Export] public AnimatedSprite2D Enemy;
+	// [Export] public Timer HealthRegen;
 	[Export] public Label CoinLabel;
 	[Export] public Label HPLabel;
 	[Export] public Label bossLabel;
 	[Export] public Label LevelLabel;
 	[Export] public Label LevelPrice;
-	// [Export] public AnimatedSprite2D Enemy;
 	[Export] public Sprite2D Shield;
 	[Export] public Sprite2D Fire;
 	[Export] public Sprite2D Earth;
@@ -31,14 +32,17 @@ public partial class Main : Node2D
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
-	// [Export] public Timer HealthRegen;
+	
 	
 	public override void _Ready()
 	{
 		GM = GetNode<GameManager>("/root/GameManager");
 		Method = GetNode<Methods>("/root/Methods");
+		Method.BindUI(LevelLabel, LevelPrice, CoinLabel);
+		
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
+		
 		
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
@@ -210,7 +214,7 @@ public partial class Main : Node2D
 		}
 		else
 		{
-			actualDamage = GM.PlayerData.Damage;
+			//actualDamage = GM.PlayerData.Damage;
 		}
 		// GM.Score, GM.HP és GM.PlayerData használata
 		GM.Score++;
@@ -298,6 +302,41 @@ public partial class Main : Node2D
 		Method.Quit();
 	}
 	
+	public void UpdateLevel()
+	{
+		Method.LevelUp(LevelLabel);
+	}
+	
+	public void UpdateLevelPrice()
+	{
+		Method.LevelPrice(LevelPrice);
+	}
+	
+	public void UpdateCoinLabel()
+	{
+		Method.Coin(CoinLabel);
+	}
+	
+	public void UpdateHP()
+	{
+		if (HPBar == null)
+		{
+			GD.PrintErr("HIBA: A HPBar null az UpdateHP-ben!");
+			return; 
+   	 	}
+		if(GM.HP <= HPBar.MaxValue && GM.HP >= 0)
+		{
+			if (HPLabel != null)
+			{
+				HPLabel.Text = "Health: " + GM.HP.ToString();
+			}
+		}
+		if (HPBar != null)
+		{
+			HPBar.Value = GM.HP; //Math.Max(0, GM.HP);
+		}
+	}
+	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
 	public void BossWins()
 	{
@@ -350,8 +389,6 @@ public partial class Main : Node2D
 			}
 		}
 	}
-	
-
 	
 	public void ChangeEnemyScene()
 	{
@@ -477,57 +514,7 @@ public partial class Main : Node2D
 			}
 		}
 	}
-	
-	public void UpdateLevel()
-	{
-		if (LevelLabel != null)
-		{
-			LevelLabel.Text = "Level: " + GM.Level.ToString();
-		}
-		//Method.LevelUp(LevelLabel);
-	}
-	
-	public void UpdateLevelPrice()
-	{
-		if (LevelPrice != null)
-		{
-			LevelPrice.Text = "Price: " + GM.LevelPrice.ToString();
-		}
-		if(GM.Level == 12)
-		{
-			LevelPrice.Text = "Elérted a maximális szintet! ";
-		}
-		
-	}
-	
-	public void UpdateCoinLabel()
-	{
-		if(CoinLabel != null)
-		{
-			CoinLabel.Text = GM.Coin.ToString();
-		}
-	}
-	
-	public void UpdateHP()
-	{
-		if (HPBar == null)
-		{
-			GD.PrintErr("HIBA: A HPBar null az UpdateHP-ben!");
-			return; 
-   	 	}
-		if(GM.HP <= HPBar.MaxValue && GM.HP >= 0)
-		{
-			if (HPLabel != null)
-			{
-				HPLabel.Text = "Health: " + GM.HP.ToString();
-			}
-		}
-		if (HPBar != null)
-		{
-			HPBar.Value = GM.HP; //Math.Max(0, GM.HP);
-		}
-	}
-	
+
 	// --- Mentés / Betöltés Metódusok (GM. adatok kezelése) ---
 
 	public const string SAVE_PATH = "user://clicker_save.json";
@@ -555,7 +542,7 @@ public partial class Main : Node2D
 		if (file != null)
 		{
 			file.StoreString(jsonString);
-	   	 	GD.Print("Játék elmentve! " + SAVE_PATH + " útvonalra");
+	   		GD.Print("Játék elmentve! " + SAVE_PATH + " útvonalra");
    	 	}
 		else
 		{
