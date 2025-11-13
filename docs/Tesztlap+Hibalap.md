@@ -51,4 +51,6 @@ A megoldás annyi volt, hogy a Main szkriptben kellett Exportálni, mint a katti
 Illetve meg kellett oldanunk, hogy a ProgressBar step, value, minvalue és maxvalue-jét összhangban legyen a kattintással. 
 
 ### B003 
-*(Itt folytathatod a B003-as és további bugok részletes leírását...)*
+A HP csík nagyon nagyon nehezen akart működni mivel teljesen új közegben vagyunk kértünk segitséget az AI-tól illetve oktató vieok formájában 
+és ezek segitséggével sikeresen meg tudtuk oldani azt hogy a HP csík rendeltetés szerüen müködjön!
+
