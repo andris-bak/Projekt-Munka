@@ -1,74 +1,74 @@
-# [cite_start]Követelményspecifikáció [cite: 49]
+# Követelményspecifikáció
 
-[cite_start]**Projekt neve:** Click the Dog (CTD) [cite: 50]  
-[cite_start]**Dátum:** 2025.10.09. [cite: 50]  
-[cite_start]**Készítette:** M.A.K.E Kft [cite: 51]  
-[cite_start]**Tagok:** Venyige Márk, Bak András Mátyás, Kovács Krisztián, Jabur Emil [cite: 51]
+**Projekt neve:** Click the Dog (CTD)
+**Dátum:** 2025.10.09.
+**Készítette:** M.A.K.E Kft
+**Tagok:** Venyige Márk, Bak András Mátyás, Kovács Krisztián, Jabur Emil
 
-## [cite_start]1. Célunk [cite: 52]
+## 1. Célunk
 
-* [cite_start]A projektünk célja, hogy egy GODOT játékmotorban készített játékot adjunk ki a félév végére. [cite: 53]
-* [cite_start]Elsősorban egyszerű játékmenet, mely a játékban eltöltött idő után nehezebbé és komplexebbé válik. [cite: 54]
-* [cite_start]Továbbá stílusa pixel-art, amely reméljük, hogy minden játékosunknak tetszeni fog. [cite: 55]
+* A projektünk célja, hogy egy GODOT játékmotorban készített játékot adjunk ki a félév végére.
+* Elsősorban egyszerű játékmenet, mely a játékban eltöltött idő után nehezebbé és komplexebbé válik.
+* Továbbá stílusa pixel-art, amely reméljük, hogy minden játékosunknak tetszeni fog.
 
-## [cite_start]2. Bevezetés [cite: 56]
+## 2. Bevezetés
 
-[cite_start]Alapul a híres, de egyszerű játék menettel rendelkező játék(ok), mint a Clicker Heroes. [cite: 57]
+Alapul a híres, de egyszerű játék menettel rendelkező játék(ok), mint a Clicker Heroes.
 
-[cite_start]Önmagában nem olyan érdekfeszítő mivel javarészt csak az egerünk bal gombját használjuk arra, hogy ellenségeket győzzünk le. [cite: 58]
+Önmagában nem olyan érdekfeszítő mivel javarészt csak az egerünk bal gombját használjuk arra, hogy ellenségeket győzzünk le.
 
-[cite_start]Viszont, egy idő után képesek vagyunk más és más karakterekre szert tenni, kik segítenek a játék végig játszásában. [cite: 59] Illetve képesek vagyunk őket szintezni, hogy minél többet sebezzenek. [cite_start]Így mi is ezt a játékmentet próbáljuk megcsinálni, de a saját és újszerű harcrendszerrel. [cite: 60]
+Viszont, egy idő után képesek vagyunk más és más karakterekre szert tenni, kik segítenek a játék végig jázásában. Illetve képesek vagyunk őket szintezni, hogy minél többet sebezzenek. Így mi is ezt a játékmentet próbáljuk megcsinálni, de a saját és újszerű harcrendszerrel.
 
-## [cite_start]3. Érintettek és szerepkörök [cite: 61]
+## 3. Érintettek és szerepkörök
 
-* **Back-End:** Bak András Mátyás és Kovács Krisztián. [cite_start]A játék logikájáért és a háttérben futó programokért felelősek [cite: 62]
-* **Front-End:** Jabur Emil és Venyige Márk. [cite_start]A játék kinézetéért, animációiért, kisebb effektekért felelősek [cite: 63]
-* **Tesztelő:** Az egész csapat. [cite_start]Minden kis lépést, minden kis változtatást legyen, az back- vagy front-end együtt próbálunk tesztelni és dokumentálni. [cite: 64]
+* **Back-End:** Bak András Mátyás és Kovács Krisztián. A játék logikájáért és a háttérben futó programokért felelősek
+* **Front-End:** Jabur Emil és Venyige Márk. A játék kinézetéért, animációiért, kisebb effektekért felelősek
+* **Tesztelő:** Az egész csapat. Minden kis lépést, minden kis változtatást legyen, az back- vagy front-end együtt próbálunk tesztelni és dokumentálni.
 
-## [cite_start]4. Funkcionális követelmények [cite: 65]
+## 4. Funkcionális követelmények
 
-* [cite_start]A felhasználó képes legyen kedve szerint beállítani a hangok erősségét. [cite: 66]
-* [cite_start]A játék képes legyen menteni. [cite: 67]
-* [cite_start]A felhasználó képes legyen új karaktereket megvásárolni [cite: 68]
-* [cite_start]A játékban legyenek sokkal erősebb fő ellenségek [cite: 69]
-* [cite_start]A felhasználó képes legyen a játék a karakterei pozícióin egy gombnyomással változtatni. [cite: 70]
-* [cite_start]Egy kisebb történet elmesélése dialouge-boxok használatával. [cite: 71]
-* [cite_start]Későbbiekben egy végtelen játékmód. [cite: 72]
+* A felhasználó képes legyen kedve szerint beállítani a hangok erősségét.
+* A játék képes legyen menteni.
+* A felhasználó képes legyen új karaktereket megvásárolni
+* A játékban legyenek sokkal erősebb fő ellenségek
+* A felhasználó képes legyen a játék a karakterei pozícióin egy gombnyomással változtatni.
+* Egy kisebb történet elmesélése dialouge-boxok használatával.
+* Későbbiekben egy végtelen játékmód.
 
-## [cite_start]5. Nem funkcionális követelmények [cite: 73]
+## 5. Nem funkcionális követelmények
 
-* [cite_start]**Használhatóság:** egyszerű, letisztult, de szórakoztató játékmenet, mely komplexebbé válik. [cite: 74]
-* [cite_start]**Teljesítmény:** kisméretű játék, mely futáskor nem használ sok memóriát. [cite: 75]
-* [cite_start]**Biztonság:** a játék offline fut, nincs bejelentkezés, nem gyűjt adatokat. [cite: 76]
-* [cite_start]**Platformfüggetlenség:** megpróbáljuk mindenfajta platformra kiadni, köztük mobiltelefonra is. [cite: 77]
+* **Használhatóság:** egyszerű, letisztult, de szórakoztató játékmenet, mely komplexebbé válik.
+* **Teljesítmény:** kisméretű játék, mely futáskor nem használ sok memóriát.
+* **Biztonság:** a játék offline fut, nincs bejelentkezés, nem gyűjt adatokat.
+* **Platformfüggetlenség:** megpróbáljuk mindenfajta platformra kiadni, köztük mobiltelefonra is.
 
-## [cite_start]6. Rendszerkörnyezet [cite: 78]
+## 6. Rendszerkörnyezet
 
-* [cite_start]**Technológia:** [cite: 79]
-    * [cite_start]Backend: C#, Godot [cite: 80]
-    * [cite_start]Frontend: Aseprite, Paint3D, Itch.io [cite: 81]
-    * [cite_start]Adatbázis:------------- [cite: 82]
-* [cite_start]**Futtatás:** telepítés után futtatható akármilyen gépről [cite: 83]
+* **Technológia:**
+    * Backend: C#, Godot
+    * Frontend: Aseprite, Paint3D, Itch.io
+    * Adatbázis:-------------
+* **Futtatás:** telepítés után futtatható akármilyen gépről
 
-## [cite_start]7. Korlátozások [cite: 84]
+## 7. Korlátozások
 
-* [cite_start]A játék legelső verziója nem tartalmaz, feloldható karaktereket, mélyebb harcrendszert [cite: 85]
-* [cite_start]Eddig még csak egy pálya játszható pár ellenséggel. [cite: 86]
+* A játék legelső verziója nem tartalmaz, feloldható karaktereket, mélyebb harcrendszert
+* Eddig még csak egy pálya játszható pár ellenséggel.
 
-## [cite_start]8. Példa felhasználói történet [cite: 87]
+## 8. Példa felhasználói történet
 
-> Felhasználóként, avagy Játékosként szeretnénk huzamosabb játék idő után elmenteni az elért pontjainkat, szintünket, pénzünket. [cite_start]Vagy esetleg le akarjuk törölni, ha szeretnénk az egészet újra kezdeni [cite: 88]
+> Felhasználóként, avagy Játékosként szeretnénk huzamosabb játék idő után elmenteni az elért pontjainkat, szintünket, pénzünket. Vagy esetleg le akarjuk törölni, ha szeretnénk az egészet újra kezdeni
 
-## [cite_start]9. Elfogadási kritériumok [cite: 89]
+## 9. Elfogadási kritériumok
 
-* [cite_start]A játék sikeresen elmenti, és a következő megnyitáskor betölti azt. [cite: 90]
-* [cite_start]A játék betölti a következő pályát, új ellenségekkel s más logikával. [cite: 91]
-* [cite_start]A játék egy elért szint után betölti a pálya végén lévő fő ellenséget [cite: 92]
+* A játék sikeresen elmenti, és a következő megnyitáskor betölti azt.
+* A játék betölti a következő pályát, új ellenségekkel s más logikával.
+* A játék egy elért szint után betölti a pálya végén lévő fő ellenséget
 
-## [cite_start]10. Jövőbeli bővítések [cite: 93]
+## 10. Jövőbeli bővítések
 
-* [cite_start]Harcrendszer normális kidolgozása [cite: 94]
-* [cite_start]Többfajta karakter feloldása ás használata, [cite: 95]
-* [cite_start]Új pályák [cite: 96]
-* [cite_start]Új ellenségek, kik sebeznek, visszatöltődik az életük, támadásokat védenek le és új sebzéstípusok [cite: 97]
-* [cite_start]Más-más zenék [cite: 98]
+* Harcrendszer normális kidolgozása
+* Többfajta karakter feloldása ás használata,
+* Új pályák
+* Új ellenségek, kik sebeznek, visszatöltődik az életük, támadásokat védenek le és új sebzéstípusok
+* Más-más zenék
