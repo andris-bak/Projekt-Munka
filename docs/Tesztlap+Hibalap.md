@@ -54,3 +54,33 @@ Illetve meg kellett oldanunk, hogy a ProgressBar step, value, minvalue és maxva
 A HP csík nagyon nagyon nehezen akart működni mivel teljesen új közegben vagyunk kértünk segitséget az AI-tól illetve oktató vieok formájában 
 és ezek segitséggével sikeresen meg tudtuk oldani azt hogy a HP csík rendeltetés szerüen müködjön!
 
+### B004 
+Nem működött a szint lépés a játékban , mivel probléma volt a szint növelő gomb hitboxával , teljesen el volt csuszva az egész és ez okozta a problémát  , beállítotuk a hitboxot így már müködött
+
+### B005
+Miután legyöztünk egy ellenséget nem növekedett a pénzünk a játékban , létre kellet hozni egy új metodust, miután az ellenség életereje 0 ra eset egy másik változohoz hozzá adtuk az előre megszabott értéket 
+így már müködöt is a kód
+
+### B006
+Meg niylt maga a kód viszont teljesen össze omlot az egész ugy hogy senki nem nyult hozzá, kimásoltuk az előző mentést beillesztetük és gond nélkül lefutot minden és a játék elindult, mai napig nem tudjuk mi lehetet a baj de ovosoltuk
+
+### B007
+Nem akarta érzékelni a többi ellenséget így mindet át raktuk egy másik sceenbe és egy Random segitségével mindig más és más Sceent tölbe
+
+### B008
+Nem voltak jók a korlátok mivel rossz volt a lineáris gondolkodásunk , meg cseréltünk pár sort hogy mi mi utn fusson le és utána már müködött
+
+### B009
+Baj volt a pályának a helyzetével , félre néztük a Sceen tájolásást és ezért nem akart rendesen a helyére állni , kiszámoltuk a pontos koordinátákat és a pálya a helyére került!
+
+### B010
+Nem akart a karakterünk poziciot váltani , rossz keyre volt téve a mozgás illetve rossz helyen volt a kódban és nem futot le
+
+### B011
+Nem jó koordinátára került a karakter , pontosabban utána kellett nézni hogy hova is kerüljön át!
+
+### B012
+Rossz animáciok futotak le viszont csak annyi volt a baj hogy félrenéztük és megcseréltük a kettő animácionak a koordinátáit!
+
+### B013
+
