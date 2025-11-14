@@ -38,7 +38,8 @@ public partial class Main : Node2D
 	{
 		GM = GetNode<GameManager>("/root/GameManager");
 		Method = GetNode<Methods>("/root/Methods");
-		Method.BindUI(LevelLabel, LevelPrice, CoinLabel);
+		Method.BindUI(LevelLabel, LevelPrice, CoinLabel, HPLabel, HPBar, bossLabel,
+		optionsMenuLayer);  //enemyScenes, currentEnemy
 		
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
@@ -61,23 +62,14 @@ public partial class Main : Node2D
 			bgmPlayer.Finished += () => Method.MusicFinished(bgmPlayer);
 		}
 		 
-		enemyScenes = new PackedScene[]
-		{
-			 GD.Load<PackedScene>("res://scenes/slime.tscn"), 
-			 GD.Load<PackedScene>("res://scenes/slime_2.tscn"), 
-			 GD.Load<PackedScene>("res://scenes/slime_3.tscn"),
-			 GD.Load<PackedScene>("res://scenes/clowndog.tscn"),
-			
-			//Boss:
-			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"), 
-		};
+		
 		
 		shieldScenes = new PackedScene[]
 		{
 			GD.Load<PackedScene>("res://scenes/shield_bal.tscn"), 
 			GD.Load<PackedScene>("res://scenes/shield_jobb.tscn"), 
 		};
-	
+		
 		ChangeEnemyScene();
 		ChangeShield();
 	}
@@ -145,6 +137,7 @@ public partial class Main : Node2D
 				// A menü láthatóságát az ellenkezőjére állítjuk (toggle)
 				optionsMenuLayer.Visible = !optionsMenuLayer.Visible;
 				GD.Print($"Opciók menü váltva: {(optionsMenuLayer.Visible ? "MEGNYITVA" : "BEZÁRVA")}");
+				
 			}
 			GetViewport().SetInputAsHandled(); 
 		}
@@ -304,151 +297,72 @@ public partial class Main : Node2D
 	
 	public void UpdateLevel()
 	{
-		Method.LevelUp(LevelLabel);
+		Method.LevelUp();
 	}
 	
 	public void UpdateLevelPrice()
 	{
-		Method.LevelPrice(LevelPrice);
+		Method.LevelPrice();
 	}
 	
 	public void UpdateCoinLabel()
 	{
-		Method.Coin(CoinLabel);
+		Method.Coin();
 	}
 	
 	public void UpdateHP()
 	{
-		if (HPBar == null)
-		{
-			GD.PrintErr("HIBA: A HPBar null az UpdateHP-ben!");
-			return; 
-   	 	}
-		if(GM.HP <= HPBar.MaxValue && GM.HP >= 0)
-		{
-			if (HPLabel != null)
-			{
-				HPLabel.Text = "Health: " + GM.HP.ToString();
-			}
-		}
-		if (HPBar != null)
-		{
-			HPBar.Value = GM.HP; //Math.Max(0, GM.HP);
-		}
+		Method.Health();
+	}
+	
+	public void UpdateTimerLabel()
+	{
+		Method.BossTime();
+	}
+	
+	public void OnMenuOpened()
+	{
+		Method.OptionOpen(optionsMenuLayer);
+	}
+	
+	public void OnMenuClosed()
+	{
+		Method.OptionClose(optionsMenuLayer);
 	}
 	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
 	public void BossWins()
 	{
-		GD.Print("AZ IDŐ LEJÁRT! A BOSS MEGNYERTE A HARCOT!");
-		GM.IsBossFight = false;
-		
-		// Veszteség büntetés: elveszíti az aktuális aranyat, de megtartja a szintjét
-		// Mivel GM.Counter nincs a LoadGame-ben, a 1000-et használom a példa kedvéért.
-		GM.Coin = Math.Max(0, GM.Coin - 1000); 
-		GM.Score = 0; // Pontok elvesztése
-		
-		// Új, normál ellenség betöltése
-		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
-		HPBar.MaxValue = GM.HP;
-		
+		Method.bossWins(HPBar);
 		UpdateCoinLabel();
 		UpdateHP();
-		ChangeShield(); // Pajzs frissítése/cseréje
+		ChangeShield(); 
 		ChangeEnemyScene(); 
 	}
 	
 	public void OnLevelClickButton()
 	{
-		// GM.Coin, GM.LevelPrice és GM.Level használata
-		if (GM.Coin >= GM.LevelPrice)
-		{
-			if(GM.Level == 12)
-			{
-				GD.Print("Elérted a maximális szintet te termesz");
-			}
-			else
-			{
-				// GM.MinHP és GM.MaxHP növelése
-				GM.MinHP = GM.MinHP * 2;
-				GM.MaxHP = GM.MaxHP * 2;
-				GM.Level++;
-				GM.PlayerData.LevelUp(); 
-				GM.Coin = GM.Coin - GM.LevelPrice;
-				GM.LevelPrice = GM.LevelPrice * 2;
-				GM.Counter++;
-				
-				// GM.Rnd használata
-				GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
-				HPBar.MaxValue = GM.HP;
-
-				UpdateCoinLabel();
-				UpdateLevel();
-				UpdateLevelPrice();
-				UpdateHP();
-			}
-		}
+		Method.LevelClick(HPBar);
 	}
 	
 	public void ChangeEnemyScene()
 	{
-		// GM.Rnd és GM.Level használata
-		GM.currentEnemyIndex = GM.Rnd.Next(0, enemyScenes.Length); 
-		int bossIndex = enemyScenes.Length - 1; 
-
-		if (GM.currentEnemyIndex == bossIndex)
-		{
-			if (GM.Level < 10) 
-			{
-				GM.currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
-				GD.Print("Boss kihagyva: Először el kell érned a(z) 5. szintet!");
-				GM.IsBossFight = false; 
-			}
-			else
-			{
-				GD.Print("10. szint elérve! BOSS BETÖLTVE!");
-				GM.HP = 170000;
-				HPBar.MaxValue = GM.HP;
-				
-				// --- BOSS IDŐZÍTŐ INDÍTÁSA ---
-				GM.IsBossFight = true;
-				GM.BossTimeLeft = GameManager.BOSS_TIME_LIMIT; // Beállítjuk a max időt
-				
-				UpdateTimerLabel();
-				UpdateHP();
-			}
-		} 
-		
-		else
-		{
-			// Normál ellenség betöltése esetén mindig kapcsoljuk ki a boss módot
-			GM.IsBossFight = false;
-		}
-		
 		if (currentEnemy != null)
 		{
-		 	 currentEnemy.QueueFree();
+			 currentEnemy.QueueFree();
 			 currentEnemy = null;
 		}
 
-		PackedScene newEnemyScene = enemyScenes[GM.currentEnemyIndex]; 
-		currentEnemy = newEnemyScene.Instantiate<Node2D>();
+		// 2. SEGÉD: Kérünk egy új ellenséget a Methodstól
+		Node2D newEnemy = Method.ChangeEnemy(); 
+		
+		// 3. TULAJDONOS: Befogadjuk az új gyereket
+		currentEnemy = newEnemy;
+		AddChild(currentEnemy); 
+		
+		// 4. TULAJDONOS: Elhelyezzük a jelenetben
+		currentEnemy.Position = new Vector2(19, 11);
 
-		AddChild(currentEnemy); 
-		currentEnemy.Position = new Vector2(19, 11); 
-		
-		GD.Print($"Új ellenség betöltve: {currentEnemy.Name}");
-		
-		AnimatedSprite2D sprite = currentEnemy.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D"); 
-		if (sprite != null)
-		{
-			// A korábbi hibaforrás javítva: "idle" helyett "Idle" (Nagybetűs I)
-			sprite.Play("Idle"); 
-		}
-		else
-		{
-			GD.PrintErr("HIBA: Nem található AnimatedSprite2D nevű gyermek Node az új ellenségen!");
-		}
 	}
 	
 	public void ChangeShield()
@@ -626,34 +540,7 @@ public partial class Main : Node2D
 			GD.Print("Nincs mentési fájl a törléshez.");
 		}
 	}
-	
-	public void UpdateTimerLabel()
-	{
-		if (bossLabel == null) return;
-			
-		if (GM.IsBossFight)
-		{
-			// Az időt két tizedesjegyre kerekítjük és megjelenítjük
-			bossLabel.Text = $"IDŐ: {GM.BossTimeLeft:0.00} mp";
-			bossLabel.Show();
-				
-			// Szín változtatása, ha már csak kevés idő van hátra
-			if (GM.BossTimeLeft <= 5.0)
-			{
-				bossLabel.Modulate = new Color(1, 0.2f, 0.2f); // Pirosas, vészjelzés
-			}
-			else
-			{
-				bossLabel.Modulate = new Color(1, 1, 1); // Fehér
-			}
-			}
-			else
-			{
-				bossLabel.Text = "";
-				bossLabel.Hide();
-			}
-	}
-	
+
 	public void ChangePosition()
 	{
 		if (PlayerSprite == null) return;
@@ -667,24 +554,6 @@ public partial class Main : Node2D
 		{
 			PlayerSprite.Position = new Vector2(435,173);
 			PlayerSprite.Play("Idle");
-		}
-	}
-	
-	public void OnMenuOpened()
-	{
-		if (optionsMenuLayer != null)
-		{
-			optionsMenuLayer.Visible = true;
-			GD.Print("Opciók menü megnyitva.");
-		}
-	}
-	
-	public void OnMenuClosed()
-	{
-		if (optionsMenuLayer != null)
-		{
-			optionsMenuLayer.Visible = false;
-			GD.Print("Opciók menü bezárva.");
 		}
 	}
 }
