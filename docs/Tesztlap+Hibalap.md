@@ -83,4 +83,18 @@ Nem jó koordinátára került a karakter , pontosabban utána kellett nézni ho
 Rossz animáciok futotak le viszont csak annyi volt a baj hogy félrenéztük és megcseréltük a kettő animácionak a koordinátáit!
 
 ### B013
+Azért nem mentet a gomb mivel hitbox problémánk volt megint , valamiért a mentés gomb hitboxa óriasi volt így le fedte a törlés gombot is
 
+### B014
+Szintén ugyan az volt a probléma mint a törlésnél , akkor még nem volt át állitva a hitbox!
+
+### B015
+A kód meg kavarodott a Sceenek és a random számok miatt valamint hogy a Fő ellenség csak egy adott szint felet jelenik meg , azt is kitetük külön sceenbe és egy segéd változóval hívjuk elő!
+
+### B016
+Nem akarta érzékelni a program a pajzsot , de kiraktuk egy külön sceenbe és már müködött is
+
+### B017
+Rossz helyen voltak a koordináták , egy hatalmas pajzsot töltöt be a játék így kisebbre kellett venni illetve egy külön sceenbe is ki kellett tenni hogy rendesen be lehesen illeszteni a pontos helyére!
+
+### B018
