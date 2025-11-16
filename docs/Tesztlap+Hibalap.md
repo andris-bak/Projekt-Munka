@@ -98,3 +98,25 @@ Nem akarta érzékelni a program a pajzsot , de kiraktuk egy külön sceenbe és
 Rossz helyen voltak a koordináták , egy hatalmas pajzsot töltöt be a játék így kisebbre kellett venni illetve egy külön sceenbe is ki kellett tenni hogy rendesen be lehesen illeszteni a pontos helyére!
 
 ### B018
+Rosz helyre tettük be a metodust és össze kavarodot a program , át kellett nézni az egészet majd lineárisan át gondolni és utána jó helyre sikerült be illeszteni 
+
+### B019
+Rossz helyen volt a metodus , át kellett látni a programot jó helyre beilleszteni és már müködöt is 
+
+### B020
+Nem töltödött vissza az ellenség élet ereje mivel nem volt hozzá megfelelő Timer , be lett rakva egy a megfelelő helyre és müködött 
+
+### B021
+Logikai hiba történt mivel túl ment a maximum élet erőn , le kellett korlátozni egy változóval a regenráciot
+
+### B022
+Random változóval akartuk megoldani de mivel nem volt globális ezért nem müködött , miután globális lett egy swich case logikával megoldotuk a problémát 
+
+### B023
+A regeneráció és egyább programok állítása okozta a híbát a kódban , kicsit át kellett rendezni logikailag és utána müködött 
+
+### B024
+Koórdinácios probléma rossz helyre volt be illesztve az Anchor Point
+
+### B025
+Logikai hiba , rossz helyre volt beillesztve a metodus ami ezzel foglalkozik
