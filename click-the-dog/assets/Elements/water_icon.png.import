@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g7wn67q23nmk"
-path="res://.godot/imported/sword_cursor.png-82a806f32658f18583bf58eeb21f65c9.ctex"
+uid="uid://cdmlmlsafjq54"
+path="res://.godot/imported/water_icon.png-cf4d2dc91fda6207ff40743d9a3721ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Cursors/sword_cursor.png"
-dest_files=["res://.godot/imported/sword_cursor.png-82a806f32658f18583bf58eeb21f65c9.ctex"]
+source_file="res://assets/Elements/water_icon.png"
+dest_files=["res://.godot/imported/water_icon.png-cf4d2dc91fda6207ff40743d9a3721ae.ctex"]
 
 [params]
 

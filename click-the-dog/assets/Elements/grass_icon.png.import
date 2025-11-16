@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g7wn67q23nmk"
-path="res://.godot/imported/sword_cursor.png-82a806f32658f18583bf58eeb21f65c9.ctex"
+uid="uid://umx7ws8vk84x"
+path="res://.godot/imported/grass_icon.png-a177b956a8807915c32fcb4b8940b787.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Cursors/sword_cursor.png"
-dest_files=["res://.godot/imported/sword_cursor.png-82a806f32658f18583bf58eeb21f65c9.ctex"]
+source_file="res://assets/Elements/grass_icon.png"
+dest_files=["res://.godot/imported/grass_icon.png-a177b956a8807915c32fcb4b8940b787.ctex"]
 
 [params]
 
