@@ -62,13 +62,13 @@ Miután legyöztünk egy ellenséget nem növekedett a pénzünk a játékban , 
 így már müködöt is a kód
 
 ### B006
-Meg niylt maga a kód viszont teljesen össze omlot az egész ugy hogy senki nem nyult hozzá, kimásoltuk az előző mentést beillesztetük és gond nélkül lefutot minden és a játék elindult, mai napig nem tudjuk mi lehetet a baj de ovosoltuk
+Meg nyilt maga a kód viszont teljesen össze omlot az egész ugy hogy senki nem nyult hozzá, kimásoltuk az előző mentést beillesztetük és gond nélkül lefutot minden és a játék elindult, mai napig nem tudjuk mi lehetet a baj de ovosoltuk
 
 ### B007
-Nem akarta érzékelni a többi ellenséget így mindet át raktuk egy másik sceenbe és egy Random segitségével mindig más és más Sceent tölbe
+A problémánk az volt hogy nem akarta érzékelni a többi ellenséget a kód így minden képet át raktuk egy másik sceenbe és egy Random változó segitségével mindig más és más Sceent töltbe a játék ha az elöző ellenség életereje 0-ra csökken!
 
 ### B008
-Nem voltak jók a korlátok mivel rossz volt a lineáris gondolkodásunk , meg cseréltünk pár sort hogy mi mi utn fusson le és utána már müködött
+Nem voltak jók a korlátok mivel rossz volt a lineáris gondolkodásunk és a sorok teljesen rossz sorrendben futtotak le ez okozta a problémát , tehát  meg cseréltünk pár sort át gondoltuk hogy mi mi után fusson le és utána már müködött a program
 
 ### B009
 Baj volt a pályának a helyzetével , félre néztük a Sceen tájolásást és ezért nem akart rendesen a helyére állni , kiszámoltuk a pontos koordinátákat és a pálya a helyére került!
@@ -77,7 +77,7 @@ Baj volt a pályának a helyzetével , félre néztük a Sceen tájolásást és
 Nem akart a karakterünk poziciot váltani , rossz keyre volt téve a mozgás illetve rossz helyen volt a kódban és nem futot le
 
 ### B011
-Nem jó koordinátára került a karakter , pontosabban utána kellett nézni hogy hova is kerüljön át!
+Nem jó koordinátára került a karakter mivel a sceen teljesen el volt tályolva és 1 2 koordinátát teljesen más kép kellett megnézni mint ahogy mi azt gondoltuk , kiszámítotuk hogy hova kell , behelyzetük és már müködött is!
 
 ### B012
 Rossz animáciok futotak le viszont csak annyi volt a baj hogy félrenéztük és megcseréltük a kettő animácionak a koordinátáit!
@@ -92,7 +92,7 @@ Szintén ugyan az volt a probléma mint a törlésnél , akkor még nem volt át
 A kód meg kavarodott a Sceenek és a random számok miatt valamint hogy a Fő ellenség csak egy adott szint felet jelenik meg , azt is kitetük külön sceenbe és egy segéd változóval hívjuk elő!
 
 ### B016
-Nem akarta érzékelni a program a pajzsot , de kiraktuk egy külön sceenbe és már müködött is
+Nem akarta érzékelni a program sor a pajzsot mivel ugyan ugy mint az ellenségeknél nem segíítet semmi más csak az hogy , kiraktuk egy külön sceenbe a pajzsokat  és már müködött is!
 
 ### B017
 Rossz helyen voltak a koordináták , egy hatalmas pajzsot töltöt be a játék így kisebbre kellett venni illetve egy külön sceenbe is ki kellett tenni hogy rendesen be lehesen illeszteni a pontos helyére!
@@ -101,7 +101,7 @@ Rossz helyen voltak a koordináták , egy hatalmas pajzsot töltöt be a játék
 Rosz helyre tettük be a metodust és össze kavarodot a program , át kellett nézni az egészet majd lineárisan át gondolni és utána jó helyre sikerült be illeszteni 
 
 ### B019
-Rossz helyen volt a metodus , át kellett látni a programot jó helyre beilleszteni és már müködöt is 
+Rossz helyen volt a metodus és ezért nem tudod lefutni rendesen ami azt eredményezte hogy nem csinált a mneü gomb semmit , át kellett látni a programot jó helyre beilleszteni és már müködöt is 
 
 ### B020
 Nem töltödött vissza az ellenség élet ereje mivel nem volt hozzá megfelelő Timer , be lett rakva egy a megfelelő helyre és müködött 
@@ -116,7 +116,8 @@ Random változóval akartuk megoldani de mivel nem volt globális ezért nem mü
 A regeneráció és egyább programok állítása okozta a híbát a kódban , kicsit át kellett rendezni logikailag és utána müködött 
 
 ### B024
-Koórdinácios probléma rossz helyre volt be illesztve az Anchor Point
+Szerencsére csak koórdinácios probléma volt rossz helyre illesztettük be  az Anchor Point-ot de amint át néztük a programot rájötünk hogy hol van a pontos helye és gond nélkül le futott 
 
 ### B025
-Logikai hiba , rossz helyre volt beillesztve a metodus ami ezzel foglalkozik
+Logikai hibába ütköztünk csak szerencsére, rossz helyre volt beillesztve a metodus ami ezzel foglalkozik , viszont egy ksi gondolkodás után sikeresen meg találtuk a helyét és müködik is !
+
