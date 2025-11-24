@@ -24,11 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://bqx56k13lucm" path="res://assets/Button/close.png" id="20_8luvg"]
 [ext_resource type="Texture2D" uid="uid://dgarpv17xoor8" path="res://assets/UI/Options_Button.png" id="21_3xnty"]
 [ext_resource type="Script" uid="uid://dvgkyd51kxiwx" path="res://scripts/VolumeSlider.cs" id="21_i1piu"]
-[ext_resource type="Texture2D" uid="uid://w1u8rp7ki44t" path="res://assets/Elements/earth.png" id="21_sqr6f"]
-[ext_resource type="Texture2D" uid="uid://do4a2vrrhksyk" path="res://assets/Elements/fire.png" id="21_wkb8g"]
 [ext_resource type="Texture2D" uid="uid://wkl1ve5n8yj3" path="res://assets/UI/options_menu.png" id="22_3xnty"]
-[ext_resource type="Texture2D" uid="uid://vgam332cqdxg" path="res://assets/Elements/szél.png" id="23_i1piu"]
-[ext_resource type="Texture2D" uid="uid://ct8ttfigavqld" path="res://assets/Elements/víz.png" id="24_kttba"]
+[ext_resource type="Texture2D" uid="uid://xkab5ujkav6" path="res://assets/Elements/fire_icon.png" id="26_7glkl"]
+[ext_resource type="Texture2D" uid="uid://umx7ws8vk84x" path="res://assets/Elements/grass_icon.png" id="27_dq02k"]
+[ext_resource type="Texture2D" uid="uid://dv6s32ac0nqk7" path="res://assets/Elements/air_icon.png" id="28_7glkl"]
+[ext_resource type="Texture2D" uid="uid://cdmlmlsafjq54" path="res://assets/Elements/water_icon.png" id="29_hshem"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyre6"]
 atlas = ExtResource("5_pyre6")
@@ -180,7 +180,7 @@ bus = &"SFX"
 position = Vector2(435, 173)
 scale = Vector2(1.125, 1.10938)
 sprite_frames = SubResource("SpriteFrames_7supi")
-animation = &"attack"
+animation = &"Idle"
 
 [node name="Paladin" type="Sprite2D" parent="." node_paths=PackedStringArray("DialogueLabel")]
 position = Vector2(466, 96)
@@ -530,24 +530,20 @@ text = "SFX:"
 metadata/_edit_use_anchors_ = true
 
 [node name="Fire" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(320, 276)
-texture = ExtResource("21_wkb8g")
+position = Vector2(325, 256)
+texture = ExtResource("26_7glkl")
 
 [node name="Earth" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(325, 256)
-texture = ExtResource("21_sqr6f")
+texture = ExtResource("27_dq02k")
 
 [node name="Air" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(318, 280)
-texture = ExtResource("23_i1piu")
+position = Vector2(325, 255)
+texture = ExtResource("28_7glkl")
 
 [node name="Water" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(319, 274)
-texture = ExtResource("24_kttba")
+position = Vector2(325, 255)
+texture = ExtResource("29_hshem")
 
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/Click" to="." method="OnClickButton"]

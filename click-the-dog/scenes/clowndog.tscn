@@ -27,7 +27,7 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(315.5, 131.5)
+position = Vector2(308, 131.5)
 scale = Vector2(1.39063, 1.39063)
 sprite_frames = SubResource("SpriteFrames_wxh03")
 animation = &"Idle"

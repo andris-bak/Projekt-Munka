@@ -62,8 +62,6 @@ public partial class Main : Node2D
 			bgmPlayer.Finished += () => Method.MusicFinished(bgmPlayer);
 		}
 		 
-		
-		
 		shieldScenes = new PackedScene[]
 		{
 			GD.Load<PackedScene>("res://scenes/shield_bal.tscn"), 
@@ -88,8 +86,8 @@ public partial class Main : Node2D
 				BossWins(); // FIX: Meghívjuk az idő lejárását kezelő metódust
 			}
 			UpdateTimerLabel();
-			
 		}
+		
 		if(GM.Tick > 0 && GM.HP < GM.MaxHP && GM.HP > 0)
 		{
 			GM.regenTimer += GM.Tick * (float)delta;
@@ -233,10 +231,11 @@ public partial class Main : Node2D
 		{
 			GM.ClickCounter = 0;
 			// FIX: Ha a boss-t vertük meg, kapcsoljuk ki az időzítőt
-			if (GM.IsBossFight)
+			if (GM.IsBossFight &&  GM.HP <= 0)
 			{
 				GM.IsBossFight = false;
 				GD.Print("BOSS LEGYŐZVE!");
+				UpdateTimerLabel();
 			}
 			
 			// GM.Coin, GM.Counter, GM.Rnd, GM.MinHP, GM.MaxHP használata
@@ -338,6 +337,7 @@ public partial class Main : Node2D
 		UpdateHP();
 		ChangeShield(); 
 		ChangeEnemyScene(); 
+
 	}
 	
 	public void OnLevelClickButton()
