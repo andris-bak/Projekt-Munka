@@ -13,6 +13,8 @@ public partial class Methods : Node
 	private CanvasLayer _optionsMenuLayer;
 	private PackedScene[] _enemyScenes;
 	private Node2D _currentEnemy;
+	private Sprite2D _goNext;
+	
 	
 	public override void _Ready()
 	{
@@ -31,7 +33,8 @@ public partial class Methods : Node
 	}
 	
 	public void BindUI(Label LevelLabel, Label LevelPrice, Label CoinLabel, 
-	Label HPLabel, ProgressBar HPBar, Label bossLabel, CanvasLayer optionsMenuLayer)
+	Label HPLabel, ProgressBar HPBar, Label bossLabel, CanvasLayer optionsMenuLayer,
+	Sprite2D GoNext)
 	{
 		_levelLabel = LevelLabel;
 		_levelPrice = LevelPrice;
@@ -40,6 +43,7 @@ public partial class Methods : Node
 		_hpBar = HPBar;
 		_bossLabel = bossLabel;
 		_optionsMenuLayer = optionsMenuLayer;
+		_goNext = GoNext;
 
 	}
 	
@@ -216,7 +220,10 @@ public partial class Methods : Node
 				
 				// Nincs paraméter, az osztályszintű _hpBar-t használjuk
 				if (_hpBar != null)
+				{
 					_hpBar.MaxValue = GM.HP;
+				}
+					
 				
 				GM.IsBossFight = true;
 				GM.BossTimeLeft = GameManager.BOSS_TIME_LIMIT; 
@@ -253,5 +260,16 @@ public partial class Methods : Node
 		
 		// Visszaadjuk az új ellenséget a hívónak (Main-nek)
 		return newEnemy;
+	}
+	
+	public void GetNext()
+	{
+		if(GM.BossDefeated == true)
+		{
+			_goNext.Visible = true;
+			GD.Print("Skin csere működik");
+			
+		}
+		
 	}
 }

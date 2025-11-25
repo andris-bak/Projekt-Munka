@@ -26,12 +26,13 @@ public partial class Main : Node2D
 	[Export] public Label LevelPrice;
 	[Export] public Sprite2D Shield;
 	[Export] public Sprite2D Fire;
-	[Export] public Sprite2D Earth;
+	[Export] public Sprite2D Earth; 
 	[Export] public Sprite2D Air;
 	[Export] public Sprite2D Water;
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
+	[Export] public Sprite2D GoNext;
 	
 	
 	public override void _Ready()
@@ -39,7 +40,7 @@ public partial class Main : Node2D
 		GM = GetNode<GameManager>("/root/GameManager");
 		Method = GetNode<Methods>("/root/Methods");
 		Method.BindUI(LevelLabel, LevelPrice, CoinLabel, HPLabel, HPBar, bossLabel,
-		optionsMenuLayer);  //enemyScenes, currentEnemy
+		optionsMenuLayer, GoNext);  //enemyScenes, currentEnemy
 		
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
@@ -135,8 +136,8 @@ public partial class Main : Node2D
 				// A menü láthatóságát az ellenkezőjére állítjuk (toggle)
 				optionsMenuLayer.Visible = !optionsMenuLayer.Visible;
 				GD.Print($"Opciók menü váltva: {(optionsMenuLayer.Visible ? "MEGNYITVA" : "BEZÁRVA")}");
-				
 			}
+			
 			GetViewport().SetInputAsHandled(); 
 		}
 	}
@@ -234,8 +235,10 @@ public partial class Main : Node2D
 			if (GM.IsBossFight &&  GM.HP <= 0)
 			{
 				GM.IsBossFight = false;
+				GM.BossDefeated = true;
 				GD.Print("BOSS LEGYŐZVE!");
 				UpdateTimerLabel();
+				GoNextVisible();
 			}
 			
 			// GM.Coin, GM.Counter, GM.Rnd, GM.MinHP, GM.MaxHP használata
@@ -286,6 +289,7 @@ public partial class Main : Node2D
 			ChangeShield(); // Pajzs frissítése/cseréje
 			ChangeEnemyScene(); 
 		} // Bezárja az if(GM.HP <= 0) blokkot
+
 	} 
 	
 	public void OnQuitButtonPressed()
@@ -327,6 +331,18 @@ public partial class Main : Node2D
 	public void OnMenuClosed()
 	{
 		Method.OptionClose(optionsMenuLayer);
+	}
+	
+	public void GoNextVisible()
+	{
+		Method.GetNext();
+	}
+	
+	public async void OnChangeMapPressed()
+	{
+		FadeController fade = GetNode<FadeController>("/root/FadeController");
+		await fade.FadeToScene("res://scenes/za_warudo_2.tscn");
+		//GetTree().ChangeSceneToFile("res://scenes/za_warudo_2.tscn");
 	}
 	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
@@ -556,4 +572,6 @@ public partial class Main : Node2D
 			PlayerSprite.Play("Idle");
 		}
 	}
+	
+
 }

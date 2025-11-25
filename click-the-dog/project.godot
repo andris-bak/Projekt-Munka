@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://GameManager.cs"
 Methods="*res://Methods.cs"
-FadeController="*res://FadeController.cs"
+FadeController="*res://fade_controller.tscn"
 
 [display]
 

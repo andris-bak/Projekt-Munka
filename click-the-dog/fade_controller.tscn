@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://y4yqmjpr4mar"]
+
+[ext_resource type="Script" uid="uid://g37ybr3jwnty" path="res://scripts/FadeController.cs" id="1_5l4qv"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_5l4qv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
