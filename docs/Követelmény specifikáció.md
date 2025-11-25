@@ -1,14 +1,27 @@
-# 💾 Követelményspecifikáció: Click the Dog (CTD)
-
-**Projekt neve:** Click the Dog (CTD)
-**Verziószám:** 1.1 (Véglegesített)
-**Dátum:** 2025.10.09.
-**Készítette:** M.A.K.E Kft.
-**Tagok:** Venyige Márk, Bak András Mátyás, Kovács Krisztián, Jabur Emil
+# Követelményspecifikáció: Click the Dog (CTD)
 
 ---
 
-## 1. 📜 Revíziótörténet
+##  Projektdokumentum adatok
+
+* **Projekt neve:** **Click the Dog (CTD)**
+* **Verziószám:** **1.1** (Véglegesített)
+* **Dátum:** 2025.10.09.
+
+---
+
+##  Készítő és tagok
+
+* **Készítette:** M.A.K.E Kft.
+* **Tagok:**
+    * Venyige Márk
+    * Bak András Mátyás
+    * Kovács Krisztián
+    * Jabur Emil
+
+---
+
+## 1.  Revíziótörténet
 
 | Verzió | Dátum | Készítette | Leírás |
 | :--- | :--- | :--- | :--- |
@@ -84,7 +97,7 @@ Alapul az inkrementális (Clicker/Idle) játékok egyszerű mechanikája. A CTD 
 
 ---
 
-## 9. 👤 Felhasználói Történetek (User Stories)
+## 9. Felhasználói Történetek (User Stories)
 
 | Azonosító | Szerepkör | Cél | Indoklás |
 | :--- | :--- | :--- | :--- |
@@ -97,7 +110,7 @@ Alapul az inkrementális (Clicker/Idle) játékok egyszerű mechanikája. A CTD 
 
 ---
 
-## 10. ✅ Elfogadási Kritériumok (Acceptance Criteria - GWT)
+## 10.  Elfogadási Kritériumok (Acceptance Criteria - GWT)
 
 | Azonosító | Given (Adott esetben) | When (Ha) | Then (Akkor) |
 | :--- | :--- | :--- | :--- |
@@ -109,7 +122,7 @@ Alapul az inkrementális (Clicker/Idle) játékok egyszerű mechanikája. A CTD 
 
 ---
 
-## 11. 🚀 Jövőbeli Bővítések (Roadmap)
+## 11.  Jövőbeli Bővítések (Roadmap)
 
 * **11.1. Komplex Harcrendszer:** Képességek, célpontválasztás, formációk.
 * **11.2. Karakterdiverzitás:** Új karaktertípusok (tank, gyógyító, sebző) implementálása.
