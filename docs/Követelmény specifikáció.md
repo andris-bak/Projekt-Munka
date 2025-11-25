@@ -1,74 +1,112 @@
-# Követelményspecifikáció
+# 💾 Követelményspecifikáció: Click the Dog (CTD)
 
 **Projekt neve:** Click the Dog (CTD)
+**Verziószám:** 1.0 (Kezdeti Kiadás)
 **Dátum:** 2025.10.09.
-**Készítette:** M.A.K.E Kft
+**Készítette:** M.A.K.E Kft.
 **Tagok:** Venyige Márk, Bak András Mátyás, Kovács Krisztián, Jabur Emil
 
-## 1. Célunk
+## 📜 Revíziótörténet
 
-* A projektünk célja, hogy egy GODOT játékmotorban készített játékot adjunk ki a félév végére.
-* Elsősorban egyszerű játékmenet, mely a játékban eltöltött idő után nehezebbé és komplexebbé válik.
-* Továbbá stílusa pixel-art, amely reméljük, hogy minden játékosunknak tetszeni fog.
+| Verzió | Dátum | Készítette | Leírás |
+| :--- | :--- | :--- | :--- |
+| 0.9 | 2025.09.28. | M.A.K.E Kft. | Első vázlat, főbb célok és mechanikák meghatározása. |
+| **1.0** | **2025.10.09.** | **M.A.K.E Kft.** | **A hivatalos Követelményspecifikáció kiadása, funkcionális és nem funkcionális követelmények véglegesítése.** |
 
-## 2. Bevezetés
+---
 
-Alapul a híres, de egyszerű játék menettel rendelkező játék(ok), mint a Clicker Heroes.
+## 1. Célunk és Motiváció
 
-Önmagában nem olyan érdekfeszítő mivel javarészt csak az egerünk bal gombját használjuk arra, hogy ellenségeket győzzünk le.
+* **Motor:** GODOT játékmotorban készített, **inkrementális clicker játék** elkészítése.
+* **Fő cél:** Egy **egyszerű, de addiktív** játékmenet létrehozása, mely a játékban eltöltött idő, avagy az **előrehaladás** (progress) után **nehezebbé és komplexebbé válik**.
+* **Stílus:** **Pixel-art vizuális stílus** alkalmazása.
+* **Innováció:** Egy **egyedi, újszerű harcrendszer** kidolgozása a hagyományos clicker játékokhoz képest.
 
-Viszont, egy idő után képesek vagyunk más és más karakterekre szert tenni, kik segítenek a játék végig jázásában. Illetve képesek vagyunk őket szintezni, hogy minél többet sebezzenek. Így mi is ezt a játékmentet próbáljuk megcsinálni, de a saját és újszerű harcrendszerrel.
+---
 
-## 3. Érintettek és szerepkörök
+## 2. Bevezetés és Játéktípus
 
-* **Back-End:** Bak András Mátyás és Kovács Krisztián. A játék logikájáért és a háttérben futó programokért felelősek
-* **Front-End:** Jabur Emil és Venyige Márk. A játék kinézetéért, animációiért, kisebb effektekért felelősek
-* **Tesztelő:** Az egész csapat. Minden kis lépést, minden kis változtatást legyen, az back- vagy front-end együtt próbálunk tesztelni és dokumentálni.
+A projekt alapul a híres, egyszerű játékmenettel rendelkező inkrementális (Clicker/Idle) játékokon (pl. *Clicker Heroes*).
 
-## 4. Funkcionális követelmények
+* **Alapmechanika:** A felhasználó a bal egérgombbal/érintéssel győzi le az ellenfeleket.
+* **Fejlődés:** A játékos segítő **karakterekre** tehet szert, akik **automatikus sebzést** (DPS) okoznak. Ezek a karakterek a játékbeli valutából **szintezhetők**.
+* **CTD sajátossága:** Ezt az alapvető mechanikát implementáljuk, de egy **saját, egyedi harcrendszerrel** egészítjük ki.
 
-* A felhasználó képes legyen kedve szerint beállítani a hangok erősségét.
-* A játék képes legyen menteni.
-* A felhasználó képes legyen új karaktereket megvásárolni
-* A játékban legyenek sokkal erősebb fő ellenségek
-* A felhasználó képes legyen a játék a karakterei pozícióin egy gombnyomással változtatni.
-* Egy kisebb történet elmesélése dialouge-boxok használatával.
-* Későbbiekben egy végtelen játékmód.
+---
 
-## 5. Nem funkcionális követelmények
+## 3. Érintettek és Szerepkörök
 
-* **Használhatóság:** egyszerű, letisztult, de szórakoztató játékmenet, mely komplexebbé válik.
-* **Teljesítmény:** kisméretű játék, mely futáskor nem használ sok memóriát.
-* **Biztonság:** a játék offline fut, nincs bejelentkezés, nem gyűjt adatokat.
-* **Platformfüggetlenség:** megpróbáljuk mindenfajta platformra kiadni, köztük mobiltelefonra is.
+| Szerepkör | Tagok | Feladatok |
+| :--- | :--- | :--- |
+| **Back-End** | Bak András Mátyás, Kovács Krisztián | Játék **logikája**, **adatszerkezetek**, **mentés-betöltés** és a háttérprogramok. |
+| **Front-End** | Jabur Emil, Venyige Márk | Játék **kinézete**, **UI/UX**, **animációk**, **vizuális effektek** és grafikai implementáció. |
+| **Tesztelő** | Az egész csapat | **Közös tesztelés** és dokumentálás a minőségbiztosítás érdekében. |
+
+---
+
+## 4. Funkcionális Követelmények (F-K)
+
+| Azonosító | Követelmény |
+| :--- | :--- |
+| **F-K 4.1.** | **Hangbeállítások:** A felhasználó képes legyen beállítani a **zene és hangeffektek** erősségét. |
+| **F-K 4.2.** | **Mentés és Betöltés:** A játék képes legyen a játékos előrehaladását (pontok, pénz, szintek) **automatikusan menteni** és betölteni. |
+| **F-K 4.3.** | **Vásárlás:** A felhasználó képes legyen **új karaktereket megvásárolni** és a meglévőket **szintezni**. |
+| **F-K 4.4.** | **Boss Ellenfél:** A játékban legyenek **kihívást jelentő főellenségek** (Bossok). |
+| **F-K 4.5.** | **Karakterpozíció Változtatás:** A felhasználó képes legyen a **karakterek pozícióin változtatni** egy gombnyomással. |
+| **F-K 4.6.** | **Történetmesélés:** Egy kisebb történet elmesélése **dialogus-ablakok** használatával. |
+| **F-K 4.7.** | **Újrakezdés/Reset:** A felhasználó képes legyen az összes mentett adatot **törölni** és a játékot újrakezdeni. |
+
+---
+
+## 5. Nem Funkcionális Követelmények (NF-K)
+
+* **NF-K 5.1. Használhatóság (Usability):** A játékmenet legyen **intuitív** és áttekinthető UI/UX mellett **fokozatosan komplexé váló**.
+* **NF-K 5.2. Teljesítmény (Performance):** **Kisméretű** játék, mely **alacsony memória- és CPU-használatot** produkál (cél: 60 FPS).
+* **NF-K 5.3. Biztonság:** **Offline futás**, nincs adatgyűjtés. A mentésfájl korlátozottan védett a manipulációtól.
+* **NF-K 5.4. Platformfüggetlenség:** Kiadásra törekvés **Windows/Linux/Mac OS** mellett **mobiltelefonokra** (Android) is.
+
+---
 
 ## 6. Rendszerkörnyezet
 
-* **Technológia:**
-    * Backend: C#, Godot
-    * Frontend: Aseprite, Paint3D, Itch.io
-    * Adatbázis:-------------
-* **Futtatás:** telepítés után futtatható akármilyen gépről
+* **Motor/Keretrendszer:** Godot Engine (verzió: 4.x)
+* **Backend (Logika):** C#
+* **Frontend (Grafika):** Aseprite, Paint3D
+* **Terjesztés:** Itch.io
+* **Adatbázis/Mentés:** **Lokális fájl alapú mentés** (pl. JSON vagy Godot ConfigFile).
 
-## 7. Korlátozások
+---
 
-* A játék legelső verziója nem tartalmaz, feloldható karaktereket, mélyebb harcrendszert
-* Eddig még csak egy pálya játszható pár ellenséggel.
+## 7. Korlátozások (Constraints)
 
-## 8. Példa felhasználói történet
+* A játék legelső **kiadási verziója (MVP)** **nem tartalmaz** mély, komplex harcrendszert.
+* A legelső verzióban **korlátozott számú** feloldható karakter lesz elérhető.
+* Kezdeti kiadásban **csak egy pálya (világ)** játszható pár ellenfél típussal.
 
-> Felhasználóként, avagy Játékosként szeretnénk huzamosabb játék idő után elmenteni az elért pontjainkat, szintünket, pénzünket. Vagy esetleg le akarjuk törölni, ha szeretnénk az egészet újra kezdeni
+---
 
-## 9. Elfogadási kritériumok
+## 8. Példa Felhasználói Történet
 
-* A játék sikeresen elmenti, és a következő megnyitáskor betölti azt.
-* A játék betölti a következő pályát, új ellenségekkel s más logikával.
-* A játék egy elért szint után betölti a pálya végén lévő fő ellenséget
+> **Felhasználóként,** avagy Játékosként szeretnék huzamosabb játékidő után **elmenteni** az elért pontjainkat, szintünket, pénzünket, hogy a játékból kilépve **ott folytathassam**, ahol abbahagytam.
 
-## 10. Jövőbeli bővítések
+---
 
-* Harcrendszer normális kidolgozása
-* Többfajta karakter feloldása ás használata,
-* Új pályák
-* Új ellenségek, kik sebeznek, visszatöltődik az életük, támadásokat védenek le és új sebzéstípusok
-* Más-más zenék
+## 9. Elfogadási Kritériumok (Acceptance Criteria - AC)
+
+| Azonosító | Kritikus Esemény | Elfogadási Feltétel |
+| :--- | :--- | :--- |
+| **AC 9.1.** | Mentés/Betöltés | A játék sikeresen elmenti, és a következő megnyitáskor **hibátlanul betölti** az aktuális állapotot. |
+| **AC 9.2.** | Pályaváltás | Egy meghatározott számú ellenfél legyőzése után a játék **betölti a következő "zónát"**, új ellenfelekkel. |
+| **AC 9.3.** | Boss Megjelenés | Egy elért szint/zóna után a játék **betölti és megjeleníti a főellenséget**. |
+| **AC 9.4.** | Karakter Vásárlás | A vásárláskor a pénz levonásra kerül, az új karakter/szint megjelenik az UI-n, és a **DPS növekszik**. |
+
+---
+
+## 10. Jövőbeli Bővítések (Roadmap)
+
+* **Komplex Harcrendszer:** Képességek, célpontválasztás, formációk.
+* **Karakterdiverzitás:** Új karaktertípusok (tank, gyógyító, sebző) implementálása.
+* **Több Tartalom:** Új pályák, zónák és ellenségtípusok.
+* **Ellenség AI Fejlesztés:** Visszatámadó, védekező és életet visszatöltő ellenfelek.
+* **Hang/Zene:** Új, egyedi zenék és hangeffektek.
+* **Végtelen Játékmód:** Speciális, ranglistás végtelen játékmód.
