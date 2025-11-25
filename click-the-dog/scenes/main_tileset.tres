@@ -1,6 +1,8 @@
-[gd_resource type="TileSet" load_steps=23 format=3 uid="uid://dih0qbocxqfay"]
+[gd_resource type="TileSet" load_steps=27 format=3 uid="uid://dih0qbocxqfay"]
 
 [ext_resource type="Texture2D" uid="uid://n725imtnxhc5" path="res://objects/Rock2.png" id="1_mwjme"]
+[ext_resource type="Texture2D" uid="uid://b56pqyubcc8wx" path="res://tilesets/snowPlains.png" id="1_pt3fl"]
+[ext_resource type="Texture2D" uid="uid://ciettlpyttqk4" path="res://objects/objectsSnowVersion.png" id="2_mwjme"]
 [ext_resource type="Texture2D" uid="uid://ba1bt6hj743b4" path="res://objects/Rock3.png" id="2_qhlpx"]
 [ext_resource type="Texture2D" uid="uid://c4slfdq4jxani" path="res://objects/Rock4.png" id="3_sw0lq"]
 [ext_resource type="Texture2D" uid="uid://cupqvph3eojca" path="res://objects/treasure-chest.png" id="4_ty1u0"]
@@ -12,8 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://f5gq1jblyuph" path="res://objects/Paths.png" id="12_lhykg"]
 [ext_resource type="Texture2D" uid="uid://b8uwv707xqgll" path="res://objects/Rock1.png" id="13_elht3"]
 
-<<<<<<< Updated upstream
-=======
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mwjme"]
 texture = ExtResource("1_pt3fl")
 0:0/0 = 0
@@ -52,6 +52,7 @@ texture = ExtResource("1_pt3fl")
 4:6/0 = 0
 5:6/0 = 0
 4:7/0 = 0
+
 4:3/0 = 0
 5:3/0 = 0
 
@@ -67,7 +68,35 @@ texture = ExtResource("2_mwjme")
 0:1/0 = 0
 5:0/0 = 0
 
->>>>>>> Stashed changes
+
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qhlpx"]
+texture = ExtResource("2_mwjme")
+0:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+1:5/0 = 0
+1:6/0 = 0
+1:7/0 = 0
+1:8/0 = 0
+2:5/0 = 0
+2:6/0 = 0
+2:7/0 = 0
+2:8/0 = 0
+6:7/0 = 0
+6:8/0 = 0
+7:7/0 = 0
+7:8/0 = 0
+10:7/0 = 0
+10:8/0 = 0
+11:7/0 = 0
+11:8/0 = 0
+0:1/0 = 0
+0:0/0 = 0
+5:0/0 = 0
+
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lat7a"]
 texture = ExtResource("1_mwjme")
 0:1/size_in_atlas = Vector2i(4, 3)
@@ -169,12 +198,13 @@ texture = ExtResource("9_xeghe")
 texture = ExtResource("11_xhfji")
 6:7/size_in_atlas = Vector2i(2, 2)
 6:7/0 = 0
-8:6/size_in_atlas = Vector2i(2, 3)
-8:6/0 = 0
+6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.847124, 6.63368, 15.478586, 5.896604, 15.110048, 10.441902, 10.319056, 13.881588, 0.3685379, 14.618664, -10.810442, 14.74151, -15.969971, 10.073366)
 10:7/size_in_atlas = Vector2i(2, 2)
 10:7/0 = 0
+10:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12.407438, -1.5969973, -8, -4.2996073, 8, -4.2996073, 12.530285, 3.9310694, 10.319057, 9.581981, -7.125064, 9.459136, -12.284592, 5.773758)
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12.161745, 16.707045, -9.459135, 12.65313, 7.370756, 12.530283, 11.793207, 18.304043, 11.793207, 21.743729, 9.704828, 25.920488, -6.510833, 25.674797, -11.916054, 22.972187)
 0:0/0 = 0
 0:1/0 = 0
 5:0/0 = 0
@@ -194,6 +224,7 @@ texture = ExtResource("13_elht3")
 1:1/0 = 0
 
 [resource]
+physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_sdn2l")
 sources/3 = SubResource("TileSetAtlasSource_5m0qk")
 sources/5 = SubResource("TileSetAtlasSource_chibb")
@@ -205,3 +236,5 @@ sources/11 = SubResource("TileSetAtlasSource_vjchf")
 sources/12 = SubResource("TileSetAtlasSource_hrtdl")
 sources/13 = SubResource("TileSetAtlasSource_ic3ik")
 sources/14 = SubResource("TileSetAtlasSource_yri1v")
+sources/0 = SubResource("TileSetAtlasSource_mwjme")
+sources/1 = SubResource("TileSetAtlasSource_qhlpx")

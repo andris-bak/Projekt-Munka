@@ -26,12 +26,13 @@ public partial class Main : Node2D
 	[Export] public Label LevelPrice;
 	[Export] public Sprite2D Shield;
 	[Export] public Sprite2D Fire;
-	[Export] public Sprite2D Earth;
+	[Export] public Sprite2D Earth; 
 	[Export] public Sprite2D Air;
 	[Export] public Sprite2D Water;
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
+	[Export] public Sprite2D GoNext;
 	
 	
 	public override void _Ready()
@@ -39,7 +40,7 @@ public partial class Main : Node2D
 		GM = GetNode<GameManager>("/root/GameManager");
 		Method = GetNode<Methods>("/root/Methods");
 		Method.BindUI(LevelLabel, LevelPrice, CoinLabel, HPLabel, HPBar, bossLabel,
-		optionsMenuLayer);  //enemyScenes, currentEnemy
+		optionsMenuLayer, GoNext);  //enemyScenes, currentEnemy
 		
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
@@ -62,8 +63,6 @@ public partial class Main : Node2D
 			bgmPlayer.Finished += () => Method.MusicFinished(bgmPlayer);
 		}
 		 
-		
-		
 		shieldScenes = new PackedScene[]
 		{
 			GD.Load<PackedScene>("res://scenes/shield_bal.tscn"), 
@@ -88,8 +87,8 @@ public partial class Main : Node2D
 				BossWins(); // FIX: Meghívjuk az idő lejárását kezelő metódust
 			}
 			UpdateTimerLabel();
-			
 		}
+		
 		if(GM.Tick > 0 && GM.HP < GM.MaxHP && GM.HP > 0)
 		{
 			GM.regenTimer += GM.Tick * (float)delta;
@@ -137,8 +136,8 @@ public partial class Main : Node2D
 				// A menü láthatóságát az ellenkezőjére állítjuk (toggle)
 				optionsMenuLayer.Visible = !optionsMenuLayer.Visible;
 				GD.Print($"Opciók menü váltva: {(optionsMenuLayer.Visible ? "MEGNYITVA" : "BEZÁRVA")}");
-				
 			}
+			
 			GetViewport().SetInputAsHandled(); 
 		}
 	}
@@ -233,10 +232,13 @@ public partial class Main : Node2D
 		{
 			GM.ClickCounter = 0;
 			// FIX: Ha a boss-t vertük meg, kapcsoljuk ki az időzítőt
-			if (GM.IsBossFight)
+			if (GM.IsBossFight &&  GM.HP <= 0)
 			{
 				GM.IsBossFight = false;
+				GM.BossDefeated = true;
 				GD.Print("BOSS LEGYŐZVE!");
+				UpdateTimerLabel();
+				GoNextVisible();
 			}
 			
 			// GM.Coin, GM.Counter, GM.Rnd, GM.MinHP, GM.MaxHP használata
@@ -287,6 +289,7 @@ public partial class Main : Node2D
 			ChangeShield(); // Pajzs frissítése/cseréje
 			ChangeEnemyScene(); 
 		} // Bezárja az if(GM.HP <= 0) blokkot
+
 	} 
 	
 	public void OnQuitButtonPressed()
@@ -330,6 +333,18 @@ public partial class Main : Node2D
 		Method.OptionClose(optionsMenuLayer);
 	}
 	
+	public void GoNextVisible()
+	{
+		Method.GetNext();
+	}
+	
+	public async void OnChangeMapPressed()
+	{
+		FadeController fade = GetNode<FadeController>("/root/FadeController");
+		await fade.FadeToScene("res://scenes/za_warudo_2.tscn");
+		//GetTree().ChangeSceneToFile("res://scenes/za_warudo_2.tscn");
+	}
+	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
 	public void BossWins()
 	{
@@ -338,6 +353,7 @@ public partial class Main : Node2D
 		UpdateHP();
 		ChangeShield(); 
 		ChangeEnemyScene(); 
+
 	}
 	
 	public void OnLevelClickButton()
@@ -556,4 +572,6 @@ public partial class Main : Node2D
 			PlayerSprite.Play("Idle");
 		}
 	}
+	
+
 }

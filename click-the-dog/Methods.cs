@@ -13,6 +13,8 @@ public partial class Methods : Node
 	private CanvasLayer _optionsMenuLayer;
 	private PackedScene[] _enemyScenes;
 	private Node2D _currentEnemy;
+	private Sprite2D _goNext;
+	
 	
 	public override void _Ready()
 	{
@@ -28,11 +30,11 @@ public partial class Methods : Node
 			//Boss:
 			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"), 
 		};
-
 	}
 	
 	public void BindUI(Label LevelLabel, Label LevelPrice, Label CoinLabel, 
-	Label HPLabel, ProgressBar HPBar, Label bossLabel, CanvasLayer optionsMenuLayer)
+	Label HPLabel, ProgressBar HPBar, Label bossLabel, CanvasLayer optionsMenuLayer,
+	Sprite2D GoNext)
 	{
 		_levelLabel = LevelLabel;
 		_levelPrice = LevelPrice;
@@ -41,6 +43,7 @@ public partial class Methods : Node
 		_hpBar = HPBar;
 		_bossLabel = bossLabel;
 		_optionsMenuLayer = optionsMenuLayer;
+		_goNext = GoNext;
 
 	}
 	
@@ -85,48 +88,45 @@ public partial class Methods : Node
 	
 	public void Health()
 	{
-		if (_hpBar == null)
-		{
-			GD.PrintErr("HIBA: A HPBar null az UpdateHP-ben!");
-			return; 
-   	 	}
-		if(GM.HP <= _hpBar.MaxValue && GM.HP >= 0)
-		{
-			if (_hpLabel != null)
+			if (_hpBar == null)
 			{
-				_hpLabel.Text = "Health: " + GM.HP.ToString();
+				GD.PrintErr("HIBA: A HPBar null az UpdateHP-ben!");
+				return; 
+	    	}
+			if(GM.HP <= _hpBar.MaxValue && GM.HP >= 0)
+			{
+				if (_hpLabel != null)
+				{
+					_hpLabel.Text = "Health: " + GM.HP.ToString();
+				}
 			}
-		}
-		
-		if (_hpBar != null)
-		{
-			_hpBar.Value = GM.HP; //Math.Max(0, GM.HP);
-		}
-		
+			
+			if (_hpBar != null)
+			{
+				_hpBar.Value = GM.HP; //Math.Max(0, GM.HP);
+			}
 	}
 	
 	public void BossTime()
 	{
 		if (_bossLabel == null) return;
-			
+		
 		if (GM.IsBossFight)
 		{
 			// Az időt két tizedesjegyre kerekítjük és megjelenítjük
 			_bossLabel.Text = $"IDŐ: {GM.BossTimeLeft:0.00} mp";
 			_bossLabel.Show();
 				
-			// Szín változtatása, ha már csak kevés idő van hátra
-			if (GM.BossTimeLeft <= 5.0)
-			{
-				_bossLabel.Modulate = new Color(1, 0.2f, 0.2f); // Pirosas, vészjelzés
-			}
-			
-			else
+			if(GM.BossTimeLeft >= 5.0 && GM.BossTimeLeft <= 15.0)
 			{
 				_bossLabel.Modulate = new Color(1, 1, 1); // Fehér
 			}
+			// Szín változtatása, ha már csak kevés idő van hátra
+			else if (GM.BossTimeLeft <= 5.0 && GM.BossTimeLeft >= 0.0)
+			{
+				_bossLabel.Modulate = new Color(1, 0.2f, 0.2f); // Piros vészjelzés
+			}
 		}
-		
 		else
 		{
 			_bossLabel.Text = "";
@@ -201,61 +201,75 @@ public partial class Methods : Node
 	
 	public Node2D ChangeEnemy()
 	{
-		// Nincs paraméter, az osztályszintű _enemyScenes-t használjuk
-	GM.currentEnemyIndex = GM.Rnd.Next(0, _enemyScenes.Length); 
-	int bossIndex = _enemyScenes.Length - 1; 
+			// Nincs paraméter, az osztályszintű _enemyScenes-t használjuk
+		GM.currentEnemyIndex = GM.Rnd.Next(0, _enemyScenes.Length); 
+		int bossIndex = _enemyScenes.Length - 1; 
 
-	if (GM.currentEnemyIndex == bossIndex)
-	{
-		if (GM.Level < 10) 
+		if (GM.currentEnemyIndex == bossIndex)
 		{
-			GM.currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
-			GD.Print("Boss kihagyva: Először el kell érned a(z) 5. szintet!");
-			GM.IsBossFight = false; 
+			if (GM.Level < 10) 
+			{
+				GM.currentEnemyIndex = GM.Rnd.Next(0, bossIndex); 
+				GD.Print("Boss kihagyva: Először el kell érned a(z) 10. szintet!");
+				GM.IsBossFight = false; 
+			}
+			else
+			{
+				GD.Print("10. szint elérve! BOSS BETÖLTVE!");
+				GM.HP = 170000;
+				
+				// Nincs paraméter, az osztályszintű _hpBar-t használjuk
+				if (_hpBar != null)
+				{
+					_hpBar.MaxValue = GM.HP;
+				}
+					
+				
+				GM.IsBossFight = true;
+				GM.BossTimeLeft = GameManager.BOSS_TIME_LIMIT; 
+				
+				// A "segéd" metódusok hívása (paraméter nélkül)
+				BossTime();
+				Health();
+			}
+		} 
+		else
+		{
+			GM.IsBossFight = false;
+		}
+		
+		// FIGYELEM: Nincs QueueFree()! Azt a Main végzi.
+
+		PackedScene newEnemyScene = _enemyScenes[GM.currentEnemyIndex]; 
+		Node2D newEnemy = newEnemyScene.Instantiate<Node2D>();
+		
+		// FIGYELEM: Nincs AddChild()! Azt a Main végzi.
+		// FIGYELEM: Nincs Position beállítás! Azt a Main végzi.
+		
+		GD.Print($"Új ellenség létrehozva: {newEnemy.Name}");
+		
+		AnimatedSprite2D sprite = newEnemy.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D"); 
+		if (sprite != null)
+		{
+			sprite.Play("Idle"); 
 		}
 		else
 		{
-			GD.Print("10. szint elérve! BOSS BETÖLTVE!");
-			GM.HP = 170000;
-			
-			// Nincs paraméter, az osztályszintű _hpBar-t használjuk
-			if (_hpBar != null)
-				_hpBar.MaxValue = GM.HP;
-			
-			GM.IsBossFight = true;
-			GM.BossTimeLeft = GameManager.BOSS_TIME_LIMIT; 
-			
-			// A "segéd" metódusok hívása (paraméter nélkül)
-			BossTime();
-			Health();
+			GD.PrintErr("HIBA: Nem található AnimatedSprite2D nevű gyermek Node az új ellenségen!");
 		}
-	} 
-	else
-	{
-		GM.IsBossFight = false;
+		
+		// Visszaadjuk az új ellenséget a hívónak (Main-nek)
+		return newEnemy;
 	}
 	
-	// FIGYELEM: Nincs QueueFree()! Azt a Main végzi.
-
-	PackedScene newEnemyScene = _enemyScenes[GM.currentEnemyIndex]; 
-	Node2D newEnemy = newEnemyScene.Instantiate<Node2D>();
-	
-	// FIGYELEM: Nincs AddChild()! Azt a Main végzi.
-	// FIGYELEM: Nincs Position beállítás! Azt a Main végzi.
-	
-	GD.Print($"Új ellenség létrehozva: {newEnemy.Name}");
-	
-	AnimatedSprite2D sprite = newEnemy.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D"); 
-	if (sprite != null)
+	public void GetNext()
 	{
-		sprite.Play("Idle"); 
-	}
-	else
-	{
-		GD.PrintErr("HIBA: Nem található AnimatedSprite2D nevű gyermek Node az új ellenségen!");
-	}
-	
-	// Visszaadjuk az új ellenséget a hívónak (Main-nek)
-	return newEnemy;
+		if(GM.BossDefeated == true)
+		{
+			_goNext.Visible = true;
+			GD.Print("Skin csere működik");
+			
+		}
+		
 	}
 }
