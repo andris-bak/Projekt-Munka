@@ -1,71 +1,180 @@
-# Funkcionális specifikáció 
+#  Funkcionális specifikáció
 
-**Projekt neve:** Click the Dog (CTD)  
-**Dátum:** 2025.10.15.  
-**Készítette:** M.A.K.E Kft  
-**Tagok:** Venyige Márk, Bak András Mátyás, Kovács Krisztián, Jabur Emil 
+**Projekt neve:** Click the Dog (CTD)
+**Verziószám:** 1.0
+**Dátum:** 2025.10.15.
+**Készítette:** M.A.K.E Kft
+**Tagok:** Venyige Márk, Bak András Mátyás, Kovács Krisztián, Jabur Emil
 
-## 1. Bevezetés 
+---
 
-Ez a dokumentum a Click the Dog játékunk funkcionális működését írja le. 
-Célja, hogy pontosan meghatározza, a játék milyen funkciókat biztosít, hogyan kezeli a játékosokat. 
+## 1. Bevezetés
 
-## 2. Rendszeráttekintés 
+Ez a dokumentum a Click the Dog játék **funkcionális működését, interfészeit és belső folyamatait** írja le. Célja, hogy pontosan meghatározza, a játék milyen funkciókat biztosít, és hogyan kezeli a játékos interakciókat.
 
-A játék telepítés után egyből elérhető. A játékosok amint elindítják a játékot és betöltik azonnal képesek belecsöppenni a videó játék világába. 
+---
 
-## 3. Felhasználói felületek 
+## 2. Rendszeráttekintés
 
-### 3.1 Főmenü 
+A Click the Dog egy helyi telepítésű, **offline** futó játék, mely a Godot játékmotorban C# nyelven készült. A játékos azonnal indíthatja a játékot (akár egy új Start, akár egy Load opcióval), és azonnal belecsöppen a jőáték világába.
 
-**Gomb:** Start, Load, Options, Quit. 
+---
 
-**Műveletek:** 
-* **Start:** elindítja a játékot és átdob egy másik jelenetre, ahol a játék folyni fog 
-* **Load:** betölti a legújabb mentésünket. 
-* **Options:** egy beállítások menüt dob fel, ahol személyre lehet szabni egy-két dolgot. 
-* **Quit:** kilép a játékból 
+## 3. Felhasználói felületek (UI/UX)
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/62364b3c-7313-44fa-9de2-f444143b3d4b" />
 
-### 3.2 Játékfelület 
+<img width="1600" height="900" alt="image (1)" src="https://github.com/user-attachments/assets/7cccfd78-6198-400f-b44a-aa927d675fe7" />
 
-**Pálya:** Ellenség, Háttér, Mentés, Mentés törlése UI elemek. 
 
-**Műveletek:** 
-* **Kattintás az ellenségre** a karakterünk támad, az ellenség élete csökken. 
-* **Mentés gombra kattintás** elmenti a játékot. 
-* **Mentés törlése** törli a mentésünkét és így lényegében újra kezdhetjük a játékot a nulláról. 
-* **Nagy X gombra kattintás** bezárja a játékot. 
+### 3.1. Főmenü
 
-**UI elemek:** szint, pénz, pontok, az ellenségek élete. 
-Ezek mind akkor változnak, ha megtámadjuk az ellenségeket vagy legyőzzük őket 
-Illetve, ha egy pályán elérünk egy adott szintet, utána a játék betölti a következő pályát, melyeken más és más fajta ellenségek lesznek. 
+A Főmenü szolgál a játék indítására és alapvető beállítások elérésére.
 
-## 4. Funkcionális folyamatok 
+| Elem | Típus | Leírás | Funkcionális Cél |
+| :--- | :--- | :--- | :--- |
+| **Start** | Gomb | Új játék indítása. | Létrehoz egy új játékállapotot, és átdob a 3.2. Játékfelület jelenetre. |
+| **Load** | Gomb | Korábban mentett játék betöltése. | Betölti a lokális mentésfájl tartalmát, és folytatja az előrehaladást a Játékfelületen. |
+| **Options** | Gomb | Beállítások menü megnyitása. | Egy felugró beállítások menüt (3.3. Opciók menü) dob fel a főmenü fölé. |
+| **Quit** | Gomb | Kilépés a játékból. | Leállítja a játék alkalmazást. |
 
-### 4.1 Támadás 
-* A játékos rákattint az ellenségre. 
-* A karakter lejátsza a támadási animációját. 
-* Az ellenségnek lemegy az élete egy adott értékkel. 
-* A karakter visszakerül az idle animációjába. 
+### 3.2. Játékfelület (Harci nézet)
 
-### 4.2 Az ellenség legyőzve 
-* A játékos levitte az ellenség Életét nullára vagy az alá. 
-* A játék automatikusan betölt egy random ellenséget. 
-* A játék folytatódik. 
+Ez a fő képernyő, ahol a játékos interakcióba lép az ellenséggel, és figyelemmel kíséri a haladását.
 
-### 4.3 Mozgás 
-* A játékos képes az E és Q billentyűkkel mozogni balra és jobbra. 
-* Ezzel bővítjük tovább a harcrendszert. 
+| Elem | Típus | Leírás | Frissítés / Művelet |
+| :--- | :--- | :--- | :--- |
+| **Ellenség (Vizuális)** | Vizuális | Az aktuális ellenfél, mely a kattintások célpontja. | Változik, ha egy ellenség legyőzésre került, vagy ha új zónába lép a játékos. |
+| **Háttér** | Vizuális | A pálya aktuális zónáját jelző háttérkép (pixel-art). | Változik, ha a játékos sikeresen legyőzte az adott zóna Bossát. |
+| **Életerő (UI)** | Kijelző | Az aktuális ellenség hátralévő életereje. | Csökken a játékos kattintása és a segítő karakterek sebzése (DPS) után. |
+| **Szint/Zóna** | Kijelző | Az aktuális zónaszám vagy szint (pl. Zóna 1-5). | Nő, ha a Boss legyőzésre kerül. |
+| **Pénz** | Kijelző | A játékos jelenlegi játékbeli valutája. | Nő, ha az ellenség legyőzésre kerül. |
+| **Pontok** | Kijelző | A játékos összesített pontszáma (Top Score alapja). | Folyamatosan növekszik a sebzés és a legyőzött ellenfelek után. |
+| **Mentés Gomb** | Gomb | Manuális mentés funkció. | Elindítja az 4.4. Mentési folyamatot. |
+| **Mentés Törlése** | Gomb | Megerősítés után törli a mentésfájlt. | Visszaállítja a játékot a kezdő állapotra (Új Játék). |
+| **Bezárás (X)** | Gomb/UI | Kilép a játékból. | Leállítja a játék alkalmazást. |
+
+### 3.3. Opciók menü (Beállítások)
+
+Az `Options` menü a felhasználói élmény személyre szabására szolgál.
+
+| Elem | Típus | Leírás | Funkcionális Cél |
+| :--- | :--- | :--- | :--- |
+| **Főhangerő** | Csúszka | A teljes játék hangerejének szabályozása. | 0% és 100% között állítható, elmentődik. |
+| **Zene Hangerő** | Csúszka | A háttérzene hangerejének szabályozása. | 0% és 100% között állítható, elmentődik. |
+| **SFX Hangerő** | Csúszka | A hangeffektek (támadás, vásárlás) hangerejének szabályozása. | 0% és 100% között állítható, elmentődik. |
+| **Vissza Gomb** | Gomb | Bezárja az opciók menüt. | Visszatér a Főmenübe vagy a Játékfelületre. |
+
+---
+
+## 4. Funkcionális folyamatok (Működési logika)
+
+
+### 4.1. Támadás és Sebzés (Player Click)
+
+Ez a folyamat írja le a fő interakciót: a játékos kattintása az ellenségre.
+
+  A[Start: Ellenség Élete = 0] --> B[Jutalmazás: Pénz és Pontok Szerzése];
+  
+  B --> C(Automatikus Mentés (Auto-Save) Indítása);
+    
+  C --> D{Volt az Ellenség Boss?};
+    
+  D -- Igen --> E[Zónaváltás: Következő Zóna Betöltése];
+    
+  D -- Nem --> F{Zóna Vége (Boss Következik)?};
+    
+  E --> H[Játék Folytatódik az új zónában];
+    
+  F -- Igen --> G[Boss Ellenség Betöltése];
+    
+  F -- Nem --> I[Random Normál Ellenség Betöltése az Aktuális Zónából];
+    
+  G --> H;
+    
+  I --> H;
+
+1.  **Trigger:** A játékos a bal egérgombbal kattint az **Ellenség (Vizuális)** elemre.
+2.  **Kattintás Érvényesítés:** A rendszer ellenőrzi, hogy a kattintás a hitboxon belül történt-e.
+3.  **Animáció:** A karakter lejátsza a **támadási animációját** (Front-End feladat).
+4.  **Sebzés Számítása:** A rendszer kiszámítja a **kattintás okozta sebzést** (Player Click Damage).
+5.  **Élet Csökkentése:** Az Ellenség életereje csökken a kiszámított sebzés értékével.
+6.  **Sebzés Szöveg:** Megjelenik egy lebegő sebzés szöveg az ellenség felett.
+7.  **Ellenőrzés:** A rendszer ellenőrzi, hogy az Ellenség élete elérte-e a nullát (lásd 4.2. Az ellenség legyőzve).
+8.  **Visszatérés:** A karakter visszakerül az alapállapot (Idle) animációjába.
+
+### 4.2. Az Ellenség Legyőzve (Defeat)
+
+Ez a folyamat felel a zónák és ellenfelek váltásáért.
+
+
+ A[Start: Ellenség Élete = 0] --> B[Jutalmazás: Pénz és Pontok Szerzése];
+ 
+  B --> D{Volt az Ellenség Boss?};
+    
+  D -- Igen --> E[Zónaváltás: Következő Zóna Betöltése];
+    
+  D -- Nem --> F{Zóna Vége (Boss Következik)?};
+    
+  E --> H[Játék Folytatódik az új zónában];
+    
+  F -- Igen --> G[Boss Ellenség Betöltése];
+    
+  F -- Nem --> I[Random Normál Ellenség Betöltése az Aktuális Zónából];
+    
+  G --> H;
+    
+  I --> H;
+    
+1.  **Trigger:** Az Ellenség élete eléri a **nullát vagy az alá csökken**.
+2.  **Jutalmazás:** A játékos pénzt (Gold) és pontokat (Score) kap.
+3.  **Mentés:** Automatikus mentés (Auto-Save) indul.
+4.  **Zóna Ellenőrzés:** A rendszer ellenőrzi a legyőzött ellenfelek számát:
+    * **Ha Boss volt:** A játékos belép a következő **Zónába**, és a Háttér frissül.
+    * **Ha normál ellenség volt:**
+        * Ha a zóna vége (Boss) még nem érkezett el: A játék automatikusan betölt egy **random ellenséget** az aktuális zónából.
+        * Ha a zóna vége elérkezett: A játék betölti a **Boss ellenséget** (lásd F-K 5.4.).
+5.  **Folytatás:** A játék folytatódik az új ellenséggel.
+
+### 4.3. Mozgás (Előzetes Harcrendszer Kiegészítés)
+
+Ez a mozgásfunkció az **5.5. Karakterpozíció Változtatás** funkcionális követelmény alapját képezi.
+
+1.  **Trigger:** A játékos megnyomja az **E** (jobbra) vagy **Q** (balra) billentyűt.
+2.  **Váltás:** A rendszer a parancsnak megfelelően **megváltoztatja a karakterek pozícióját** az előre definiált helyek között (pl. Front-line, Back-line).
+3.  **Vizuális Visszajelzés:** A karakterek vizuálisan pozíciót váltanak a képernyőn.
+4.  **Mentés:** Automatikus mentés (Auto-Save) indul.
+
+### 4.4. Mentési Folyamat
+
+1.  **Trigger:** Manuális (Mentés gomb) vagy automatikus (pl. Zónaváltás, vásárlás).
+2.  **Adatgyűjtés:** A rendszer összegyűjti az összes releváns adatot: szint, pénz, pontok, karakterek szintezése, aktuális zóna.
+3.  **Írás:** Az adatokat a **Godot `ConfigFile`** formátumában írja a lokális mentésfájlba.
+4.  **Visszajelzés:** A képernyőn megjelenik egy rövid üzenet: "Játék elmentve."
+
+---
 
 ## 5. Rendszerkövetelmények 
 
-* Nem kell hozzá erős gép, kicsi igényű a játék 
-* Képernyőméret: mobil és asztali támogatás. 
-* Backend: C# és Godot. 
-* Frontend: Aseprite 
+* **5.1. Hardver Teljesítmény:** Alacsony gépigényű játék, minimális erőforrás-használattal.
+
+| Követelmény | Minimális Specifikáció | Ajánlott Specifikáció |
+| :--- | :--- | :--- |
+| **Operációs Rendszer** | Windows 7/10/11 (64-bit), Linux, macOS | Windows 10/11, vagy frissebb Linux/macOS |
+| **Processzor (CPU)** | 2.0 GHz Dual Core | 3.0 GHz+ Quad Core |
+| **Memória (RAM)** | 2 GB | 4 GB vagy több |
+| **Grafikus Kártya (GPU)** | OpenGL 3.3 / Vulkan 1.0 támogatás | OpenGL 4.5 / Vulkan 1.1 támogatás (Dedikált VRAM ajánlott) |
+| **Szabad lemezterület** | 50 MB | 100 MB |
+
+* **5.2. Képernyőméret:** Reszponzív UI elemek, **mobil és asztali támogatással**.
+* **5.3. Backend:** C# és Godot 4.x.
+* **5.4. Frontend:** Aseprite és Godot UI eszközök.
+
+---
 
 ## 6. Jövőbeli funkciók 
 
-* Az ellenségek képesek legyenek levédeni a támadásainkat. 
-* Több karakter. 
-* Egyéb QOL változtatások a legjobb felhasználói élmény érdekében.
+| Funkció | Prioritás | Leírás |
+| :--- | :--- | :--- |
+| **6.1. Ellenség Védekezés** | **Rövid táv** | Az ellenségek képesek legyenek **levédeni** a támadásainkat (sebzés csökkentés). Ez a harcrendszer mélységéhez szükséges. |
+| **6.2. Karakter Diverzitás** | **Hosszú táv** | Több feloldható karakter, eltérő funkciókkal (pl. gyógyító, tank, DPS). Ez a tartalom bővítését szolgálja. |
+| **6.3. QOL (Quality of Life)** | **Rövid táv** | Kisebb változtatások a legjobb felhasználói élmény érdekében (pl. jobb beállítások kezelése, apróbb kényelmi funkciók). Ezek javítják a visszatérő felhasználók élményét. |
