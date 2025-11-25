@@ -229,10 +229,10 @@ sprite_frames = SubResource("SpriteFrames_aluu1")
 script = ExtResource("6_aluu1")
 
 [node name="Click" type="TextureButton" parent="Enemy"]
-offset_left = -33.0
-offset_top = -24.5
-offset_right = 32.0
-offset_bottom = 30.5
+offset_left = -28.5
+offset_top = -17.0
+offset_right = 36.5
+offset_bottom = 38.0
 script = ExtResource("12_kttba")
 _hoverCursorTexture = ExtResource("15_7glkl")
 _defaultCursorTexture = ExtResource("14_3xnty")
@@ -534,21 +534,25 @@ text = "SFX:"
 metadata/_edit_use_anchors_ = true
 
 [node name="Fire" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 268)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("26_7glkl")
 
 [node name="Earth" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 268)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("27_dq02k")
 
 [node name="Air" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 268)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("28_7glkl")
 
 [node name="Water" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 268)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("29_hshem")
