@@ -20,7 +20,7 @@ public partial class Player
 	public Player()
 	{
 		Level = 1;
-		Damage = 10;
+		Damage = 1;
 		PlayerDamageType = DamageType.NONE;
 	}
 	

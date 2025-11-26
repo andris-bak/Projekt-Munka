@@ -134,7 +134,7 @@ public partial class Methods : Node
 		}
 	}
 	
-	public void OptionOpen(CanvasLayer _optionsMenuLayer)
+	public void OptionOpen()
 	{
 		if (_optionsMenuLayer != null)
 		{
@@ -143,7 +143,7 @@ public partial class Methods : Node
 		}
 	}
 	
-	public void OptionClose(CanvasLayer _optionsMenuLayer)
+	public void OptionClose()
 	{
 		if (_optionsMenuLayer != null)
 		{
@@ -152,7 +152,7 @@ public partial class Methods : Node
 		}
 	}
 	
-	public void bossWins(ProgressBar _hpBar)
+	public void bossWins()
 	{
 		GD.Print("AZ IDŐ LEJÁRT! A BOSS MEGNYERTE A HARCOT!");
 		GM.IsBossFight = false;
@@ -167,7 +167,7 @@ public partial class Methods : Node
 		_hpBar.MaxValue = GM.HP;
 	}
 	
-	public void LevelClick(ProgressBar _hpBar)
+	public void LevelClick(	)
 	{
 		if (GM.Coin >= GM.LevelPrice)
 		{
@@ -272,4 +272,5 @@ public partial class Methods : Node
 		}
 		
 	}
+
 }

@@ -52,50 +52,20 @@ texture = ExtResource("1_pt3fl")
 4:6/0 = 0
 5:6/0 = 0
 4:7/0 = 0
-
 4:3/0 = 0
 5:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qhlpx"]
 texture = ExtResource("2_mwjme")
+0:1/0 = 0
+0:0/0 = 0
+5:0/0 = 0
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
 6:7/size_in_atlas = Vector2i(2, 2)
 6:7/0 = 0
 10:7/size_in_atlas = Vector2i(2, 2)
 10:7/0 = 0
-0:0/0 = 0
-0:1/0 = 0
-5:0/0 = 0
-
-
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qhlpx"]
-texture = ExtResource("2_mwjme")
-0:5/0 = 0
-0:6/0 = 0
-0:7/0 = 0
-0:8/0 = 0
-1:5/0 = 0
-1:6/0 = 0
-1:7/0 = 0
-1:8/0 = 0
-2:5/0 = 0
-2:6/0 = 0
-2:7/0 = 0
-2:8/0 = 0
-6:7/0 = 0
-6:8/0 = 0
-7:7/0 = 0
-7:8/0 = 0
-10:7/0 = 0
-10:8/0 = 0
-11:7/0 = 0
-11:8/0 = 0
-0:1/0 = 0
-0:0/0 = 0
-5:0/0 = 0
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lat7a"]
 texture = ExtResource("1_mwjme")

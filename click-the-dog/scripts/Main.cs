@@ -5,7 +5,7 @@ public partial class Main : Node2D
 {
 	public GameManager GM;
 	public Methods Method;
-	
+
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
 	public AudioStreamPlayer hitSound; 
@@ -14,6 +14,7 @@ public partial class Main : Node2D
 	public Node2D currentEnemy; 
 	public Node2D currentShield; 
 	public AnimatedSprite2D maincat; 
+	public Player.DamageType tes = Player.DamageType.NONE;
 
 	// Exportált Node hivatkozások...
 	// [Export] public Label ScoreLabel;
@@ -140,6 +141,13 @@ public partial class Main : Node2D
 			
 			GetViewport().SetInputAsHandled(); 
 		}
+		
+		if (@event.IsActionPressed("switchToWater"))
+		{
+			tes = Player.DamageType.WATER;
+			
+			GetViewport().SetInputAsHandled(); 
+		}
 	}
 	
 	public void OnClickButton()
@@ -179,8 +187,8 @@ public partial class Main : Node2D
 			}
 		}
 		
-		Player.DamageType tes = Player.DamageType.NONE;
-		//Enemy.DefenseType tes2 = Enemy.DefenseType.AIR;
+
+
 		switch(GM.element)
 			{
 				case 0 :
@@ -199,7 +207,7 @@ public partial class Main : Node2D
 					break;
 			}
 		
-		if(tes == Player.DamageType.NONE && GM.EnemyData.EnemyResistance == Enemy.DefenseType.FIRE)
+		if(tes == Player.DamageType.WATER && GM.EnemyData.EnemyResistance == Enemy.DefenseType.FIRE)
 		{
 			GD.Print($"type  működik");
 			actualDamage *= 5;
@@ -325,12 +333,12 @@ public partial class Main : Node2D
 	
 	public void OnMenuOpened()
 	{
-		Method.OptionOpen(optionsMenuLayer);
+		Method.OptionOpen();
 	}
 	
 	public void OnMenuClosed()
 	{
-		Method.OptionClose(optionsMenuLayer);
+		Method.OptionClose();
 	}
 	
 	public void GoNextVisible()
@@ -348,7 +356,7 @@ public partial class Main : Node2D
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
 	public void BossWins()
 	{
-		Method.bossWins(HPBar);
+		Method.bossWins();
 		UpdateCoinLabel();
 		UpdateHP();
 		ChangeShield(); 
@@ -358,7 +366,7 @@ public partial class Main : Node2D
 	
 	public void OnLevelClickButton()
 	{
-		Method.LevelClick(HPBar);
+		Method.LevelClick();
 	}
 	
 	public void ChangeEnemyScene()
