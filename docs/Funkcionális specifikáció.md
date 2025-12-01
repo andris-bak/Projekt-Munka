@@ -8,15 +8,109 @@
 
 ---
 
-## 1. Bevezetés
+# 1. Bevezetés
 
-Ez a dokumentum a Click the Dog játék **funkcionális működését, interfészeit és belső folyamatait** írja le. Célja, hogy pontosan meghatározza, a játék milyen funkciókat biztosít, és hogyan kezeli a játékos interakciókat.
+Ez a dokumentum a **Click the Dog (CTD)** nevű játék **funkcionális specifikációját** tartalmazza.  
+Célja, hogy részletesen bemutassa a játék működési logikáját, felhasználói felületeit, interakciós folyamatait, valamint az ezekért felelős rendszereket.  
+A specifikáció segíti a fejlesztői munkát, az egyes modulok összehangolását, valamint a projekt jövőbeli bővítésének megtervezését.
+
+A dokumentum a játék **jelenlegi stabil verziójára (1.0)** vonatkozik, és meghatározza azokat a funkciókat, amelyek a beadandó projekt részeként megvalósultak. Emellett keretrendszert biztosít a későbbi fejlesztésekhez, biztosítva, hogy a csapat egységesen értelmezze a játék mechanikáit és logikai működését.
+
+A játék alapelve egy egyszerűen érthető, mégis addiktív mechanizmuson nyugszik:  
+a játékos kattintásokkal sebezheti az ellenségeket, miközben előrehalad a különböző zónákon és Boss ellenfeleken keresztül.  
+Ennek a dokumentumnak a feladata minden ilyen interakciót és háttérfolyamatot részletesen meghatározni és rögzíteni.
+
+
+# 2. Rendszeráttekintés
+
+A **Click the Dog** egy helyben futó, offline üzemű **clicker–harci hibrid játék**, amely a **Godot 4.x** játékmotorban, C# programozási nyelvvel készült. A rendszer moduláris felépítésű, így könnyen módosítható, optimalizálható vagy bővíthető.
+
+A játék fő eleme egy **harci képernyő**, ahol a játékos:
+- kattintással okoz sebzést,
+- passzív DPS segítségével folyamatos sebzést generál,
+- zónáról zónára halad,
+- időszakonként Bossokat győz le.
+
+A motor minden interakciót és háttérfolyamatot valós időben kezel. A rendszer több almodulból épül fel:
 
 ---
 
-## 2. Rendszeráttekintés
+## 2.1. Interakciós rendszer
 
-A Click the Dog egy helyi telepítésű, **offline** futó játék, mely a Godot játékmotorban C# nyelven készült. A játékos azonnal indíthatja a játékot (akár egy új Start, akár egy Load opcióval), és azonnal belecsöppen a jőáték világába.
+A játékos minden művelete (kattintás, mozgás, menükezelés) eseménykezelőkön keresztül jut el a megfelelő modulokhoz.  
+A kattintási eseményeket a játék azonnal feldolgozza, és továbbítja a sebzéskezelő komponensnek.
+
+---
+
+## 2.2. Harcrendszer
+
+A harcrendszer felelős az alábbiakért:
+
+- **Kattintási sebzés (Click Damage)** kiszámítása és alkalmazása  
+- **Passzív DPS értékek** folyamatos frissítése  
+- **Ellenségek életerejének** kezelése  
+- Az ellenség halálának ellenőrzése  
+- A zóna előrehaladásának és Boss megjelenésének szabályozása  
+
+A rendszer minden legyőzött ellenfélnél meghatározza, hogy:
+- új ellenség,
+- vagy zónaváltás,
+- vagy Boss betöltése következzen.
+
+---
+
+## 2.3. Progresszió és Gazdasági Rendszer
+
+A játékos előrehaladásához kötődő minden érték (pl. pénz, pontszám, zóna, DPS, karakterfejlődés) nyilvántartása elkülönített modulban történik.
+
+A modul feladatai:
+
+- Jutalmazás ellenségek legyőzésekor  
+- Pénz- és pontszám-növelés  
+- Zóna előrehaladás kezelése  
+- Fejlesztések és statisztikák tárolása  
+
+Minden fontos változás menthető, ezzel biztosítva a folyamatosságot.
+
+---
+
+## 2.4. Mentési és Betöltési Rendszer
+
+A játék állapotát a Godot **ConfigFile** formátuma menti, mely gyors helyi mentést és visszatöltést tesz lehetővé.
+
+A rendszer képes:
+
+- Manuális mentésre (gombnyomással)  
+- Automatikus mentésre (zónaváltáskor, vásárláskor stb.)  
+- A teljes mentésfájl törlésére  
+
+Minden mentést rövid vizuális visszajelzés kísér.
+
+---
+
+## 2.5. Grafikus és Felhasználói Felület Rendszer
+
+A játék UI-ja Godot Control node-okból épül fel, reszponzív működésre optimalizálva.
+
+Feladataik:
+
+- Játékállapot megjelenítése (HP, pénz, pontok, zóna)  
+- Gombok és menük kezelése  
+- Vizuális visszajelzések biztosítása (lebegő sebzés, mentés üzenet)  
+- Játékbeli jelenetek és háttérváltások megjelenítése  
+
+---
+
+## 2.6. Célplatform és Teljesítmény
+
+A játék alacsony rendszerigénnyel rendelkezik, és célja, hogy **régebbi számítógépeken is gördülékenyen fusson**.
+
+Optimalizálási fókuszok:
+
+- alacsony CPU-terhelés,
+- gyors animációkezelés,
+- minimalizált memóriaterhelés,
+- skálázható felbontások támogatása.
 
 ---
 
