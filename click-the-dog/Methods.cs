@@ -63,7 +63,7 @@ public partial class Methods : Node
 	public void LevelUp()
 	{
 		if (_levelLabel != null && GM != null)
-			_levelLabel.Text = $"Level: {GM.Level}";
+			_levelLabel.Text = $"Lvl:{GM.Level}";
 	}
 	
 	public void LevelPrice()

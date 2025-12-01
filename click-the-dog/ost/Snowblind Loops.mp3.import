@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ccvgm2fsk5ubt"
+path="res://.godot/imported/Snowblind Loops.mp3-bddcf1dab7dc4847436c3a9c10bcc916.mp3str"
+
+[deps]
+
+source_file="res://ost/Snowblind Loops.mp3"
+dest_files=["res://.godot/imported/Snowblind Loops.mp3-bddcf1dab7dc4847436c3a9c10bcc916.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

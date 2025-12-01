@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://bla6t6qp38sla"]
+[gd_scene load_steps=46 format=4 uid="uid://bla6t6qp38sla"]
 
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://dv6s32ac0nqk7" path="res://assets/Elements/air_icon.png" id="28_7glkl"]
 [ext_resource type="Texture2D" uid="uid://cdmlmlsafjq54" path="res://assets/Elements/water_icon.png" id="29_hshem"]
 [ext_resource type="Texture2D" uid="uid://cfcnglrnqp2pa" path="res://assets/Button/lvlup_button_grey.png" id="30_dq02k"]
+[ext_resource type="Texture2D" uid="uid://fmuuqcybl4fl" path="res://assets/UI/character_lvl.png" id="31_hshem"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyre6"]
 atlas = ExtResource("5_pyre6")
@@ -291,7 +292,7 @@ offset_bottom = 8.24242
 metadata/_edit_use_anchors_ = true
 
 [node name="Dabloon" type="Sprite2D" parent="."]
-position = Vector2(12, 56)
+position = Vector2(13, 47.000004)
 scale = Vector2(1.4375, 1.4375)
 texture = ExtResource("10_nxjxa")
 
@@ -321,19 +322,20 @@ theme_override_fonts/font = ExtResource("10_7supi")
 text = "Health: "
 
 [node name="Level" type="Label" parent="."]
-offset_left = 2.0
-offset_top = 71.0
-offset_right = 62.17
-offset_bottom = 90.0
+offset_left = 31.999998
+offset_top = 67.0
+offset_right = 95.59999
+offset_bottom = 106.0
 scale = Vector2(1.095, 1.095)
 theme_override_fonts/font = ExtResource("10_7supi")
-text = "Level: "
+theme_override_font_sizes/font_size = 24
+text = " Lvl:"
 
 [node name="Coins" type="Label" parent="."]
 offset_left = 26.0
-offset_top = 43.0
+offset_top = 33.999996
 offset_right = 103.0
-offset_bottom = 74.0
+offset_bottom = 65.0
 scale = Vector2(1.18, 1.18)
 theme_override_fonts/font = ExtResource("10_7supi")
 theme_override_font_sizes/font_size = 27
@@ -358,7 +360,7 @@ theme_override_fonts/font = ExtResource("10_7supi")
 text = "Time: "
 
 [node name="LvlupButtonColored" type="Sprite2D" parent="."]
-position = Vector2(460, 161)
+position = Vector2(86, 78)
 texture = ExtResource("10_ti7n2")
 
 [node name="TextureButton" type="TextureButton" parent="LvlupButtonColored"]
@@ -373,6 +375,7 @@ offset_right = -2.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Shield" type="Sprite2D" parent="."]
 position = Vector2(205.5, 178.5)
@@ -578,6 +581,11 @@ offset_right = 0.64059067
 offset_bottom = -0.30530357
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CharacterLvl" type="Sprite2D" parent="."]
+position = Vector2(15, 76.00001)
+scale = Vector2(2.0625, 2.0625)
+texture = ExtResource("31_hshem")
 
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/Click" to="." method="OnClickButton"]

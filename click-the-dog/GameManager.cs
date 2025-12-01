@@ -35,7 +35,7 @@ public partial class GameManager : Node
 	// public int CurrentEnemyIndex { get; set; } = 0; 
 	public bool IsBossFight { get; set; } = false;
 	public double BossTimeLeft { get; set; } = 0.0;
-	public const double BOSS_TIME_LIMIT = 15.0; // 15 másodperces időlimit
+	public const double BOSS_TIME_LIMIT = 40.0; // 15 másodperces időlimit
 
 	public override void _Ready()
 	{
