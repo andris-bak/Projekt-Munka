@@ -5,6 +5,7 @@ public partial class Main : Node2D
 {
 	public GameManager GM;
 	public Methods Method;
+	private int CurrentScene;
 
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
@@ -25,6 +26,8 @@ public partial class Main : Node2D
 	[Export] public Label bossLabel;
 	[Export] public Label LevelLabel;
 	[Export] public Label LevelPrice;
+	[Export] public CanvasLayer Sign;
+	[Export] public CanvasLayer MENU;
 	[Export] public Sprite2D Shield;
 	[Export] public Sprite2D Fire;
 	[Export] public Sprite2D Earth; 
@@ -34,6 +37,7 @@ public partial class Main : Node2D
 	[Export] public AnimatedSprite2D PlayerSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
 	[Export] public Sprite2D GoNext;
+	[Export] public ColorRect PauseOverLay;
 	
 	
 	public override void _Ready()
@@ -41,11 +45,12 @@ public partial class Main : Node2D
 		GM = GetNode<GameManager>("/root/GameManager");
 		Method = GetNode<Methods>("/root/Methods");
 		Method.BindUI(LevelLabel, LevelPrice, CoinLabel, HPLabel, HPBar, bossLabel,
-		optionsMenuLayer, GoNext);  //enemyScenes, currentEnemy
+		optionsMenuLayer, GoNext, Sign, MENU);  //enemyScenes, currentEnemy
 		
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
 		
+		CurrentScene = 1;
 		
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
@@ -70,12 +75,21 @@ public partial class Main : Node2D
 			GD.Load<PackedScene>("res://scenes/shield_jobb.tscn"), 
 		};
 		
+		if (PlayerSprite != null)
+		{
+ 		 	PlayerSprite.Position = new Vector2(429, 173); 
+		 	PlayerSprite.Play("Idle");
+		}
+		
 		ChangeEnemyScene();
 		ChangeShield();
 	}
 	
 	public override void _Process(double delta)
 	{
+	//	if (GetTree().Paused)
+	//	return;
+		
 		ChangePosition(); 
 		// --- IDŐZÍTŐ LOGIKA ---
 		if (GM.IsBossFight)
@@ -132,20 +146,44 @@ public partial class Main : Node2D
 		
 		if (@event.IsActionPressed("openMenu"))
 		{
-			if (optionsMenuLayer != null)
+			if (MENU != null)
 			{
-				// A menü láthatóságát az ellenkezőjére állítjuk (toggle)
-				optionsMenuLayer.Visible = !optionsMenuLayer.Visible;
-				GD.Print($"Opciók menü váltva: {(optionsMenuLayer.Visible ? "MEGNYITVA" : "BEZÁRVA")}");
+				MENU.Visible = !MENU.Visible;
+				GD.Print($" menü váltva: {(MENU.Visible ? "MEGNYITVA" : "BEZÁRVA")}");
+			}
+			if(MENU.Visible == false)
+			{
+				optionsMenuLayer.Visible = false;
 			}
 			
+			GetViewport().SetInputAsHandled(); 
+		}
+		
+		if (@event.IsActionPressed("switchToFire"))
+		{
+			tes = Player.DamageType.FIRE;
+			GD.Print($"Fire type  működik");
 			GetViewport().SetInputAsHandled(); 
 		}
 		
 		if (@event.IsActionPressed("switchToWater"))
 		{
 			tes = Player.DamageType.WATER;
-			
+			GD.Print($"Water type  működik");
+			GetViewport().SetInputAsHandled(); 
+		}
+		
+		if (@event.IsActionPressed("switchToAir"))
+		{
+			tes = Player.DamageType.AIR;
+			GD.Print($"AIR type  működik");
+			GetViewport().SetInputAsHandled(); 
+		}
+		
+		if (@event.IsActionPressed("switchToEarth"))
+		{
+			tes = Player.DamageType.EARTH;
+			GD.Print($"EARTH type  működik");
 			GetViewport().SetInputAsHandled(); 
 		}
 	}
@@ -164,7 +202,7 @@ public partial class Main : Node2D
 		
 		// Player pozíciók (ahol a PlayerSprite áll)
 		Vector2 leftPlayerPos = new Vector2(205, 173); // Bal oldal
-		Vector2 rightPlayerPos = new Vector2(435, 173); // Jobb oldal
+		Vector2 rightPlayerPos = new Vector2(429, 173); // Jobb oldal
 
 		// Ellenőrizzük, hogy aktív-e a pajzs, és a játékos a megfelelő oldalon van-e
 		if (currentShield != null)
@@ -187,8 +225,6 @@ public partial class Main : Node2D
 			}
 		}
 		
-
-
 		switch(GM.element)
 			{
 				case 0 :
@@ -206,12 +242,20 @@ public partial class Main : Node2D
 				default:
 					break;
 			}
+			
+		if(tes == Player.DamageType.FIRE && GM.EnemyData.EnemyResistance == Enemy.DefenseType.EARTH)
+		{
+			GD.Print($"Fire type  működik");
+			actualDamage *= 5;
+		}
 		
 		if(tes == Player.DamageType.WATER && GM.EnemyData.EnemyResistance == Enemy.DefenseType.FIRE)
 		{
-			GD.Print($"type  működik");
+			GD.Print($"Water type  működik");
 			actualDamage *= 5;
 		}
+		
+		
 		else
 		{
 			//actualDamage = GM.PlayerData.Damage;
@@ -224,7 +268,7 @@ public partial class Main : Node2D
 		// Animációk
 		if(PlayerSprite != null)
 		{
-			if (PlayerSprite.Position == new Vector2(435, 173))
+			if (PlayerSprite.Position == new Vector2(429, 173))
 			{
 				PlayerSprite.Play("attack"); 
 			}
@@ -300,9 +344,19 @@ public partial class Main : Node2D
 
 	} 
 	
-	public void OnQuitButtonPressed()
+	public async void OnQuitButtonPressed()
 	{
 		// SaveGame();
+		FadeController fade = GetNode<FadeController>("/root/FadeController");
+		await fade.FadeOut();
+		if(CurrentScene == 2)
+		{
+			Sign.Visible = false;
+		}
+		if(MENU.Visible == true)
+		{
+			MENU.Visible = false;
+		}
 		Method.Quit();
 	}
 	
@@ -331,7 +385,7 @@ public partial class Main : Node2D
 		Method.BossTime();
 	}
 	
-	public void OnMenuOpened()
+	public void OnOptionsMenuOpened()
 	{
 		Method.OptionOpen();
 	}
@@ -344,6 +398,12 @@ public partial class Main : Node2D
 	public void GoNextVisible()
 	{
 		Method.GetNext();
+		CurrentScene++;
+	}
+	
+	public void HeroHire()
+	{
+		Method.Hire();
 	}
 	
 	public async void OnChangeMapPressed()
@@ -361,7 +421,6 @@ public partial class Main : Node2D
 		UpdateHP();
 		ChangeShield(); 
 		ChangeEnemyScene(); 
-
 	}
 	
 	public void OnLevelClickButton()
@@ -386,7 +445,6 @@ public partial class Main : Node2D
 		
 		// 4. TULAJDONOS: Elhelyezzük a jelenetben
 		currentEnemy.Position = new Vector2(19, 11);
-
 	}
 	
 	public void ChangeShield()
@@ -442,7 +500,7 @@ public partial class Main : Node2D
 	{
 		if (PlayerSprite != null)
 		{
-			if (PlayerSprite.Position == new Vector2(435, 173) && PlayerSprite.Animation != "Idle")
+			if (PlayerSprite.Position == new Vector2(429, 173) && PlayerSprite.Animation != "Idle")
 			{
 				PlayerSprite.Play("Idle"); 
 			}
@@ -454,9 +512,7 @@ public partial class Main : Node2D
 	}
 
 	// --- Mentés / Betöltés Metódusok (GM. adatok kezelése) ---
-
 	public const string SAVE_PATH = "user://clicker_save.json";
-	
 	public void SaveGame()
 	{
 		// GM adatok mentése
@@ -469,7 +525,6 @@ public partial class Main : Node2D
 			{"MinHP", GM.MinHP},
 			{"MaxHP", GM.MaxHP},
 			{"Counter", GM.Counter},
-
 			{"PlayerLevel", GM.PlayerData.Level},
 			{"PlayerDamage", GM.PlayerData.Damage}
 		};
@@ -480,7 +535,7 @@ public partial class Main : Node2D
 		if (file != null)
 		{
 			file.StoreString(jsonString);
-	   		GD.Print("Játék elmentve! " + SAVE_PATH + " útvonalra");
+			GD.Print("Játék elmentve! " + SAVE_PATH + " útvonalra");
    	 	}
 		else
 		{
@@ -492,7 +547,7 @@ public partial class Main : Node2D
 	{
 		if (!Godot.FileAccess.FileExists(SAVE_PATH))
 		{
-	   	 	GD.Print("Mentési fájl nem található, új játék indul.");
+			GD.Print("Mentési fájl nem található, új játék indul.");
 			return; 
 		}	
 
@@ -502,6 +557,7 @@ public partial class Main : Node2D
 			GD.PrintErr("Hiba a betöltéskor: Nem lehet megnyitni a fájlt olvasásra.");
 			return;
 		}
+		
 		string jsonString = file.GetAsText();
 
 		Variant dataVariant = Json.ParseString(jsonString);
@@ -510,14 +566,14 @@ public partial class Main : Node2D
 		{
 			GD.PrintErr("Hiba a betöltéskor: Sérült mentési fájl formátum.");
 			return;
-   		}
+		}
 	
 		Godot.Collections.Dictionary dataDict = dataVariant.As<Godot.Collections.Dictionary>();
 
 		// GM adatok betöltése
 		GM.Score = (int)(long)dataDict["Score"];
 		GM.Coin = (int)(long)dataDict["Coin"];
-   		GM.Level = (int)(long)dataDict["Level"];
+		GM.Level = (int)(long)dataDict["Level"];
 		GM.LevelPrice = (int)(long)dataDict["LevelPrice"];
 		GM.MinHP = (int)(long)dataDict["MinHP"];
 		GM.MaxHP = (int)(long)dataDict["MaxHP"];
@@ -538,7 +594,7 @@ public partial class Main : Node2D
 		{
 			 // Itt a MaxHP-ra frissítjük a MaxValue-t, ahogy a _Ready-ben is volt
 			 HPBar.MaxValue = GM.MaxHP; 
-   		}
+		}
 		UpdateHP();
 
 		GD.Print("Játék sikeresen betöltve a mentésből.");
@@ -576,10 +632,8 @@ public partial class Main : Node2D
 		}
 		if (Input.IsActionJustPressed("switchRight"))
 		{
-			PlayerSprite.Position = new Vector2(435,173);
+			PlayerSprite.Position = new Vector2(429,173);
 			PlayerSprite.Play("Idle");
 		}
 	}
-	
-
 }

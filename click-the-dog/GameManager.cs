@@ -22,9 +22,6 @@ public partial class GameManager : Node
 	public int element {get; set;} = -1;
 	public bool BossDefeated {get; set;} = false;
 	
-	
-	// A Player és Enemy objektumok maradnak példányként a GM-ben
-	// (Feltételezem, hogy a Player és Enemy is osztályok, amelyek RefCounted-től örökölnek, vagy csak egyszerű C# osztályok)
 	public Player PlayerData { get; set; }
 	public Enemy EnemyData { get; set; }
 	
@@ -42,7 +39,6 @@ public partial class GameManager : Node
 		// Inicializálás:
 		PlayerData = new Player();
 		EnemyData = new Enemy();
-		// Inicializáld itt a HP-t az EnemyData Health értékével, ha szükséges
 		HP = EnemyData.Health;
 	}
 }

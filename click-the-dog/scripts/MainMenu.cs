@@ -45,8 +45,10 @@ public partial class MainMenu : Node2D
 		// GetTree().ChangeSceneToFile("res://scenes/za_warudo.tscn");
 	}
 
-	public void OnQuitButtonPressed()
+	public async void OnQuitButtonPressed()
 	{
+		FadeController fade = GetNode<FadeController>("/root/FadeController");
+		await fade.FadeOut();
 		GetTree().Quit();
 	}
 	

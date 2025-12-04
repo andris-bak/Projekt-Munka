@@ -14,6 +14,8 @@ public partial class Methods : Node
 	private PackedScene[] _enemyScenes;
 	private Node2D _currentEnemy;
 	private Sprite2D _goNext;
+	private CanvasLayer _sign;
+	private CanvasLayer _menu;
 	
 	
 	public override void _Ready()
@@ -34,7 +36,7 @@ public partial class Methods : Node
 	
 	public void BindUI(Label LevelLabel, Label LevelPrice, Label CoinLabel, 
 	Label HPLabel, ProgressBar HPBar, Label bossLabel, CanvasLayer optionsMenuLayer,
-	Sprite2D GoNext)
+	Sprite2D GoNext, CanvasLayer Sign, CanvasLayer MENU)
 	{
 		_levelLabel = LevelLabel;
 		_levelPrice = LevelPrice;
@@ -44,7 +46,8 @@ public partial class Methods : Node
 		_bossLabel = bossLabel;
 		_optionsMenuLayer = optionsMenuLayer;
 		_goNext = GoNext;
-
+		_sign = Sign;
+		_menu = MENU;
 	}
 	
 	public void Quit()
@@ -100,7 +103,6 @@ public partial class Methods : Node
 					_hpLabel.Text = "Health: " + GM.HP.ToString();
 				}
 			}
-			
 			if (_hpBar != null)
 			{
 				_hpBar.Value = GM.HP; //Math.Max(0, GM.HP);
@@ -167,7 +169,7 @@ public partial class Methods : Node
 		_hpBar.MaxValue = GM.HP;
 	}
 	
-	public void LevelClick(	)
+	public void LevelClick()
 	{
 		if (GM.Coin >= GM.LevelPrice)
 		{
@@ -268,9 +270,18 @@ public partial class Methods : Node
 		{
 			_goNext.Visible = true;
 			GD.Print("Skin csere működik");
-			
 		}
 		
 	}
-
+	
+	public void Hire()
+	{
+		if(GM.Coin >= 150)
+		{
+			_sign.Visible = false;
+			GM.Coin -= 150;
+			Coin();
+			Paladin.QeueFree();
+		}
+	}
 }

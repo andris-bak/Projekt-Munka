@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://bla6t6qp38sla"]
+[gd_scene load_steps=49 format=4 uid="uid://bla6t6qp38sla"]
 
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b2h2qsk78oq16" path="res://characters/Paladin.png" id="4_f6s5u"]
 [ext_resource type="Texture2D" uid="uid://b0a3fiooljiv4" path="res://characters/maincharacter_left-Sheet.png" id="5_pyre6"]
 [ext_resource type="AudioStream" uid="uid://cqjb2x6w8b0f8" path="res://fx/mixkit-game-ball-tap-2073.wav" id="5_qg8qh"]
+[ext_resource type="Texture2D" uid="uid://b6a0pygj8875x" path="res://characters/maincharacter_idle_right-Sheet.png" id="6_24og2"]
 [ext_resource type="Script" uid="uid://bg0lvh8ja5vuh" path="res://scripts/Animation.cs" id="6_aluu1"]
+[ext_resource type="Texture2D" uid="uid://gs2fejwgx6xg" path="res://characters/maincharacter_idle_left-Sheet.png" id="6_nxls5"]
 [ext_resource type="Texture2D" uid="uid://ben7vftxjdfoo" path="res://characters/maincharacter_right-Sheet.png" id="6_wgbfl"]
 [ext_resource type="Script" uid="uid://b80xh4x1824fe" path="res://scripts/Paladin.cs" id="7_ra36h"]
 [ext_resource type="Texture2D" uid="uid://cusiw7yhn1kcw" path="res://assets/Button/save.png" id="8_eynld"]
@@ -29,23 +31,24 @@
 [ext_resource type="Texture2D" uid="uid://umx7ws8vk84x" path="res://assets/Elements/grass_icon.png" id="27_dq02k"]
 [ext_resource type="Texture2D" uid="uid://dv6s32ac0nqk7" path="res://assets/Elements/air_icon.png" id="28_7glkl"]
 [ext_resource type="Texture2D" uid="uid://cdmlmlsafjq54" path="res://assets/Elements/water_icon.png" id="29_hshem"]
+[ext_resource type="Texture2D" uid="uid://dq8rb03ayrd48" path="res://assets/UI/menu.png" id="30_crbji"]
 [ext_resource type="Texture2D" uid="uid://cfcnglrnqp2pa" path="res://assets/Button/lvlup_button_grey.png" id="30_dq02k"]
 [ext_resource type="Texture2D" uid="uid://fmuuqcybl4fl" path="res://assets/UI/character_lvl.png" id="31_hshem"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pyre6"]
-atlas = ExtResource("5_pyre6")
+[sub_resource type="AtlasTexture" id="AtlasTexture_24og2"]
+atlas = ExtResource("6_nxls5")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7supi"]
-atlas = ExtResource("5_pyre6")
+[sub_resource type="AtlasTexture" id="AtlasTexture_crbji"]
+atlas = ExtResource("6_nxls5")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wgbfl"]
-atlas = ExtResource("6_wgbfl")
+[sub_resource type="AtlasTexture" id="AtlasTexture_23wv0"]
+atlas = ExtResource("6_24og2")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lf8k4"]
-atlas = ExtResource("6_wgbfl")
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0gfu"]
+atlas = ExtResource("6_24og2")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qg8qh"]
@@ -84,25 +87,25 @@ region = Rect2(0, 0, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pyre6")
+"texture": SubResource("AtlasTexture_24og2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7supi")
+"texture": SubResource("AtlasTexture_crbji")
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 10.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wgbfl")
+"texture": SubResource("AtlasTexture_23wv0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lf8k4")
+"texture": SubResource("AtlasTexture_q0gfu")
 }],
 "loop": true,
 "name": &"Idle2",
-"speed": 10.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -141,13 +144,14 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aluu1"]
 
-[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "GoNext")]
+[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "MENU", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "GoNext", "PauseOverLay")]
 script = ExtResource("1_qvfia")
 CoinLabel = NodePath("Coins")
 HPLabel = NodePath("Health")
 bossLabel = NodePath("Time")
 LevelLabel = NodePath("Level")
 LevelPrice = NodePath("Price")
+MENU = NodePath("MENU")
 Shield = NodePath("Shield")
 Fire = NodePath("Fire")
 Earth = NodePath("Earth")
@@ -155,8 +159,9 @@ Air = NodePath("Air")
 Water = NodePath("Water")
 HPBar = NodePath("ProgressBar")
 PlayerSprite = NodePath("MC")
-optionsMenuLayer = NodePath("OptionsMenuLayer")
+optionsMenuLayer = NodePath("MENU/OptionsMenuLayer")
 GoNext = NodePath("GoNext")
+PauseOverLay = NodePath("MENU/PauseOverLay")
 
 [node name="ground" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAATAAoAAgACAAEAAAAUAAoAAgACAAEAAAAUAAsAAgACAAEAAAATAAkAAgACAAEAAAATAAgAAgACAAEAAAATAAcAAgACAAEAAAATAAYAAgACAAEAAAAUAAYAAgACAAEAAAAVAAoAAgACAAEAAAAWAAoAAgACAAEAAAAXAAoAAgACAAEAAAAYAAoAAgACAAEAAAAYAAsAAgACAAEAAAAXAAsAAgACAAEAAAAWAAsAAgACAAEAAAAVAAsAAgACAAEAAAAUAAkAAgACAAEAAAAUAAgAAgACAAEAAAAUAAcAAgACAAEAAAASAAoAAgACAAEAAAARAAoAAgACAAEAAAAQAAoAAgACAAEAAAAPAAoAAgACAAEAAAAPAAsAAgACAAEAAAAQAAsAAgACAAEAAAARAAsAAgACAAEAAAASAAsAAgACAAEAAAATAAwAAgACAAEAAAATAA0AAgACAAEAAAATAA4AAgACAAEAAAATAA8AAgACAAEAAAAUAA8AAgACAAEAAAAUAA4AAgACAAEAAAAUAA0AAgACAAEAAAAUAAwAAgACAAEAAAAQAAwAAgACAAEAAAAQAA0AAgACAAEAAAASAA4AAgACAAEAAAARAA4AAgACAAEAAAAVAA4AAgACAAEAAAAWAA4AAgACAAEAAAAXAAwAAgACAAEAAAAXAA0AAgACAAEAAAAXAAkAAgACAAEAAAAXAAgAAgACAAEAAAAVAAcAAgACAAEAAAAWAAcAAgACAAEAAAASAAcAAgACAAEAAAARAAcAAgACAAEAAAAQAAgAAgACAAEAAAAQAAkAAgACAAEAAAARAAgAAgACAAEAAAASAAgAAgACAAEAAAAVAAgAAgACAAEAAAAWAAgAAgACAAEAAAAWAAkAAgACAAEAAAAWAAwAAgACAAEAAAAWAA0AAgACAAEAAAAVAA0AAgACAAEAAAASAA0AAgACAAEAAAARAA0AAgACAAEAAAARAAwAAgACAAEAAAASAAwAAgACAAEAAAAVAAwAAgACAAEAAAAVAAkAAgACAAEAAAASAAkAAgACAAEAAAARAAkAAgACAAEAAAAOAAoAAgACAAEAAAAOAAsAAgACAAEAAAAZAAoAAgACAAEAAAAZAAsAAgACAAEAAAATABAAAgACAAEAAAAUABAAAgACAAEAAAATAAUAAgACAAEAAAAUAAUAAgACAAEAAAAOAAwAAgACAAEAAAAOAAkAAgACAAEAAAASAAUAAgAFAAEAAAAVAAUAAgAEAAEAAAAZAAkAAgACAAEAAAAZAAwAAgACAAEAAAASABAAAgAFAAAAAAAVABAAAgAEAAAAAAARAA8AAgACAAEAAAAPAA0AAgACAAEAAAAQAA4AAgACAAEAAAAPAAwAAgACAAEAAAASAA8AAgACAAEAAAAVAA8AAgACAAEAAAAWAA8AAgACAAEAAAAXAA4AAgACAAEAAAAYAAwAAgACAAEAAAAYAA0AAgACAAEAAAAYAAgAAgACAAEAAAAXAAcAAgACAAEAAAAWAAYAAgACAAEAAAAVAAYAAgACAAEAAAAYAAkAAgACAAEAAAASAAYAAgACAAEAAAARAAYAAgACAAEAAAAQAAcAAgACAAEAAAAPAAgAAgACAAEAAAAPAAkAAgACAAEAAAAPAAcAAgAFAAEAAAAOAAcAAgACAAAAAAANAAcAAgABAAAAAAAMAAgAAgACAAAAAAALAAgAAgACAAAAAAAKAAgAAgACAAAAAAAJAAgAAgACAAAAAAAIAAgAAgACAAAAAAAHAAcAAgADAAAAAAAGAAcAAgACAAAAAAAFAAcAAgACAAAAAAAEAAcAAgACAAAAAAADAAcAAgABAAAAAAACAAgAAgACAAAAAAABAAgAAgACAAAAAAAAAAgAAgACAAAAAAAPAA4AAgAFAAAAAAAOAA4AAgACAAIAAAANAA4AAgACAAIAAAAMAA4AAgACAAIAAAALAA4AAgACAAIAAAAKAA8AAgADAAIAAAAJAA8AAgACAAIAAAAIAA8AAgACAAIAAAAHAA8AAgACAAIAAAAGAA8AAgABAAIAAAAFAA4AAgACAAIAAAAEAA4AAgACAAIAAAADAA4AAgACAAIAAAACAA4AAgACAAIAAAABAA4AAgACAAIAAAAAAA4AAgACAAIAAAAYAAcAAgAEAAEAAAAZAAcAAgACAAAAAAAaAAcAAgACAAAAAAAbAAcAAgADAAAAAAAcAAgAAgACAAAAAAAdAAgAAgACAAAAAAAeAAgAAgACAAAAAAAfAAcAAgABAAAAAAAgAAcAAgACAAAAAAAhAAcAAgACAAAAAAAiAAcAAgACAAAAAAAjAAcAAgADAAAAAAAkAAgAAgACAAAAAAAlAAgAAgACAAAAAAAmAAgAAgACAAAAAAAnAAgAAgACAAAAAAAYAA4AAgAEAAAAAAAZAA4AAgACAAIAAAAaAA4AAgACAAIAAAAbAA4AAgACAAIAAAAcAA8AAgABAAIAAAAdAA8AAgACAAIAAAAeAA8AAgACAAIAAAAfAA8AAgACAAIAAAAgAA8AAgADAAIAAAAhAA4AAgACAAIAAAAiAA4AAgACAAIAAAAjAA4AAgACAAIAAAAkAA4AAgACAAIAAAAlAA8AAgABAAIAAAAmAA8AAgACAAIAAAAnAA8AAgACAAIAAAAIAAsAAgACAAEAAAAIAAoAAgACAAEAAAAIAAkAAgACAAEAAAAHAAkAAgACAAEAAAAHAAgAAgAEAAEAAAAGAAgAAgACAAEAAAAFAAgAAgACAAEAAAAEAAgAAgACAAEAAAADAAgAAgAFAAEAAAADAAkAAgACAAEAAAACAAkAAgACAAEAAAABAAkAAgACAAEAAAAAAAkAAgACAAEAAAAAAAoAAgACAAEAAAAAAAsAAgACAAEAAAAAAAwAAgACAAEAAAAAAA0AAgACAAEAAAABAA0AAgACAAEAAAABAAwAAgACAAEAAAABAAsAAgACAAEAAAABAAoAAgACAAEAAAACAAoAAgACAAEAAAACAAsAAgACAAEAAAACAAwAAgACAAEAAAACAA0AAgACAAEAAAADAA0AAgACAAEAAAADAAwAAgACAAEAAAADAAsAAgACAAEAAAADAAoAAgACAAEAAAAEAAoAAgACAAEAAAAEAAkAAgACAAEAAAAFAAkAAgACAAEAAAAFAAoAAgACAAEAAAAFAAsAAgACAAEAAAAEAAsAAgACAAEAAAAEAAwAAgACAAEAAAAEAA0AAgACAAEAAAAFAA0AAgACAAEAAAAFAAwAAgACAAEAAAAGAAwAAgACAAEAAAAGAAsAAgACAAEAAAAGAAoAAgACAAEAAAAGAAkAAgACAAEAAAAHAAoAAgACAAEAAAAHAAsAAgACAAEAAAAHAAwAAgACAAEAAAAHAA0AAgACAAEAAAAGAA0AAgACAAEAAAAGAA4AAgAFAAAAAAAHAA4AAgACAAEAAAAIAA4AAgACAAEAAAAIAA0AAgACAAEAAAAIAAwAAgACAAEAAAAJAAwAAgACAAEAAAAJAAsAAgACAAEAAAAJAAoAAgACAAEAAAAJAAkAAgACAAEAAAAKAAkAAgACAAEAAAAKAAoAAgACAAEAAAAKAAsAAgACAAEAAAAKAAwAAgACAAEAAAAKAA0AAgACAAEAAAAJAA0AAgACAAEAAAAJAA4AAgACAAEAAAAKAA4AAgAEAAAAAAALAA0AAgACAAEAAAALAAwAAgACAAEAAAALAAsAAgACAAEAAAALAAoAAgACAAEAAAALAAkAAgACAAEAAAAMAAkAAgACAAEAAAAMAAoAAgACAAEAAAAMAAsAAgACAAEAAAAMAAwAAgACAAEAAAAMAA0AAgACAAEAAAANAA0AAgACAAEAAAANAAwAAgACAAEAAAANAAoAAgACAAEAAAANAAkAAgACAAEAAAANAAgAAgAFAAEAAAAOAAgAAgACAAEAAAAOAA0AAgACAAEAAAAfAAwAAgACAAEAAAAfAAsAAgACAAEAAAAfAAoAAgACAAEAAAAfAAkAAgACAAEAAAAfAAgAAgAFAAEAAAAgAAgAAgACAAEAAAAgAAkAAgACAAEAAAAgAAoAAgACAAEAAAAgAAsAAgACAAEAAAAgAAwAAgACAAEAAAAgAA0AAgACAAEAAAAfAA0AAgACAAEAAAAeAA0AAgACAAEAAAAeAAwAAgACAAEAAAAeAAsAAgACAAEAAAAeAAoAAgACAAEAAAAeAAkAAgACAAEAAAAdAAkAAgACAAEAAAAcAAkAAgACAAEAAAAbAAkAAgACAAEAAAAbAAgAAgAEAAEAAAAaAAgAAgACAAEAAAAZAAgAAgACAAEAAAAaAAkAAgACAAEAAAAaAAoAAgACAAEAAAAaAAsAAgACAAEAAAAaAAwAAgACAAEAAAAaAA0AAgACAAEAAAAZAA0AAgACAAEAAAAbAA0AAgACAAEAAAAbAAwAAgACAAEAAAAbAAsAAgACAAEAAAAbAAoAAgACAAEAAAAcAAoAAgACAAEAAAAcAAsAAgACAAEAAAAcAAwAAgACAAEAAAAcAA0AAgACAAEAAAAcAA4AAgAFAAAAAAAdAA4AAgACAAEAAAAdAA0AAgACAAEAAAAdAAwAAgACAAEAAAAdAAsAAgACAAEAAAAdAAoAAgACAAEAAAAeAA4AAgACAAEAAAAfAA4AAgACAAEAAAAgAA4AAgAEAAAAAAAhAA0AAgACAAEAAAAhAAwAAgACAAEAAAAhAAsAAgACAAEAAAAhAAoAAgACAAEAAAAhAAkAAgACAAEAAAAhAAgAAgACAAEAAAAiAAgAAgACAAEAAAAiAAkAAgACAAEAAAAiAAoAAgACAAEAAAAiAAsAAgACAAEAAAAiAAwAAgACAAEAAAAiAA0AAgACAAEAAAAjAA0AAgACAAEAAAAjAAwAAgACAAEAAAAjAAsAAgACAAEAAAAjAAoAAgACAAEAAAAjAAkAAgACAAEAAAAjAAgAAgAEAAEAAAAkAAkAAgACAAEAAAAkAAoAAgACAAEAAAAkAAsAAgACAAEAAAAkAAwAAgACAAEAAAAkAA0AAgACAAEAAAAlAA0AAgACAAEAAAAlAAwAAgACAAEAAAAlAAsAAgACAAEAAAAlAAoAAgACAAEAAAAlAAkAAgACAAEAAAAmAAkAAgACAAEAAAAmAAoAAgACAAEAAAAmAAsAAgACAAEAAAAmAAwAAgACAAEAAAAmAA0AAgACAAEAAAAmAA4AAgACAAEAAAAlAA4AAgAFAAAAAAAnAA4AAgACAAEAAAAnAA0AAgACAAEAAAAnAAwAAgACAAEAAAAnAAsAAgACAAEAAAAnAAoAAgACAAEAAAAnAAkAAgACAAEAAAAFAAUAAgAEAAcAAAAEAAUAAgAEAAcAAAADAAUAAgAEAAcAAAACAAUAAgAEAAcAAAABAAUAAgAEAAcAAAAAAAUAAgAEAAcAAAAAAAYAAgAEAAcAAAAAAAcAAgAEAAcAAAABAAcAAgAEAAcAAAABAAYAAgAEAAcAAAACAAYAAgAEAAcAAAACAAcAAgAEAAcAAAADAAYAAgAEAAcAAAAEAAYAAgAEAAcAAAAFAAYAAgAEAAcAAAAGAAYAAgAEAAcAAAAGAAUAAgAEAAcAAAAHAAUAAgAEAAcAAAAHAAYAAgAEAAcAAAAIAAYAAgAEAAcAAAAIAAUAAgAEAAcAAAAJAAUAAgAEAAcAAAAJAAYAAgAEAAcAAAAJAAcAAgAEAAcAAAAIAAcAAgAEAAcAAAAKAAcAAgAEAAcAAAAKAAYAAgAEAAcAAAAKAAUAAgAEAAcAAAALAAUAAgAEAAcAAAALAAYAAgAEAAcAAAALAAcAAgAEAAcAAAAMAAcAAgAEAAcAAAAMAAYAAgAEAAcAAAAMAAUAAgAEAAcAAAANAAUAAgAEAAcAAAANAAYAAgAEAAcAAAAOAAYAAgAEAAcAAAAOAAUAAgAEAAcAAAAPAAUAAgAEAAcAAAAPAAYAAgABAAAAAAAQAAYAAgAFAAEAAAAQAAUAAgABAAAAAAARAAUAAgACAAAAAAAcAAUAAgAEAAcAAAAbAAUAAgAEAAcAAAAaAAUAAgAEAAcAAAAZAAUAAgAEAAcAAAAYAAUAAgAEAAcAAAAXAAUAAgADAAAAAAAWAAUAAgACAAAAAAAXAAYAAgAEAAEAAAAYAAYAAgADAAAAAAAZAAYAAgAEAAcAAAAaAAYAAgAEAAcAAAAbAAYAAgAEAAcAAAAcAAYAAgAEAAcAAAAcAAcAAgAEAAcAAAAdAAcAAgAEAAcAAAAdAAYAAgAEAAcAAAAeAAUAAgAEAAcAAAAeAAYAAgAEAAcAAAAeAAcAAgAEAAcAAAAfAAYAAgAEAAcAAAAfAAUAAgAEAAcAAAAgAAUAAgAEAAcAAAAgAAYAAgAEAAcAAAAhAAYAAgAEAAcAAAAhAAUAAgAEAAcAAAAiAAUAAgAEAAcAAAAiAAYAAgAEAAcAAAAjAAYAAgAEAAcAAAAjAAUAAgAEAAcAAAAkAAUAAgAEAAcAAAAkAAYAAgAEAAcAAAAkAAcAAgAEAAcAAAAlAAcAAgAEAAcAAAAlAAYAAgAEAAcAAAAlAAUAAgAEAAcAAAAmAAUAAgAEAAcAAAAmAAYAAgAEAAcAAAAmAAcAAgAEAAcAAAAnAAcAAgAEAAcAAAAnAAYAAgAEAAcAAAAnAAUAAgAEAAcAAAAEABAAAgAEAAcAAAAEAA8AAgAEAAcAAAADAA8AAgAEAAcAAAACAA8AAgAEAAcAAAABAA8AAgAEAAcAAAAAAA8AAgAEAAcAAAAAABAAAgAEAAcAAAABABAAAgAEAAcAAAACABAAAgAEAAcAAAADABAAAgAEAAcAAAAFAA8AAgAEAAcAAAAFABAAAgAEAAcAAAAGABAAAgAEAAcAAAAHABAAAgAEAAcAAAAIABAAAgAEAAcAAAAJABAAAgAEAAcAAAAKABAAAgAEAAcAAAALABAAAgAEAAcAAAALAA8AAgAEAAcAAAAMAA8AAgAEAAcAAAAMABAAAgAEAAcAAAANABAAAgAEAAcAAAANAA8AAgAEAAcAAAAOAA8AAgAEAAcAAAAOABAAAgAEAAcAAAAPABAAAgAEAAcAAAAPAA8AAgABAAIAAAAQAA8AAgAFAAAAAAAQABAAAgABAAIAAAARABAAAgACAAIAAAAYABAAAgAEAAcAAAAYAA8AAgADAAIAAAAXAA8AAgAEAAAAAAAXABAAAgADAAIAAAAWABAAAgACAAIAAAAZAA8AAgAEAAcAAAAZABAAAgAEAAcAAAAaABAAAgAEAAcAAAAaAA8AAgAEAAcAAAAbAA8AAgAEAAcAAAAbABAAAgAEAAcAAAAcABAAAgAEAAcAAAAdABAAAgAEAAcAAAAeABAAAgAEAAcAAAAfABAAAgAEAAcAAAAgABAAAgAEAAcAAAAhABAAAgAEAAcAAAAhAA8AAgAEAAcAAAAiAA8AAgAEAAcAAAAiABAAAgAEAAcAAAAjABAAAgAEAAcAAAAjAA8AAgAEAAcAAAAkAA8AAgAEAAcAAAAkABAAAgAEAAcAAAAlABAAAgAEAAcAAAAmABAAAgAEAAcAAAAnABAAAgAEAAcAAAAAAAQAAgAEAAcAAAAAAAMAAgAEAAcAAAAAAAIAAgAEAAcAAAAAAAEAAgAEAAcAAAAAAAAAAgAEAAcAAAABAAAAAgAEAAcAAAACAAAAAgAEAAcAAAADAAAAAgAEAAcAAAAEAAAAAgAEAAcAAAAFAAAAAgAEAAcAAAAGAAAAAgAEAAcAAAAHAAEAAgAEAAcAAAAIAAEAAgAEAAcAAAAJAAEAAgAEAAcAAAAKAAEAAgAEAAcAAAALAAEAAgAEAAcAAAAMAAEAAgAEAAcAAAANAAEAAgAEAAcAAAAOAAEAAgAEAAcAAAAPAAEAAgAEAAcAAAAQAAEAAgAEAAcAAAARAAEAAgAEAAcAAAASAAEAAgAEAAcAAAARAAAAAgAEAAcAAAAQAAAAAgAEAAcAAAAPAAAAAgAEAAcAAAAOAAAAAgAEAAcAAAANAAAAAgAEAAcAAAAMAAAAAgAEAAcAAAALAAAAAgAEAAcAAAAKAAAAAgAEAAcAAAAJAAAAAgAEAAcAAAAIAAAAAgAEAAcAAAAHAAAAAgAEAAcAAAASAAAAAgAEAAcAAAATAAAAAgAEAAcAAAAUAAAAAgAEAAcAAAAVAAAAAgAEAAcAAAAWAAAAAgAEAAcAAAAXAAAAAgAEAAcAAAAYAAAAAgAEAAcAAAAZAAAAAgAEAAcAAAAaAAAAAgAEAAcAAAAbAAAAAgAEAAcAAAAcAAAAAgAEAAcAAAAdAAAAAgAEAAcAAAAeAAAAAgAEAAcAAAAfAAAAAgAEAAcAAAAgAAAAAgAEAAcAAAAhAAAAAgAEAAcAAAAiAAAAAgAEAAcAAAAjAAAAAgAEAAcAAAAkAAAAAgAEAAcAAAAlAAAAAgAEAAcAAAAmAAAAAgAEAAcAAAAnAAAAAgAEAAcAAAAnAAEAAgAEAAcAAAAnAAIAAgAEAAcAAAAnAAMAAgAEAAcAAAAnAAQAAgAEAAcAAAAmAAQAAgAEAAcAAAAlAAQAAgAEAAcAAAAkAAQAAgAEAAcAAAAkAAMAAgAEAAcAAAAjAAMAAgAEAAcAAAAiAAMAAgAEAAcAAAAhAAMAAgAEAAcAAAAgAAMAAgAEAAcAAAAfAAMAAgAEAAcAAAAeAAMAAgAEAAcAAAAdAAMAAgAEAAcAAAAcAAMAAgAEAAcAAAAbAAMAAgAEAAcAAAAaAAMAAgAEAAcAAAAZAAMAAgAEAAcAAAAYAAMAAgAEAAcAAAAXAAMAAgAEAAcAAAAWAAMAAgAEAAcAAAAVAAMAAgAEAAcAAAAUAAMAAgAEAAcAAAATAAMAAgAEAAcAAAASAAMAAgAEAAcAAAARAAMAAgAEAAcAAAAQAAMAAgAEAAcAAAAPAAMAAgAEAAcAAAAOAAMAAgAEAAcAAAANAAMAAgAEAAcAAAAMAAMAAgAEAAcAAAALAAMAAgAEAAcAAAAKAAMAAgAEAAcAAAAJAAMAAgAEAAcAAAAIAAMAAgAEAAcAAAAHAAMAAgAEAAcAAAAGAAMAAgAEAAcAAAAFAAMAAgAEAAcAAAAFAAQAAgAEAAcAAAAEAAQAAgAEAAcAAAADAAQAAgAEAAcAAAACAAQAAgAEAAcAAAABAAQAAgAEAAcAAAABAAMAAgAEAAcAAAABAAIAAgAEAAcAAAACAAIAAgAEAAcAAAACAAEAAgAEAAcAAAADAAEAAgAEAAcAAAAEAAEAAgAEAAcAAAAFAAEAAgAEAAcAAAAGAAEAAgAEAAcAAAABAAEAAgAEAAcAAAACAAMAAgAEAAcAAAADAAMAAgAEAAcAAAADAAIAAgAEAAcAAAAEAAIAAgAEAAcAAAAFAAIAAgAEAAcAAAAGAAIAAgAEAAcAAAAHAAIAAgAEAAcAAAAIAAIAAgAEAAcAAAAJAAIAAgAEAAcAAAAKAAIAAgAEAAcAAAALAAIAAgAEAAcAAAAMAAIAAgAEAAcAAAANAAIAAgAEAAcAAAAOAAIAAgAEAAcAAAAPAAIAAgAEAAcAAAAQAAIAAgAEAAcAAAARAAIAAgAEAAcAAAASAAIAAgAEAAcAAAATAAIAAgAEAAcAAAAUAAIAAgAEAAcAAAAUAAEAAgAEAAcAAAAVAAEAAgAEAAcAAAATAAEAAgAEAAcAAAAWAAEAAgAEAAcAAAAXAAEAAgAEAAcAAAAYAAEAAgAEAAcAAAAZAAEAAgAEAAcAAAAaAAEAAgAEAAcAAAAbAAEAAgAEAAcAAAAcAAEAAgAEAAcAAAAdAAEAAgAEAAcAAAAeAAEAAgAEAAcAAAAfAAEAAgAEAAcAAAAgAAEAAgAEAAcAAAAhAAEAAgAEAAcAAAAiAAEAAgAEAAcAAAAjAAEAAgAEAAcAAAAkAAEAAgAEAAcAAAAlAAEAAgAEAAcAAAAmAAEAAgAEAAcAAAAmAAIAAgAEAAcAAAAmAAMAAgAEAAcAAAAlAAMAAgAEAAcAAAAjAAIAAgAEAAcAAAAkAAIAAgAEAAcAAAAlAAIAAgAEAAcAAAAiAAIAAgAEAAcAAAAhAAIAAgAEAAcAAAAgAAIAAgAEAAcAAAAfAAIAAgAEAAcAAAAeAAIAAgAEAAcAAAAdAAIAAgAEAAcAAAAcAAIAAgAEAAcAAAAbAAIAAgAEAAcAAAAaAAIAAgAEAAcAAAAZAAIAAgAEAAcAAAAYAAIAAgAEAAcAAAAXAAIAAgAEAAcAAAAWAAIAAgAEAAcAAAAVAAIAAgAEAAcAAAAEAAMAAgAEAAcAAAAGAAQAAgAEAAcAAAAHAAQAAgAEAAcAAAAIAAQAAgAEAAcAAAAJAAQAAgAEAAcAAAAKAAQAAgAEAAcAAAALAAQAAgAEAAcAAAAMAAQAAgAEAAcAAAANAAQAAgAEAAcAAAAOAAQAAgAEAAcAAAAPAAQAAgAEAAcAAAAQAAQAAgAEAAcAAAARAAQAAgAEAAcAAAASAAQAAgABAAAAAAATAAQAAgACAAAAAAAUAAQAAgACAAAAAAAVAAQAAgADAAAAAAAWAAQAAgAEAAcAAAAXAAQAAgAEAAcAAAAZAAQAAgAEAAcAAAAaAAQAAgAEAAcAAAAbAAQAAgAEAAcAAAAcAAQAAgAEAAcAAAAdAAQAAgAEAAcAAAAeAAQAAgAEAAcAAAAfAAQAAgAEAAcAAAAgAAQAAgAEAAcAAAAhAAQAAgAEAAcAAAAiAAQAAgAEAAcAAAAjAAQAAgAEAAcAAAAAABEAAgAEAAcAAAAAABIAAgAEAAcAAAAAABMAAgAEAAcAAAAAABQAAgAEAAcAAAAAABUAAgAEAAcAAAABABUAAgAEAAcAAAACABUAAgAEAAcAAAADABUAAgAEAAcAAAABABYAAgAEAAcAAAAAABYAAgAEAAcAAAACABYAAgAEAAcAAAADABYAAgAEAAcAAAAEABYAAgAEAAcAAAAFABYAAgAEAAcAAAAGABYAAgAEAAcAAAAHABYAAgAEAAcAAAAIABYAAgAEAAcAAAAJABYAAgAEAAcAAAAKABYAAgAEAAcAAAALABYAAgAEAAcAAAAMABYAAgAEAAcAAAANABYAAgAEAAcAAAAOABYAAgAEAAcAAAAPABYAAgAEAAcAAAAQABYAAgAEAAcAAAARABYAAgAEAAcAAAASABYAAgAEAAcAAAATABYAAgAEAAcAAAAUABYAAgAEAAcAAAAVABYAAgAEAAcAAAAWABYAAgAEAAcAAAAXABYAAgAEAAcAAAAYABYAAgAEAAcAAAAZABYAAgAEAAcAAAAaABYAAgAEAAcAAAAbABYAAgAEAAcAAAAcABYAAgAEAAcAAAAdABYAAgAEAAcAAAAeABYAAgAEAAcAAAAfABYAAgAEAAcAAAAgABYAAgAEAAcAAAAhABYAAgAEAAcAAAAiABYAAgAEAAcAAAAjABYAAgAEAAcAAAAkABYAAgAEAAcAAAAlABYAAgAEAAcAAAAmABYAAgAEAAcAAAAnABYAAgAEAAcAAAAnABUAAgAEAAcAAAAnABQAAgAEAAcAAAAnABMAAgAEAAcAAAAnABIAAgAEAAcAAAAnABEAAgAEAAcAAAAZABMAAgAEAAcAAAAZABIAAgAEAAcAAAAZABEAAgAEAAcAAAAYABEAAgAEAAcAAAAXABEAAgAEAAcAAAAWABEAAgAEAAcAAAAVABEAAgADAAIAAAASABEAAgABAAIAAAARABEAAgAEAAcAAAAQABEAAgAEAAcAAAAPABEAAgAEAAcAAAAOABEAAgAEAAcAAAANABEAAgAEAAcAAAAMABEAAgAEAAcAAAALABEAAgAEAAcAAAAKABEAAgAEAAcAAAAJABEAAgAEAAcAAAAIABEAAgAEAAcAAAAHABEAAgAEAAcAAAAGABEAAgAEAAcAAAAFABEAAgAEAAcAAAAEABEAAgAEAAcAAAADABEAAgAEAAcAAAACABEAAgAEAAcAAAABABEAAgAEAAcAAAABABIAAgAEAAcAAAABABMAAgAEAAcAAAABABQAAgAEAAcAAAACABQAAgAEAAcAAAACABMAAgAEAAcAAAACABIAAgAEAAcAAAADABIAAgAEAAcAAAADABMAAgAEAAcAAAADABQAAgAEAAcAAAAEABQAAgAEAAcAAAAEABMAAgAEAAcAAAAEABIAAgAEAAcAAAAFABIAAgAEAAcAAAAFABMAAgAEAAcAAAAFABQAAgAEAAcAAAAFABUAAgAEAAcAAAAEABUAAgAEAAcAAAAGABUAAgAEAAcAAAAGABQAAgAEAAcAAAAGABMAAgAEAAcAAAAGABIAAgAEAAcAAAAHABIAAgAEAAcAAAAHABMAAgAEAAcAAAAHABQAAgAEAAcAAAAHABUAAgAEAAcAAAAIABUAAgAEAAcAAAAIABQAAgAEAAcAAAAIABMAAgAEAAcAAAAIABIAAgAEAAcAAAAJABIAAgAEAAcAAAAJABMAAgAEAAcAAAAJABQAAgAEAAcAAAAJABUAAgAEAAcAAAAKABUAAgAEAAcAAAAKABQAAgAEAAcAAAAKABMAAgAEAAcAAAAKABIAAgAEAAcAAAALABIAAgAEAAcAAAALABMAAgAEAAcAAAALABQAAgAEAAcAAAALABUAAgAEAAcAAAAMABUAAgAEAAcAAAAMABQAAgAEAAcAAAAMABMAAgAEAAcAAAAMABIAAgAEAAcAAAANABIAAgAEAAcAAAANABMAAgAEAAcAAAANABQAAgAEAAcAAAANABUAAgAEAAcAAAAOABUAAgAEAAcAAAAOABQAAgAEAAcAAAAOABMAAgAEAAcAAAAOABIAAgAEAAcAAAAPABIAAgAEAAcAAAAPABMAAgAEAAcAAAAPABQAAgAEAAcAAAAPABUAAgAEAAcAAAAQABUAAgAEAAcAAAAQABQAAgAEAAcAAAAQABMAAgAEAAcAAAAQABIAAgAEAAcAAAARABIAAgAEAAcAAAARABMAAgAEAAcAAAARABQAAgAEAAcAAAARABUAAgAEAAcAAAASABUAAgAEAAcAAAASABQAAgAEAAcAAAASABMAAgAEAAcAAAASABIAAgAEAAcAAAATABIAAgAEAAcAAAATABMAAgAEAAcAAAATABQAAgAEAAcAAAATABUAAgAEAAcAAAAUABUAAgAEAAcAAAAUABQAAgAEAAcAAAAUABMAAgAEAAcAAAAUABIAAgAEAAcAAAAVABIAAgAEAAcAAAAVABMAAgAEAAcAAAAVABQAAgAEAAcAAAAVABUAAgAEAAcAAAAWABUAAgAEAAcAAAAWABQAAgAEAAcAAAAWABMAAgAEAAcAAAAWABIAAgAEAAcAAAAXABIAAgAEAAcAAAAXABMAAgAEAAcAAAAXABQAAgAEAAcAAAAXABUAAgAEAAcAAAAYABUAAgAEAAcAAAAYABQAAgAEAAcAAAAYABMAAgAEAAcAAAAYABIAAgAEAAcAAAAZABQAAgAEAAcAAAAZABUAAgAEAAcAAAAaABUAAgAEAAcAAAAaABQAAgAEAAcAAAAaABMAAgAEAAcAAAAaABIAAgAEAAcAAAAaABEAAgAEAAcAAAAbABEAAgAEAAcAAAAbABIAAgAEAAcAAAAbABMAAgAEAAcAAAAbABQAAgAEAAcAAAAbABUAAgAEAAcAAAAcABUAAgAEAAcAAAAcABQAAgAEAAcAAAAcABMAAgAEAAcAAAAcABIAAgAEAAcAAAAcABEAAgAEAAcAAAAdABEAAgAEAAcAAAAdABIAAgAEAAcAAAAdABMAAgAEAAcAAAAdABQAAgAEAAcAAAAdABUAAgAEAAcAAAAeABUAAgAEAAcAAAAeABQAAgAEAAcAAAAeABMAAgAEAAcAAAAeABIAAgAEAAcAAAAeABEAAgAEAAcAAAAfABEAAgAEAAcAAAAfABIAAgAEAAcAAAAfABMAAgAEAAcAAAAfABQAAgAEAAcAAAAfABUAAgAEAAcAAAAgABUAAgAEAAcAAAAgABQAAgAEAAcAAAAgABMAAgAEAAcAAAAgABIAAgAEAAcAAAAgABEAAgAEAAcAAAAhABEAAgAEAAcAAAAhABIAAgAEAAcAAAAhABMAAgAEAAcAAAAhABQAAgAEAAcAAAAhABUAAgAEAAcAAAAiABUAAgAEAAcAAAAiABQAAgAEAAcAAAAiABMAAgAEAAcAAAAiABIAAgAEAAcAAAAiABEAAgAEAAcAAAAjABEAAgAEAAcAAAAjABIAAgAEAAcAAAAjABMAAgAEAAcAAAAjABQAAgAEAAcAAAAjABUAAgAEAAcAAAAkABUAAgAEAAcAAAAkABQAAgAEAAcAAAAkABMAAgAEAAcAAAAkABIAAgAEAAcAAAAkABEAAgAEAAcAAAAlABEAAgAEAAcAAAAlABIAAgAEAAcAAAAlABMAAgAEAAcAAAAlABQAAgAEAAcAAAAlABUAAgAEAAcAAAAmABUAAgAEAAcAAAAmABQAAgAEAAcAAAAmABMAAgAEAAcAAAAmABIAAgAEAAcAAAAmABEAAgAEAAcAAAATABEAAgACAAIAAAAUABEAAgACAAIAAAATAAsAAgACAAEAAAAYAAQAAgAEAAcAAAANAAsAAgACAAEAAAAdAAUAAgAEAAcAAAA=")
@@ -184,10 +189,11 @@ stream = ExtResource("5_qg8qh")
 bus = &"SFX"
 
 [node name="MC" type="AnimatedSprite2D" parent="."]
-position = Vector2(435, 173)
+position = Vector2(429, 172.99998)
 scale = Vector2(1.125, 1.10938)
 sprite_frames = SubResource("SpriteFrames_7supi")
 animation = &"Idle"
+frame_progress = 0.291173
 
 [node name="Paladin" type="Sprite2D" parent="." node_paths=PackedStringArray("DialogueLabel")]
 position = Vector2(466, 96)
@@ -380,164 +386,6 @@ metadata/_edit_use_anchors_ = true
 [node name="Shield" type="Sprite2D" parent="."]
 position = Vector2(205.5, 178.5)
 
-[node name="Menu" type="Sprite2D" parent="."]
-position = Vector2(573, 18)
-scale = Vector2(1.125, 1.09375)
-texture = ExtResource("21_3xnty")
-
-[node name="OpenMenu" type="TextureButton" parent="Menu"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.483
-anchor_right = 0.5
-anchor_bottom = 0.483
-offset_left = -45.2222
-offset_top = -28.2043
-offset_right = -0.222221
-offset_bottom = -1.20429
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Menu/OpenMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.484
-anchor_top = 0.5
-anchor_right = 0.484
-anchor_bottom = 0.5
-offset_left = -19.78
-offset_top = -8.5
-offset_right = 15.22
-offset_bottom = 10.5
-scale = Vector2(1.145, 1.145)
-theme_override_fonts/font = ExtResource("10_7supi")
-text = "Options"
-
-[node name="OptionsMenuLayer" type="CanvasLayer" parent="."]
-visible = false
-scale = Vector2(0.895, 0.895)
-transform = Transform2D(0.895, 0, 0, 0.895, 0, 0)
-
-[node name="MenuBackground" type="TextureRect" parent="OptionsMenuLayer"]
-anchors_preset = -1
-anchor_left = 0.76
-anchor_top = 0.111
-anchor_right = 0.76
-anchor_bottom = 0.111
-offset_left = -2.60114
-offset_top = -37.7254
-offset_right = 112.399
-offset_bottom = 30.2746
-texture = ExtResource("22_3xnty")
-metadata/_edit_use_anchors_ = true
-
-[node name="Close" type="Sprite2D" parent="OptionsMenuLayer"]
-position = Vector2(578.799, 20.2346)
-scale = Vector2(0.296875, 0.281266)
-texture = ExtResource("20_8luvg")
-
-[node name="CloseButton" type="TextureButton" parent="OptionsMenuLayer/Close"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.484375
-anchor_right = 0.5
-anchor_bottom = 0.484375
-offset_left = -66.0
-offset_top = -67.0
-offset_right = 2.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Master" type="HSlider" parent="OptionsMenuLayer/Close"]
-anchors_preset = -1
-anchor_left = -1.229
-anchor_top = 0.359
-anchor_right = -1.229
-anchor_bottom = 0.361
-offset_left = -96.5019
-offset_top = -47.8635
-offset_right = 32.4981
-offset_bottom = -15.9915
-rounded = true
-script = ExtResource("21_i1piu")
-metadata/_edit_use_anchors_ = true
-
-[node name="MasterLabel" type="Label" parent="OptionsMenuLayer/Close/Master"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.387
-anchor_top = 0.5
-anchor_right = -0.387
-anchor_bottom = 0.5
-offset_left = -37.6559
-offset_top = -16.0
-offset_right = -0.655945
-offset_bottom = 3.0
-scale = Vector2(2.29, 2.29)
-theme_override_fonts/font = ExtResource("10_7supi")
-text = "Master:"
-
-[node name="Music" type="HSlider" parent="OptionsMenuLayer/Close"]
-anchors_preset = -1
-anchor_left = -1.234
-anchor_top = 1.062
-anchor_right = -1.234
-anchor_bottom = 1.062
-offset_left = -96.024
-offset_top = -39.968
-offset_right = 31.976
-offset_bottom = -23.968
-rounded = true
-script = ExtResource("21_i1piu")
-BusName = "Music"
-
-[node name="MusicLabel" type="Label" parent="OptionsMenuLayer/Close/Music"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.387
-anchor_top = 0.5
-anchor_right = -0.387
-anchor_bottom = 0.5
-offset_left = -38.464
-offset_top = -18.0
-offset_right = -3.464
-offset_bottom = 0.999992
-scale = Vector2(2.29, 2.29)
-theme_override_fonts/font = ExtResource("10_7supi")
-text = "Music:"
-
-[node name="Sound Effects" type="HSlider" parent="OptionsMenuLayer/Close"]
-anchors_preset = -1
-anchor_left = -1.208
-anchor_top = 1.792
-anchor_right = -1.208
-anchor_bottom = 1.792
-offset_left = -94.4775
-offset_top = -40.0255
-offset_right = 30.5225
-offset_bottom = -24.0255
-rounded = true
-script = ExtResource("21_i1piu")
-BusName = "SFX"
-metadata/_edit_use_anchors_ = true
-
-[node name="SFXLabel" type="Label" parent="OptionsMenuLayer/Close/Sound Effects"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.411422
-anchor_top = 0.47913
-anchor_right = -0.411422
-anchor_bottom = 0.47913
-offset_left = -42.5723
-offset_top = -18.6661
-offset_right = -5.57226
-offset_bottom = 0.333923
-scale = Vector2(2.29, 2.29)
-theme_override_fonts/font = ExtResource("10_7supi")
-text = "SFX:"
-metadata/_edit_use_anchors_ = true
-
 [node name="Fire" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(320, 268)
@@ -587,12 +435,195 @@ position = Vector2(15, 76.00001)
 scale = Vector2(2.0625, 2.0625)
 texture = ExtResource("31_hshem")
 
+[node name="MENU" type="CanvasLayer" parent="."]
+layer = 0
+visible = false
+
+[node name="PauseOverLay" type="ColorRect" parent="MENU"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.46666667)
+
+[node name="OptionsMenuLayer" type="CanvasLayer" parent="MENU"]
+visible = false
+scale = Vector2(0.895, 0.895)
+transform = Transform2D(0.895, 0, 0, 0.895, 0, 0)
+
+[node name="MenuBackground" type="TextureRect" parent="MENU/OptionsMenuLayer"]
+anchors_preset = -1
+anchor_left = 0.86600006
+anchor_top = 0.41400003
+anchor_right = 0.86600006
+anchor_bottom = 0.41400003
+offset_left = -80.49701
+offset_top = -66.358444
+offset_right = 55.815857
+offset_bottom = 8.501907
+texture = ExtResource("22_3xnty")
+metadata/_edit_use_anchors_ = true
+
+[node name="CloseButton" type="TextureButton" parent="MENU/OptionsMenuLayer"]
+anchors_preset = -1
+anchor_left = 0.89900005
+anchor_top = 0.26500002
+anchor_right = 0.89900005
+anchor_bottom = 0.26500002
+offset_left = 4.5282593
+offset_top = -4.897217
+offset_right = 22.405334
+offset_bottom = 16.33184
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Close" type="Sprite2D" parent="MENU/OptionsMenuLayer"]
+position = Vector2(587.7095, 101.67598)
+scale = Vector2(0.296875, 0.281266)
+texture = ExtResource("20_8luvg")
+
+[node name="Master" type="HSlider" parent="MENU/OptionsMenuLayer/Close"]
+anchors_preset = -1
+anchor_left = -1.016
+anchor_top = 0.45700002
+anchor_right = -1.016
+anchor_bottom = 0.45700002
+offset_left = -157.02808
+offset_top = -53.082767
+offset_right = -0.7828369
+offset_bottom = -8.769936
+rounded = true
+script = ExtResource("21_i1piu")
+metadata/_edit_use_anchors_ = true
+
+[node name="MasterLabel" type="Label" parent="MENU/OptionsMenuLayer/Close/Master"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.387
+anchor_top = 0.5
+anchor_right = -0.387
+anchor_bottom = 0.5
+offset_left = -37.6559
+offset_top = -16.0
+offset_right = -0.655945
+offset_bottom = 3.0
+scale = Vector2(2.29, 2.29)
+theme_override_fonts/font = ExtResource("10_7supi")
+text = "Master:"
+metadata/_edit_use_anchors_ = true
+
+[node name="Music" type="HSlider" parent="MENU/OptionsMenuLayer/Close"]
+anchors_preset = -1
+anchor_left = -1.044
+anchor_top = 1.243
+anchor_right = -1.044
+anchor_bottom = 1.243
+offset_left = -155.23611
+offset_top = -51.74475
+offset_right = -2.9123764
+offset_bottom = -12.649849
+rounded = true
+script = ExtResource("21_i1piu")
+BusName = "Music"
+metadata/_edit_use_anchors_ = true
+
+[node name="MusicLabel" type="Label" parent="MENU/OptionsMenuLayer/Close/Music"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.387
+anchor_top = 0.5
+anchor_right = -0.387
+anchor_bottom = 0.5
+offset_left = -38.464
+offset_top = -18.0
+offset_right = -3.464
+offset_bottom = 0.999992
+scale = Vector2(2.29, 2.29)
+theme_override_fonts/font = ExtResource("10_7supi")
+text = "Music:"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sound Effects" type="HSlider" parent="MENU/OptionsMenuLayer/Close"]
+anchors_preset = -1
+anchor_left = -1.746
+anchor_top = 1.8930001
+anchor_right = -1.746
+anchor_bottom = 1.9620001
+offset_left = -106.544556
+offset_top = -45.675232
+offset_right = 42.568726
+offset_bottom = -13.961746
+rounded = true
+script = ExtResource("21_i1piu")
+BusName = "SFX"
+metadata/_edit_use_anchors_ = true
+
+[node name="SFXLabel" type="Label" parent="MENU/OptionsMenuLayer/Close/Sound Effects"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.411422
+anchor_top = 0.47913
+anchor_right = -0.411422
+anchor_bottom = 0.47913
+offset_left = -42.5723
+offset_top = -18.6661
+offset_right = -5.57226
+offset_bottom = 0.333923
+scale = Vector2(2.29, 2.29)
+theme_override_fonts/font = ExtResource("10_7supi")
+text = "SFX:"
+metadata/_edit_use_anchors_ = true
+
+[node name="Menu2" type="Sprite2D" parent="MENU"]
+position = Vector2(317, 183)
+scale = Vector2(2.985916, 3.1416664)
+texture = ExtResource("30_crbji")
+
+[node name="Options" type="Sprite2D" parent="MENU/Menu2"]
+position = Vector2(0.7654953, -24.878704)
+scale = Vector2(1.1149656, 0.7324068)
+texture = ExtResource("21_3xnty")
+
+[node name="OpenMenu" type="TextureButton" parent="MENU/Menu2/Options"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.48299998
+anchor_right = 0.5
+anchor_bottom = 0.48299998
+offset_left = -44.970142
+offset_top = -29.122559
+offset_right = 0.029834747
+offset_bottom = -0.032183647
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="MENU/Menu2/Options/OpenMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.484
+anchor_top = 0.5
+anchor_right = 0.484
+anchor_bottom = 0.5
+offset_left = -19.78
+offset_top = -8.5
+offset_right = 15.22
+offset_bottom = 10.5
+scale = Vector2(1.145, 1.145)
+theme_override_fonts/font = ExtResource("10_7supi")
+text = "Options"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="animation_finished" from="MC" to="." method="OnPlayerAnimationFinished"]
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/Click" to="." method="OnClickButton"]
 [connection signal="pressed" from="Save/Savebutton" to="." method="SaveGame"]
 [connection signal="pressed" from="ExitButton/Exit" to="." method="OnQuitButtonPressed"]
 [connection signal="pressed" from="DeleteSave/Delete" to="." method="DeleteSave"]
 [connection signal="pressed" from="LvlupButtonColored/TextureButton" to="." method="OnLevelClickButton"]
-[connection signal="pressed" from="Menu/OpenMenu" to="." method="OnMenuOpened"]
-[connection signal="pressed" from="OptionsMenuLayer/Close/CloseButton" to="." method="OnMenuClosed"]
 [connection signal="pressed" from="GoNext/ChangeMapButton" to="." method="OnChangeMapPressed"]
+[connection signal="pressed" from="MENU/OptionsMenuLayer/CloseButton" to="." method="OnMenuClosed"]
+[connection signal="pressed" from="MENU/Menu2/Options/OpenMenu" to="." method="OnOptionsMenuOpened"]

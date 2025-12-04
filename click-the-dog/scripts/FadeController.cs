@@ -21,7 +21,7 @@ public partial class FadeController : CanvasLayer
 		await FadeIn();
 	}
 
-	private async Task FadeOut()
+	public async Task FadeOut()
 	{
 		_fadeRect.MouseFilter = Control.MouseFilterEnum.Stop; // most már blokkolhat
 		var tween = CreateTween();
@@ -29,7 +29,7 @@ public partial class FadeController : CanvasLayer
 		await ToSignal(tween, Tween.SignalName.Finished);
 	}
 
-	private async Task FadeIn()
+	public async Task FadeIn()
 	{
 		var tween = CreateTween();
 		tween.TweenProperty(_fadeRect, "modulate:a", 0f, FadeTime);
