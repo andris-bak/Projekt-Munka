@@ -272,3 +272,8 @@ Ez a mozgásfunkció az **5.5. Karakterpozíció Változtatás** funkcionális k
 | **6.1. Ellenség Védekezés** | **Rövid táv** | Az ellenségek képesek legyenek **levédeni** a támadásainkat (sebzés csökkentés). Ez a harcrendszer mélységéhez szükséges. |
 | **6.2. Karakter Diverzitás** | **Hosszú táv** | Több feloldható karakter, eltérő funkciókkal (pl. gyógyító, tank, DPS). Ez a tartalom bővítését szolgálja. |
 | **6.3. QOL (Quality of Life)** | **Rövid táv** | Kisebb változtatások a legjobb felhasználói élmény érdekében (pl. jobb beállítások kezelése, apróbb kényelmi funkciók). Ezek javítják a visszatérő felhasználók élményét. |
+| **6.4. Történet írása** | **Közép táv** | Egy kis történet folyamán fusson a játék, hogy a felhasználó beleélhesse magát a játéka |
+| **6.5. Skill Rendszer** | **Hosszú táv** | A játékba implementálni, egy olyan rendszert, amivel az összes karakter megkülönböztethető lesz, és egy kisebb "piacot" létrehozni a játékon belül |
+| **6.6. "Nyitott világ"** | **Hosszú táv** | Egy olyan hatalmas (a játék szempontjából) pályát létrehozni, amivel összekötetésbe hozzuk a történettel, illetve mélyebb játék élmény |
+| **6.7. Kiadás** | **Hosszú táv** | A játékot kiadni különböző játék platformokra, mint például: Steam, Itch.io, Epic Games. (Kisebb rajongói tábor, és bevétel) |
+
