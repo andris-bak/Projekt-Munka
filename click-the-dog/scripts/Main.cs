@@ -12,6 +12,7 @@ public partial class Main : Node2D
 	public AudioStreamPlayer hitSound; 
 	public PackedScene[] enemyScenes; 
 	public PackedScene[] shieldScenes; 
+	public PackedScene[] characterScenes;
 	public Node2D currentEnemy; 
 	public Node2D currentShield; 
 	public AnimatedSprite2D maincat; 
@@ -35,6 +36,7 @@ public partial class Main : Node2D
 	[Export] public Sprite2D Water;
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
+	[Export] public AnimatedSprite2D PaladinSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
 	[Export] public Sprite2D GoNext;
 	[Export] public ColorRect PauseOverLay;
@@ -45,7 +47,7 @@ public partial class Main : Node2D
 		GM = GetNode<GameManager>("/root/GameManager");
 		Method = GetNode<Methods>("/root/Methods");
 		Method.BindUI(LevelLabel, LevelPrice, CoinLabel, HPLabel, HPBar, bossLabel,
-		optionsMenuLayer, GoNext, Sign, MENU);  //enemyScenes, currentEnemy
+		optionsMenuLayer, GoNext, Sign, MENU, PaladinSprite);  //enemyScenes, currentEnemy
 		
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
@@ -73,6 +75,11 @@ public partial class Main : Node2D
 		{
 			GD.Load<PackedScene>("res://scenes/shield_bal.tscn"), 
 			GD.Load<PackedScene>("res://scenes/shield_jobb.tscn"), 
+		};
+		
+		characterScenes = new PackedScene[]
+		{
+			GD.Load<PackedScene>("res://scenes/paladin.tscn"),
 		};
 		
 		if (PlayerSprite != null)
@@ -404,6 +411,20 @@ public partial class Main : Node2D
 	public void HeroHire()
 	{
 		Method.Hire();
+		PackedScene newCharacterScene = characterScenes[0];
+		Node2D newCharacter = newCharacterScene.Instantiate<Node2D>();
+		AnimatedSprite2D sprite = newCharacter.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
+		AddChild(newCharacter);
+		if(PlayerSprite.Position == new Vector2(429, 173))
+		{
+			sprite.Position = new Vector2(205, 173);
+			sprite.Play("Idle2");
+		}
+		if(PlayerSprite.Position == new Vector2(205, 173))
+		{
+			sprite.Position = new Vector2(429, 173);
+			sprite.Play("Idle");
+		}
 	}
 	
 	public async void OnChangeMapPressed()
@@ -536,7 +557,7 @@ public partial class Main : Node2D
 		{
 			file.StoreString(jsonString);
 			GD.Print("Játék elmentve! " + SAVE_PATH + " útvonalra");
-   	 	}
+	 	}
 		else
 		{
 			GD.PrintErr("Hiba a mentéskor: Nem lehet megnyitni a fájlt.");

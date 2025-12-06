@@ -16,7 +16,7 @@ public partial class Methods : Node
 	private Sprite2D _goNext;
 	private CanvasLayer _sign;
 	private CanvasLayer _menu;
-	
+	private AnimatedSprite2D _paladinSprite;
 	
 	public override void _Ready()
 	{
@@ -36,7 +36,7 @@ public partial class Methods : Node
 	
 	public void BindUI(Label LevelLabel, Label LevelPrice, Label CoinLabel, 
 	Label HPLabel, ProgressBar HPBar, Label bossLabel, CanvasLayer optionsMenuLayer,
-	Sprite2D GoNext, CanvasLayer Sign, CanvasLayer MENU)
+	Sprite2D GoNext, CanvasLayer Sign, CanvasLayer MENU, AnimatedSprite2D PaladinSprite)
 	{
 		_levelLabel = LevelLabel;
 		_levelPrice = LevelPrice;
@@ -48,6 +48,7 @@ public partial class Methods : Node
 		_goNext = GoNext;
 		_sign = Sign;
 		_menu = MENU;
+		_paladinSprite = PaladinSprite;
 	}
 	
 	public void Quit()
@@ -203,7 +204,7 @@ public partial class Methods : Node
 	
 	public Node2D ChangeEnemy()
 	{
-			// Nincs paraméter, az osztályszintű _enemyScenes-t használjuk
+		// Nincs paraméter, az osztályszintű _enemyScenes-t használjuk
 		GM.currentEnemyIndex = GM.Rnd.Next(0, _enemyScenes.Length); 
 		int bossIndex = _enemyScenes.Length - 1; 
 
@@ -225,12 +226,8 @@ public partial class Methods : Node
 				{
 					_hpBar.MaxValue = GM.HP;
 				}
-					
-				
 				GM.IsBossFight = true;
 				GM.BossTimeLeft = GameManager.BOSS_TIME_LIMIT; 
-				
-				// A "segéd" metódusok hívása (paraméter nélkül)
 				BossTime();
 				Health();
 			}
@@ -239,15 +236,8 @@ public partial class Methods : Node
 		{
 			GM.IsBossFight = false;
 		}
-		
-		// FIGYELEM: Nincs QueueFree()! Azt a Main végzi.
-
 		PackedScene newEnemyScene = _enemyScenes[GM.currentEnemyIndex]; 
 		Node2D newEnemy = newEnemyScene.Instantiate<Node2D>();
-		
-		// FIGYELEM: Nincs AddChild()! Azt a Main végzi.
-		// FIGYELEM: Nincs Position beállítás! Azt a Main végzi.
-		
 		GD.Print($"Új ellenség létrehozva: {newEnemy.Name}");
 		
 		AnimatedSprite2D sprite = newEnemy.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D"); 
@@ -259,8 +249,6 @@ public partial class Methods : Node
 		{
 			GD.PrintErr("HIBA: Nem található AnimatedSprite2D nevű gyermek Node az új ellenségen!");
 		}
-		
-		// Visszaadjuk az új ellenséget a hívónak (Main-nek)
 		return newEnemy;
 	}
 	
@@ -281,7 +269,6 @@ public partial class Methods : Node
 			_sign.Visible = false;
 			GM.Coin -= 150;
 			Coin();
-			Paladin.QeueFree();
 		}
 	}
 }
