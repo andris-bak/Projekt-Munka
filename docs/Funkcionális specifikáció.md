@@ -167,25 +167,8 @@ Az `Options` menü a felhasználói élmény személyre szabására szolgál.
 
 Ez a folyamat írja le a fő interakciót: a játékos kattintása az ellenségre.
 
-  A[Start: Ellenség Élete = 0] --> B[Jutalmazás: Pénz és Pontok Szerzése];
-  
-  B --> C(Automatikus Mentés (Auto-Save) Indítása);
-    
-  C --> D{Volt az Ellenség Boss?};
-    
-  D -- Igen --> E[Zónaváltás: Következő Zóna Betöltése];
-    
-  D -- Nem --> F{Zóna Vége (Boss Következik)?};
-    
-  E --> H[Játék Folytatódik az új zónában];
-    
-  F -- Igen --> G[Boss Ellenség Betöltése];
-    
-  F -- Nem --> I[Random Normál Ellenség Betöltése az Aktuális Zónából];
-    
-  G --> H;
-    
-  I --> H;
+  <img width="1557" height="2167" alt="Untitled diagram-2025-12-07-203154" src="https://github.com/user-attachments/assets/5f0239b4-17c2-475f-ac2a-64aab651994e" />
+
 
 1.  **Trigger:** A játékos a bal egérgombbal kattint az **Ellenség (Vizuális)** elemre.
 2.  **Kattintás Érvényesítés:** A rendszer ellenőrzi, hogy a kattintás a hitboxon belül történt-e.
@@ -200,24 +183,8 @@ Ez a folyamat írja le a fő interakciót: a játékos kattintása az ellenségr
 
 Ez a folyamat felel a zónák és ellenfelek váltásáért.
 
+  <img width="1557" height="2167" alt="Untitled diagram-2025-12-07-203154" src="https://github.com/user-attachments/assets/3621079e-66d3-46f4-8085-45525430cdd6" />
 
- A[Start: Ellenség Élete = 0] --> B[Jutalmazás: Pénz és Pontok Szerzése];
- 
-  B --> D{Volt az Ellenség Boss?};
-    
-  D -- Igen --> E[Zónaváltás: Következő Zóna Betöltése];
-    
-  D -- Nem --> F{Zóna Vége (Boss Következik)?};
-    
-  E --> H[Játék Folytatódik az új zónában];
-    
-  F -- Igen --> G[Boss Ellenség Betöltése];
-    
-  F -- Nem --> I[Random Normál Ellenség Betöltése az Aktuális Zónából];
-    
-  G --> H;
-    
-  I --> H;
     
 1.  **Trigger:** Az Ellenség élete eléri a **nullát vagy az alá csökken**.
 2.  **Jutalmazás:** A játékos pénzt (Gold) és pontokat (Score) kap.
