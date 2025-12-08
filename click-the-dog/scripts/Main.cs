@@ -5,8 +5,7 @@ public partial class Main : Node2D
 {
 	public GameManager GM;
 	public Methods Method;
-	private int CurrentScene;
-
+	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
 	public AudioStreamPlayer hitSound; 
@@ -17,6 +16,7 @@ public partial class Main : Node2D
 	public Node2D currentShield; 
 	public AnimatedSprite2D maincat; 
 	public Player.DamageType tes = Player.DamageType.NONE;
+	public AnimatedSprite2D PaladinSprite;
 
 	// Exportált Node hivatkozások...
 	// [Export] public Label ScoreLabel;
@@ -36,7 +36,6 @@ public partial class Main : Node2D
 	[Export] public Sprite2D Water;
 	[Export] public ProgressBar HPBar;
 	[Export] public AnimatedSprite2D PlayerSprite;
-	[Export] public AnimatedSprite2D PaladinSprite;
 	[Export] public CanvasLayer optionsMenuLayer;
 	[Export] public Sprite2D GoNext;
 	[Export] public ColorRect PauseOverLay;
@@ -52,7 +51,7 @@ public partial class Main : Node2D
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
 		
-		CurrentScene = 1;
+		GM.CurrentScene = 1;
 		
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
@@ -285,6 +284,18 @@ public partial class Main : Node2D
 			}
 		}
 		
+		if(PaladinSprite != null)
+		{
+			if (PaladinSprite.Position == new Vector2(429, 173))
+			{
+				PaladinSprite.Play("attack"); 
+			}
+			else if (PaladinSprite.Position == new Vector2(205, 173))
+			{
+				PaladinSprite.Play("attack2");
+			}
+		}
+		
 		hitSound.Play();
 		
 		if(GM.HP <= 0)
@@ -356,7 +367,7 @@ public partial class Main : Node2D
 		// SaveGame();
 		FadeController fade = GetNode<FadeController>("/root/FadeController");
 		await fade.FadeOut();
-		if(CurrentScene == 2)
+		if(GM.CurrentScene == 2)
 		{
 			Sign.Visible = false;
 		}
@@ -405,25 +416,27 @@ public partial class Main : Node2D
 	public void GoNextVisible()
 	{
 		Method.GetNext();
-		CurrentScene++;
+		GM.CurrentScene++;
 	}
 	
 	public void HeroHire()
 	{
 		Method.Hire();
+		GM.Hired = true;
 		PackedScene newCharacterScene = characterScenes[0];
 		Node2D newCharacter = newCharacterScene.Instantiate<Node2D>();
-		AnimatedSprite2D sprite = newCharacter.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
+		PaladinSprite = newCharacter.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
 		AddChild(newCharacter);
+		
 		if(PlayerSprite.Position == new Vector2(429, 173))
 		{
-			sprite.Position = new Vector2(205, 173);
-			sprite.Play("Idle2");
+			PaladinSprite.Position = new Vector2(205, 173);
+			PaladinSprite.Play("Idle2");
 		}
 		if(PlayerSprite.Position == new Vector2(205, 173))
 		{
-			sprite.Position = new Vector2(429, 173);
-			sprite.Play("Idle");
+			PaladinSprite.Position = new Vector2(429, 173);
+			PaladinSprite.Play("Idle");
 		}
 	}
 	
@@ -547,7 +560,8 @@ public partial class Main : Node2D
 			{"MaxHP", GM.MaxHP},
 			{"Counter", GM.Counter},
 			{"PlayerLevel", GM.PlayerData.Level},
-			{"PlayerDamage", GM.PlayerData.Damage}
+			{"PlayerDamage", GM.PlayerData.Damage},
+			{"Pálya", GM.CurrentScene}
 		};
 		
 		string jsonString = Json.Stringify(dataDict);
@@ -656,5 +670,21 @@ public partial class Main : Node2D
 			PlayerSprite.Position = new Vector2(429,173);
 			PlayerSprite.Play("Idle");
 		}
+		
+		// Mozgás a Paladinnak 
+		if(GM.Hired == true)
+		{
+			if (Input.IsActionJustPressed("switchLeft"))
+			{
+				PaladinSprite.Position = new Vector2(205,173);
+				PaladinSprite.Play("Idle2");
+			}
+			if (Input.IsActionJustPressed("switchRight"))
+			{
+				PaladinSprite.Position = new Vector2(429,173);
+				PaladinSprite.Play("Idle");
+			}
+		}
+	
 	}
 }

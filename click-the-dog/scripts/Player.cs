@@ -5,6 +5,8 @@ public partial class Player
 {
 	public int Level {get;  set;}
 	public int Damage {get;  set;}
+	public int PalaLevel {get; set;}
+	public int PalaDamage {get;set;}
 	
 	public enum DamageType
 	{
@@ -22,6 +24,8 @@ public partial class Player
 		Level = 1;
 		Damage = 1;
 		PlayerDamageType = DamageType.NONE;
+		PalaLevel = 1;
+		PalaDamage = 1;
 	}
 	
 	public void LevelUp()

@@ -174,11 +174,10 @@ public partial class Methods : Node
 	{
 		if (GM.Coin >= GM.LevelPrice)
 		{
-			if(GM.Level == 12)
+			if(GM.Level == 24)
 			{
 				GD.Print("Elérted a maximális szintet te termesz");
 			}
-			
 			else
 			{
 				// GM.MinHP és GM.MaxHP növelése
@@ -189,15 +188,17 @@ public partial class Methods : Node
 				GM.Coin = GM.Coin - GM.LevelPrice;
 				GM.LevelPrice = GM.LevelPrice * 2;
 				GM.Counter++;
+				GM.PlayerData.PalaLevel++;
+				GM.PlayerData.PalaDamage *= 2;
 				
 				// GM.Rnd használata
 				GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
 				_hpBar.MaxValue = GM.HP;
-
-				Coin();//UpdateCoinLabel();
-				LevelUp();//UpdateLevel();
-				LevelPrice();//UpdateLevelPrice();
-				Health();//UpdateHP();
+				
+				Coin();
+				LevelUp();
+				LevelPrice();
+				Health();
 			}
 		}
 	}

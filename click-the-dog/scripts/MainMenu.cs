@@ -5,6 +5,9 @@ public partial class MainMenu : Node2D
 {
 	private const string SAVE_PATH = "user://clicker_save.json"; 
 	private AudioStreamPlayer zene; 
+	public GameManager GM;
+
+	
 	
 	[Export] public TextureButton loadButton; 
 	
@@ -32,9 +35,16 @@ public partial class MainMenu : Node2D
 	private void OnLoadGameButtonPressed()
 	{
 		GD.Print("Mentett játék betöltése...");
-
-		var mainScene = GD.Load<PackedScene>("res://scenes/za_warudo.tscn");
-
+		var mainScene = GD.Load<PackedScene>("res://scenes/za_warudo_2.tscn");
+		//if(GM.CurrentScene == 1)
+		//{
+		//	mainScene = GD.Load<PackedScene>("res://scenes/za_warudo.tscn");
+		//	GetTree().ChangeSceneToPacked(mainScene);
+		//}
+		//if(GM.CurrentScene == 2)
+		//{
+		//	mainScene = GD.Load<PackedScene>("res://scenes/za_warudo_2.tscn");	
+		//}
 		GetTree().ChangeSceneToPacked(mainScene);
 	}
 	
