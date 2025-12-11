@@ -1,10 +1,15 @@
 #  Funkcionális specifikáció
 
 **Projekt neve:** Click the Dog (CTD)
+
 **Verziószám:** 1.0
+
 **Dátum:** 2025.10.15.
+
 **Készítette:** M.A.K.E Kft
+
 **Tagok:** Venyige Márk, Bak András Mátyás, Kovács Krisztián, Jabur Emil
+
 
 ---
 
