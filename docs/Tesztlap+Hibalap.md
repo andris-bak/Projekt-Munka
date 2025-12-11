@@ -57,6 +57,8 @@ A tesztelés elsősorban **Black-Box (Fekete dobozos)** és **Ad-Hoc (Alkalmi)**
 | [B025](#b025) | A saját kurzorok nincsenek rendesen beállítva | Mikor rávisszük, az ellenségre a kurzort megváltozik | Ezek a kurzorok nem akartak rendesen betölteni | Kicsi | Javítva | Egy-két változtatás a szkriptben (Metódus helyes beillesztése) |
 | [B026](#b026) | Ellenállás nem működik rendesen | A játéba bekerültek az elementek amik növelik vagy csökentik a sebzést | ezek nem akartak mükködni | Kicsi | Javítva | logikát kellett átgondolni |
 | [B027](#b027) | Ellenállás logika miatt nem működik a shield | Az element logika miatt nem akart a shild müködni és nem védet le semmit | nem akart levédeni semmit a shild | Kicsi | Javítva | logikát kellett átgondolni |
+| [B028](#b028) | PauseMenu nem működik rendsen, jó eséllyel a ColorRect a hibás | a játékban már lesz pause menü de nem akar müködni | a Colorrect a hibás | Kicsi | Javítva | logikát kellett átgondolni |
+| [B029](#b029) | Leállítjuk az inputot, rossz logikával | nem akar az input müködni | nem tudjuk mi lehet a baj | Kicsi | **Nincs Javítva** | dolgozás alatt |
 
 ---
 
@@ -142,6 +144,14 @@ Problémánk volt az elementel mert amit ki gondoltunk logikát nem akart mükö
 
 ### B027
 A pajzsnak kicsit bekavart az element logikája és ez álltal nem akart egyáltalán levédeni semmit, át kellet irni igy a pajzsnak a metodusát de most már müködik.
+
+### B028
+Nem akart a pause menü müködni ugy kb semmi de szerencsére csak a Colorrent volt a baj.
+
+### B029
+nem tudjuk mi lehet baj nem akarnak müködni az inputok
+
+
 ---
 
 ## 4.  Összefoglalás és Következtetések
@@ -168,4 +178,5 @@ A projekt tesztelése és hibajavítása során a csapat számos értékes tapas
 **Javaslat a jövőre:** A következő projekt során a csapatnak érdemes lenne a fejlesztés korai szakaszában a UI és hitbox beállításokat külön, dedikált tesztekkel ellenőrizni, mielőtt a mélyebb logikai implementációba belekezdenek.
 
 ---
+
 
