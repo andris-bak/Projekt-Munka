@@ -23,6 +23,107 @@ A tesztelés elsősorban **Black-Box (Fekete dobozos)** és **Ad-Hoc (Alkalmi)**
     * **Kicsi:** Esztétikai vagy apróbb, kényelmi hiba.
 
 ---
+### Venyige Márk (TM): Randomizált Teszt Esetek 
+
+| ID | Teszt eset leírása | Hivatkozás (Bug) |
+| :--- | :--- | :--- |
+| TM02 | HP csík vizuális csökkenése. | B002 |
+| TM03 | Karakter szintjének tényleges növekedése a gombnyomás után. | B004 |
+| TM05 | Karakter mozgása a kijelölt (pontos) jobb oldali koordinátára. | B011 |
+| TM11 | Elementális sebzés eltérő ellenségeken (Element logikai teszt). | B026 |
+| TM13 | A regeneráció csak addig működik, amíg a HP nem éri el a maximumot. | B021 |
+| TM17 | Korlátozások tesztelése: Szint nem csökkenhet. | B008 |
+| TM21 | Sebzés tesztelése, amikor a pajzs aktív. | B018 |
+| TM27 | Pause Menü megnyitása (szünet) (`ColorRect` nem blokkolja a képet). | B028 |
+| TM29 | Leállítjuk az inputot, rossz logikával. | B029 |
+| TM32 | Új, nagyobb HP-val rendelkező ellenség betöltése. | B003 |
+| TM35 | Játék teljes bezárása és újraindítása. | B006 |
+| TM39 | HP csík vizuális megjelenése az új ellenségnél (maximális HP). | B003 |
+| TM42 | HP csík tesztelése a minimális értékig (0). | B002 |
+| TM45 | Pajzs pontos elhelyezkedése az ellenség bal oldalán. | B017 |
+| TM49 | Elementális sebzés animációja (ha van). | B026 |
+| TM52 | Gyors mozgás jobbra-balra tesztelése. | B010 |
+| TM59 | Öt random ellenség betöltésének tesztelése. | B007 |
+| TM67 | Pénz növekedése egy ellenség legyőzése után. | B005 |
+| TM72 | HP regeneráció megállítása a kattintások idejére. | B020 |
+| TM79 | Kilépés a játékból az Opciók menüből. | B014 |
+
+### Bak András Mátyás (TA): Teszt Esetek 
+
+| ID | Teszt eset leírása | Hivatkozás (Bug) |
+| :--- | :--- | :--- |
+| TA01 | Ellenállás logika miatt nem működik a shield. | B027 |
+| TA06 | Törlés gomb (B013) működésének ellenőrzése, hogy ne mentse el az adatot. | B013 |
+| TA09 | Szint növelése, mentés, majd betöltés ellenőrzése. | B004 |
+| TA14 | Karakter mozgása a kijelölt (pontos) középső koordinátára. | B011 |
+| TA16 | Random ellenség betöltésének ellenőrzése a Boss után. | B015 |
+| TA18 | Főellenség betöltése az adott szint elérése után. | B015 |
+| TA24 | Opciók menü bezárása. | B024 |
+| TA25 | A regeneráció ellenőrzése, hogy ne haladja meg a maximum HP-t. | B021 |
+| TA36 | Animáció: Mozgás a bal oldali pozícióra (megfelelő irány). | B012 |
+| TA37 | Térkép/Pálya betöltésének ellenőrzése (helyes elhelyezkedés). | B009 |
+| TA43 | Karakter mozgása a jobb oldali pozícióra ('E' lenyomásával). | B010 |
+| TA48 | Mentés törlése a dedikált gombbal. | B013 |
+| TA51 | Szint növelő gomb megnyomása. | B004 |
+| TA55 | Ellenség legyőzésekor a megfelelő metódus hívódik meg. | B005 |
+| TA60 | Boss legyőzése utáni pénzjutalom ellenőrzése. | B005 |
+| TA62 | Kurzorkép visszaállítása, amikor az ellenség területe elhagyásra kerül. | B025 |
+| TA63 | Nagy sebzés bevitel, majd HP regeneráció ellenőrzése. | B021 |
+| TA69 | Mentés törlése utáni újbóli játék indítás (alapértelmezett állapot). | B013 |
+| TA71 | Játék elindítása mentés után (adatok betöltődnek). | B014 |
+| TA77 | HP csík vizuális csökkenése az új, nagyobb HP-val rendelkező ellenségnél. | B003 |
+
+### Kovács Krisztián (TK): Teszt Esetek 
+
+| ID | Teszt eset leírása | Hivatkozás (Bug) |
+| :--- | :--- | :--- |
+| TK07 | Karakter mozgása a bal oldali pozícióra ('Q' lenyomásával). | B010 |
+| TK12 | Nagy sebzés bevitel, majd HP regeneráció ellenőrzése. | B021 |
+| TK15 | Pajzs pontos elhelyezkedése az ellenség bal oldalán. | B017 |
+| TK19 | Menü bezárása gombbal. | B019 |
+| TK20 | Ellenállások megjelenése a játékos számára. | B022 |
+| TK26 | Opciók menü megnyitása (helyes elhelyezkedés a képernyőn). | B024 |
+| TK33 | Karakter mozgása a kijelölt (pontos) középső koordinátára. | B011 |
+| TK38 | Játék állapotának mentése funkcióval. | B014 |
+| TK40 | UI elemek (HP csík, pénz, szint) elhelyezkedése eltérő felbontásnál. | B024 |
+| TK46 | Kurzorkép változása, amikor az ellenség fölé kerül. | B025 |
+| TK50 | Több ellenség legyőzése utáni pénzösszeg ellenőrzése. | B005 |
+| TK54 | Logikai teszt: Megfelelő korlátozások beállítása. | B008 |
+| TK57 | Animáció: Mozgás a jobb oldali pozícióra (megfelelő irány). | B012 |
+| TK61 | Kilépéskor mentés megtagadása (nem menti el automatikusan). | B014 |
+| TK64 | Győzelem után az új ellenség teljes HP csíkkal indul. | B003 |
+| TK68 | Menügomb megnyomása (Menü megjelenése). | B019 |
+| TK70 | Sebzés tesztelése, amikor a pajzs inaktív. | B018 |
+| TK74 | Kattintás tesztelése lassú ütemben. | B001 |
+| TK78 | Kattintás az ellenségre. | B001 |
+| TK80 | Hosszú távú teszt: 5 perc játék utáni HP regeneráció ellenőrzése. | B020 |
+
+### Jabur Emil (TE): Teszt Esetek 
+
+| ID | Teszt eset leírása | Hivatkozás (Bug) |
+| :--- | :--- | :--- |
+| TE04 | Kilépés a játékból menügombbal. | B019 |
+| TE08 | HP csík vizuális csökkenése. | B002 |
+| TE10 | Korlátozások tesztelése: HP nem mehet 0 alá. | B008 |
+| TE18 | Karakter mozgása a kijelölt (pontos) bal oldali koordinátára. | B011 |
+| TE20 | Kilépés a játékból az Opciók menüből. | B014 |
+| TE22 | Kritikus hiba ellenőrzése: A játék nem omlik össze random betöltéskor. | B006 |
+| TE23 | Karakter mozgása a kijelölt (pontos) bal oldali koordinátára. | B011 |
+| TE28 | Pajzs megjelenése a védekezési ponton. | B016 |
+| TE31 | Kattintás tesztelése gyors egymásutánban. | B001 |
+| TE34 | Sebzés értékének csökkenése az ellenség HP-ján. | B001 |
+| TE41 | Az új ellenségeket nem tudtuk betölteni. | B007 |
+| TE44 | Boss legyőzése utáni pénzjutalom ellenőrzése. | B005 |
+| TE47 | Mentett adatok betöltése a főmenüből. | B014 |
+| TE53 | Ellenállás nem működik rendesen. | B026 |
+| TE56 | Játék indítása (HP csík teljes feltöltéssel indul). | B023 |
+| TE65 | Karakter mozgása a bal oldali pozícióra ('Q' lenyomásával). | B010 |
+| TE73 | Pajzs és Elementális sebzés kombinált tesztelése. | B027 |
+| TE75 | HP csík megjelenítése a Főellenség betöltésekor (teljes). | B023 |
+| TE76 | Pajzs pontos elhelyezkedése az ellenség jobb oldalán. | B017 |
+| TE78 | Kilépéskor mentés megtagadása (nem menti el automatikusan). | B014 |
+
+---
 
 ## 2.  Hibalista
 
@@ -178,5 +279,6 @@ A projekt tesztelése és hibajavítása során a csapat számos értékes tapas
 **Javaslat a jövőre:** A következő projekt során a csapatnak érdemes lenne a fejlesztés korai szakaszában a UI és hitbox beállításokat külön, dedikált tesztekkel ellenőrizni, mielőtt a mélyebb logikai implementációba belekezdenek.
 
 ---
+
 
 
