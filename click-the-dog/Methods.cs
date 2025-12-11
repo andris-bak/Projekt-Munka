@@ -17,7 +17,17 @@ public partial class Methods : Node
 	private CanvasLayer _sign;
 	private CanvasLayer _menu;
 	private AnimatedSprite2D _paladinSprite;
-	
+
+	public static string BuildLevelPriceText(int level, int levelPrice)
+	{
+		if (level == 12)
+		{
+			return "Elérted a maximális szintet!";
+		}
+
+		return $"Price: {levelPrice}";
+	}
+
 	public override void _Ready()
 	{
 		// Autoloadként ez létrejön még a fő jelenet előtt:

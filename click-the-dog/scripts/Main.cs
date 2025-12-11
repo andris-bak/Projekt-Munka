@@ -63,7 +63,7 @@ public partial class Main : Node2D
 		UpdateLevel();
 		UpdateLevelPrice();
 		UpdateTimerLabel();
-
+		
 		if(bgmPlayer != null)
 		{
 			bgmPlayer.Play();
@@ -85,6 +85,12 @@ public partial class Main : Node2D
 		{
  		 	PlayerSprite.Position = new Vector2(429, 173); 
 		 	PlayerSprite.Play("Idle");
+			PlayerSprite.AnimationFinished += OnPlayerAnimationFinished;
+		}
+		
+		if (PaladinSprite != null)
+		{
+			PlayerSprite.AnimationFinished += OnPlayerAnimationFinished;
 		}
 		
 		ChangeEnemyScene();
@@ -116,16 +122,12 @@ public partial class Main : Node2D
 			if(GM.regenTimer > 1.0f)
 			{
 				int regenMennyiseg = Mathf.FloorToInt(GM.regenTimer);
-				
 				// Kivonjuk a hozzáadott értéket az akkumulátorból
 				GM.regenTimer -= regenMennyiseg;
-				
 				// Hozzáadjuk a HP-hoz
 				GM.HP += regenMennyiseg;
-
 				// FONTOS: Soha ne engedjük MaxHp fölé menni
 				GM.HP = Mathf.Min(GM.HP, GM.MaxHP);
-
 				UpdateHP();
 			}
 		}
@@ -254,14 +256,11 @@ public partial class Main : Node2D
 			GD.Print($"Fire type  működik");
 			actualDamage *= 5;
 		}
-		
 		if(tes == Player.DamageType.WATER && GM.EnemyData.EnemyResistance == Enemy.DefenseType.FIRE)
 		{
 			GD.Print($"Water type  működik");
 			actualDamage *= 5;
 		}
-		
-		
 		else
 		{
 			//actualDamage = GM.PlayerData.Damage;
@@ -276,7 +275,7 @@ public partial class Main : Node2D
 		{
 			if (PlayerSprite.Position == new Vector2(429, 173))
 			{
-				PlayerSprite.Play("attack"); 
+				PlayerSprite.Play("attack");
 			}
 			else if (PlayerSprite.Position == new Vector2(205, 173))
 			{
@@ -543,6 +542,18 @@ public partial class Main : Node2D
 				PlayerSprite.Play("Idle2");
 			}
 		}
+		
+		if (PaladinSprite != null)
+		{
+			if (PaladinSprite.Position == new Vector2(429, 173) && PaladinSprite.Animation != "Idle")
+			{
+				PaladinSprite.Play("Idle"); 
+			}
+			else if (PaladinSprite.Position == new Vector2(205, 173) && PaladinSprite.Animation != "Idle2")
+			{
+				PaladinSprite.Play("Idle2");
+			}
+		}
 	}
 
 	// --- Mentés / Betöltés Metódusok (GM. adatok kezelése) ---
@@ -676,13 +687,13 @@ public partial class Main : Node2D
 		{
 			if (Input.IsActionJustPressed("switchLeft"))
 			{
-				PaladinSprite.Position = new Vector2(205,173);
-				PaladinSprite.Play("Idle2");
+				PaladinSprite.Position = new Vector2(429,173);
+				PaladinSprite.Play("Idle");
 			}
 			if (Input.IsActionJustPressed("switchRight"))
 			{
-				PaladinSprite.Position = new Vector2(429,173);
-				PaladinSprite.Play("Idle");
+				PaladinSprite.Position = new Vector2(205,173);
+				PaladinSprite.Play("Idle2");
 			}
 		}
 	

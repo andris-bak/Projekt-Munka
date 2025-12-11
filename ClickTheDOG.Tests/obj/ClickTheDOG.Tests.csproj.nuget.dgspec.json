@@ -1,0 +1,163 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\ClickTheDOG.Tests\\ClickTheDOG.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\click-the-dog\\Click the DOG.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\click-the-dog\\Click the DOG.csproj",
+        "projectName": "Click the DOG",
+        "projectPath": "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\click-the-dog\\Click the DOG.csproj",
+        "packagesPath": "C:\\Users\\Felhasznalo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\click-the-dog\\.godot\\mono\\temp\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Felhasznalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Godot.SourceGenerators": {
+              "target": "Package",
+              "version": "[4.5.1, )",
+              "autoReferenced": true
+            },
+            "GodotSharp": {
+              "target": "Package",
+              "version": "[4.5.1, )",
+              "autoReferenced": true
+            },
+            "GodotSharpEditor": {
+              "target": "Package",
+              "version": "[4.5.1, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\ClickTheDOG.Tests\\ClickTheDOG.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\ClickTheDOG.Tests\\ClickTheDOG.Tests.csproj",
+        "projectName": "ClickTheDOG.Tests",
+        "projectPath": "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\ClickTheDOG.Tests\\ClickTheDOG.Tests.csproj",
+        "packagesPath": "C:\\Users\\Felhasznalo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\ClickTheDOG.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Felhasznalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\click-the-dog\\Click the DOG.csproj": {
+                "projectPath": "C:\\Users\\Felhasznalo\\Documents\\_fasz\\Projekt-Munka\\click-the-dog\\Click the DOG.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[*, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[*, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[*, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
