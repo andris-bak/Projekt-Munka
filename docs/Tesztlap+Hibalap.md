@@ -23,6 +23,7 @@ A tesztelés elsősorban **Black-Box (Fekete dobozos)** és **Ad-Hoc (Alkalmi)**
     * **Kicsi:** Esztétikai vagy apróbb, kényelmi hiba.
 
 ---
+###  Manuális tesztelések:
 ###  Venyige Márk (TM):  Teszt Esetek 
 
 | ID | Teszt eset leírása | Hivatkozás (Bug) |
@@ -123,6 +124,56 @@ A tesztelés elsősorban **Black-Box (Fekete dobozos)** és **Ad-Hoc (Alkalmi)**
 | TE19 | Ellenség legyőzésekor a megfelelő metódus hívódik meg. | B005 |
 | TE20 | UI elemek (HP csík, pénz, szint) elhelyezkedése eltérő felbontásnál. | B024 |
 
+---
+
+##  Unit tesztelés (xUnit + Godot C#)
+
+A manuális tesztelés mellett a projekt végére bevezettünk egy kisebb, célzott **automatizált unit tesztelési réteget** is, amely segít bizonyos logikai hibákat gyorsabban észrevenni, illetve stabilabbá tenni a játék hosszú távú fejlesztését.
+
+---
+
+### A unit tesztelés célja
+
+A manuális tesztjén belül sokszor ismétlődő logikai részeket (pl. szintnövelés, árképzés, UI-szöveg megjelenítés) szerettük volna:
+
+- kiszervezni külön, motorfüggetlen metódusokba,
+- automatikusan tesztelni xUnit segítségével,
+- biztosítani, hogy későbbi módosítások ne törjék el a meglévő működést,
+- csökkenteni a manuális tesztelések számára időrabló, ismétlődő lépéseket.
+
+A tesztelés ehhez egy külön **.NET 8 alapú xUnit projektet** használt (`ClickTheDOG.Tests`).
+
+---
+
+### A megoldás felépítése
+
+#### 1. Külön xUnit projekt létrehozása
+A tesztelési projekt:
+
+- külön mappában található (`ClickTheDOG.Tests`),
+- hivatkozik a játék fő projektjére (`Click the DOG.csproj`),
+- nem fut Godot alatt, csak a tiszta C# logikát teszteli.
+
+Ezért bizonyos metódusokat úgy alakítottunk át, hogy azok Godot-tól függetlenül is hívhatók legyenek.
+
+---
+
+###  Példa: Szintnövelési árképzés tesztelése
+
+A szintnövelés árát és az ehhez tartozó szöveges megjelenítést a következő kódrészlet állítja elő:
+```csharp
+public static class Methods
+{
+    public static string BuildLevelPriceText(int level, int levelPrice)
+    {
+        if (level == 12)
+            return "Elérted a maximális szintet!";
+
+        return $"Price: {levelPrice}";
+    }
+}
+
+```
 ---
 
 ## 2.  Hibalista
@@ -279,7 +330,6 @@ A projekt tesztelése és hibajavítása során a csapat számos értékes tapas
 **Javaslat a jövőre:** A következő projekt során a csapatnak érdemes lenne a fejlesztés korai szakaszában a UI és hitbox beállításokat külön, dedikált tesztekkel ellenőrizni, mielőtt a mélyebb logikai implementációba belekezdenek.
 
 ---
-
 
 
 
