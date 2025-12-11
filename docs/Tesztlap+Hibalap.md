@@ -55,6 +55,8 @@ A tesztelés elsősorban **Black-Box (Fekete dobozos)** és **Ad-Hoc (Alkalmi)**
 | [B023](#b023) | Amikor elindul a játék a HP csík nincs teljesen feltöltve | Egyszerűen csak simán betöltené a HP csíkot | A HP csík csak egy darabig töltődik fel (pl.: a feléig) | Közepes | Javítva | `ProgressBar`-ban be kellett állítani mást (Logikai rendezés) |
 | [B024](#b024) | Az opciók menü nem helyezkedik el rendesen | Ahogy megnyitjuk az opciók menüt ott lesz látható, ahova tettük | Teljesen máshova kerül az egész | Kicsi | Javítva | Az Anchor Point-ot kellett jó helyre tenni |
 | [B025](#b025) | A saját kurzorok nincsenek rendesen beállítva | Mikor rávisszük, az ellenségre a kurzort megváltozik | Ezek a kurzorok nem akartak rendesen betölteni | Kicsi | Javítva | Egy-két változtatás a szkriptben (Metódus helyes beillesztése) |
+| [B026](#b026) | Ellenállás nem működik rendesen | A játéba bekerültek az elementek amik növelik vagy csökentik a sebzést | ezek nem akartak mükködni | Kicsi | Javítva | logikát kellett átgondolni |
+| [B027](#b027) | Ellenállás logika miatt nem működik a shield | Az element logika miatt nem akart a shild müködni és nem védet le semmit | nem akart levédeni semmit a shild | Kicsi | Javítva | logikát kellett átgondolni |
 
 ---
 
@@ -135,6 +137,11 @@ Szerencsére csak koordinációs probléma volt, rossz helyre illesztettük be a
 ### B025
 Logikai hibába ütköztünk csak szerencsére, rossz helyre volt beillesztve a metódus, ami ezzel foglalkozik, viszont egy kis gondolkodás után sikeresen meg találtuk a helyét és működik is !
 
+### B026
+Problémánk volt az elementel mert amit ki gondoltunk logikát nem akart müködni, át kellet rni 1 2 dolgot a metodúsban és más logikát kellett kitalálni de már szerencsére müködik.
+
+### B027
+A pajzsnak kicsit bekavart az element logikája és ez álltal nem akart egyáltalán levédeni semmit, át kellet irni igy a pajzsnak a metodusát de most már müködik.
 ---
 
 ## 4.  Összefoglalás és Következtetések
@@ -161,3 +168,4 @@ A projekt tesztelése és hibajavítása során a csapat számos értékes tapas
 **Javaslat a jövőre:** A következő projekt során a csapatnak érdemes lenne a fejlesztés korai szakaszában a UI és hitbox beállításokat külön, dedikált tesztekkel ellenőrizni, mielőtt a mélyebb logikai implementációba belekezdenek.
 
 ---
+
