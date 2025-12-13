@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b8vj2ctyf7rey"]
+[gd_scene load_steps=20 format=3 uid="uid://b8vj2ctyf7rey"]
 
 [ext_resource type="Texture2D" uid="uid://ciqqehf5c4bjk" path="res://characters/paladin-attack-Sheet-left.png" id="1_fm4g8"]
 [ext_resource type="Texture2D" uid="uid://b1gue6hdflqsm" path="res://characters/paladin-attack-Sheet-right.png" id="2_q4ql4"]
@@ -37,6 +37,10 @@ region = Rect2(64, 0, 64, 64)
 atlas = ExtResource("1_fm4g8")
 region = Rect2(0, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lirki"]
+atlas = ExtResource("1_fm4g8")
+region = Rect2(192, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_fnu1a"]
 atlas = ExtResource("2_q4ql4")
 region = Rect2(0, 0, 64, 64)
@@ -52,6 +56,10 @@ region = Rect2(128, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_utlf5"]
 atlas = ExtResource("2_q4ql4")
 region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fn61"]
+atlas = ExtResource("2_q4ql4")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_37aur"]
 animations = [{
@@ -95,10 +103,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pyt0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lirki")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 12.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -112,16 +123,21 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_utlf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fn61")
 }],
 "loop": false,
 "name": &"attack2",
-"speed": 12.0
+"speed": 15.0
 }]
 
 [node name="Paladin" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(266, 156.00002)
-scale = Vector2(1.921875, 1.921875)
+scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_37aur")
-animation = &"Idle2"
+animation = &"attack"
+frame = 4
+frame_progress = 1.0
