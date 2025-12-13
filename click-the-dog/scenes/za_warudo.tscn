@@ -584,8 +584,48 @@ position = Vector2(317, 183)
 scale = Vector2(2.985916, 3.1416664)
 texture = ExtResource("30_crbji")
 
+[node name="Resume" type="Sprite2D" parent="MENU/Menu2"]
+position = Vector2(0.66981304, -38.832897)
+scale = Vector2(1.0993788, 0.71104896)
+texture = ExtResource("21_3xnty")
+
+[node name="ResumeLabel" type="Label" parent="MENU/Menu2/Resume"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.49643
+offset_top = -26.638947
+offset_right = -11.324814
+offset_bottom = -7.6389465
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.29, 1.29)
+theme_override_fonts/font = ExtResource("10_7supi")
+text = "Resume"
+
+[node name="Exit" type="Sprite2D" parent="MENU/Menu2"]
+position = Vector2(0.0837307, 27.340492)
+scale = Vector2(1.1175656, 0.76616)
+texture = ExtResource("21_3xnty")
+
+[node name="ExitLabel" type="Label" parent="MENU/Menu2/Exit"]
+anchors_preset = -1
+anchor_left = 0.51000005
+anchor_top = 0.483
+anchor_right = 0.51000005
+anchor_bottom = 0.483
+offset_left = -37.91928
+offset_top = -26.494354
+offset_right = 2.080717
+offset_bottom = -3.4943542
+scale = Vector2(1.615, 1.615)
+theme_override_fonts/font = ExtResource("10_7supi")
+text = "Exit"
+
 [node name="Options" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(0.7654953, -24.878704)
+position = Vector2(0.33490533, -7.9575615)
 scale = Vector2(1.1149656, 0.7324068)
 texture = ExtResource("21_3xnty")
 
@@ -604,13 +644,13 @@ metadata/_edit_use_anchors_ = true
 [node name="Label" type="Label" parent="MENU/Menu2/Options/OpenMenu"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.484
-anchor_top = 0.5
-anchor_right = 0.484
-anchor_bottom = 0.5
-offset_left = -19.78
+anchor_left = 0.5232589
+anchor_top = 0.48146525
+anchor_right = 0.5232589
+anchor_bottom = 0.48146525
+offset_left = -20.5
 offset_top = -8.5
-offset_right = 15.22
+offset_right = 14.5
 offset_bottom = 10.5
 scale = Vector2(1.145, 1.145)
 theme_override_fonts/font = ExtResource("10_7supi")
@@ -625,5 +665,3 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="DeleteSave/Delete" to="." method="DeleteSave"]
 [connection signal="pressed" from="LvlupButtonColored/TextureButton" to="." method="OnLevelClickButton"]
 [connection signal="pressed" from="GoNext/ChangeMapButton" to="." method="OnChangeMapPressed"]
-[connection signal="pressed" from="MENU/OptionsMenuLayer/CloseButton" to="." method="OnMenuClosed"]
-[connection signal="pressed" from="MENU/Menu2/Options/OpenMenu" to="." method="OnOptionsMenuOpened"]
