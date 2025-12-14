@@ -50,9 +50,9 @@ public partial class MainMenu : Node2D
 	
 	public async void OnStartButtonPressed()
 	{
-		FadeController fade = GetNode<FadeController>("/root/FadeController");
-		await fade.FadeToScene("res://scenes/za_warudo.tscn");
-		// GetTree().ChangeSceneToFile("res://scenes/za_warudo.tscn");
+		//FadeController fade = GetNode<FadeController>("/root/FadeController");
+		//await fade.FadeToScene("res://scenes/za_warudo.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/za_warudo.tscn");
 	}
 
 	public async void OnQuitButtonPressed()
