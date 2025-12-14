@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
 [ext_resource type="Texture2D" uid="uid://hl5r3nubg80w" path="res://assets/Elements/fire_icon_grey.png" id="3_0js5b"]
-[ext_resource type="AudioStream" uid="uid://cb77mou88xnmk" path="res://ost/ChillMenu.wav" id="3_qg8qh"]
+[ext_resource type="AudioStream" uid="uid://c8het8swb6qft" path="res://sfx/cicahang.wav" id="8_jtjaw"]
 [ext_resource type="Texture2D" uid="uid://b2h2qsk78oq16" path="res://characters/Paladin.png" id="4_f6s5u"]
 [ext_resource type="Texture2D" uid="uid://bk7mpgoaf53y6" path="res://assets/Elements/water_icon_grey.png" id="5_510jb"]
 [ext_resource type="Texture2D" uid="uid://b0a3fiooljiv4" path="res://characters/maincharacter_left-Sheet.png" id="5_pyre6"]
-[ext_resource type="AudioStream" uid="uid://cqjb2x6w8b0f8" path="res://fx/mixkit-game-ball-tap-2073.wav" id="5_qg8qh"]
+[ext_resource type="AudioStream" uid="uid://cqjb2x6w8b0f8" path="res://sfx/mixkit-game-ball-tap-2073.wav" id="5_qg8qh"]
 [ext_resource type="Texture2D" uid="uid://b6a0pygj8875x" path="res://characters/maincharacter_idle_right-Sheet.png" id="6_24og2"]
 [ext_resource type="Script" uid="uid://bg0lvh8ja5vuh" path="res://scripts/Animation.cs" id="6_aluu1"]
 [ext_resource type="Texture2D" uid="uid://gs2fejwgx6xg" path="res://characters/maincharacter_idle_left-Sheet.png" id="6_nxls5"]
@@ -15,8 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dtr1pbyebiyr2" path="res://assets/Elements/air_icon_grey.png" id="7_pvrf0"]
 [ext_resource type="Script" uid="uid://b80xh4x1824fe" path="res://scripts/Paladin.cs" id="7_ra36h"]
 [ext_resource type="Texture2D" uid="uid://cusiw7yhn1kcw" path="res://assets/Button/save.png" id="8_eynld"]
-[ext_resource type="AudioStream" uid="uid://c8het8swb6qft" path="res://fx/cicahang.wav" id="8_jtjaw"]
-[ext_resource type="Texture2D" uid="uid://kp4mtwqvcw8k" path="res://assets/Elements/grass_icon_grey.png" id="9_oa5er"]
 [ext_resource type="Texture2D" uid="uid://c5qk8qqqsdtei" path="res://assets/Button/save_button.png" id="9_ti7n2"]
 [ext_resource type="FontFile" uid="uid://bnccpqkw6ljbi" path="res://fonts/Silver.ttf" id="10_7supi"]
 [ext_resource type="Texture2D" uid="uid://btvgfikj1tpy2" path="res://assets/Egyéb/dabloon.png" id="10_nxjxa"]
@@ -73,6 +71,7 @@ atlas = ExtResource("5_pyre6")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hfhyq"]
+
 atlas = ExtResource("6_wgbfl")
 region = Rect2(0, 0, 64, 64)
 
@@ -128,7 +127,7 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 15.0
-}, {
+}], {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hfhyq")
@@ -149,7 +148,7 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aluu1"]
 
-[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "MENU", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "GoNext", "PauseOverLay", "PlayerFire", "PlayerWater", "PlayerAir", "PlayerEarth", "Elements")]
+[node name="za warudo" type="Node2D"]
 script = ExtResource("1_qvfia")
 CoinLabel = NodePath("Coins")
 HPLabel = NodePath("Health")
@@ -178,7 +177,7 @@ WaterOff = ExtResource("5_510jb")
 AirOn = ExtResource("28_7glkl")
 AirOff = ExtResource("7_pvrf0")
 EarthOn = ExtResource("27_dq02k")
-EarthOff = ExtResource("9_oa5er")
+EarthOff = ExtResource("27_dq02k")
 Elements = NodePath("Elements")
 
 [node name="ground" type="TileMapLayer" parent="."]
@@ -186,7 +185,7 @@ tile_map_data = PackedByteArray("AAATAAoAAgACAAEAAAAUAAoAAgACAAEAAAAUAAsAAgACAAE
 tile_set = ExtResource("1_ydpgq")
 
 [node name="cliff" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAABYAAgACAAUAAAABABYAAgACAAUAAAACABYAAgACAAUAAAADABYAAgACAAUAAAAEABYAAgACAAUAAAAFABYAAgAEAAUAAAAGABYAAgACAAQAAAAAABUAAgACAAUAAAABABUAAgACAAUAAAACABUAAgAEAAUAAAADABUAAgACAAQAAAAAABQAAgACAAQAAAABABQAAgACAAQAAAAHABYAAgACAAQAAAAEABUAAgACAAQAAAAIABYAAgADAAQAAAAFABUAAgADAAQAAAACABQAAgADAAQAAAAdABYAAgABAAQAAAAeABYAAgAFAAUAAAAfABYAAgACAAUAAAAgABYAAgACAAUAAAAhABYAAgACAAUAAAAiABYAAgACAAUAAAAjABYAAgACAAUAAAAkABYAAgACAAUAAAAlABYAAgACAAUAAAAmABYAAgACAAUAAAAnABYAAgACAAUAAAAeABUAAgABAAQAAAAfABUAAgACAAQAAAAgABUAAgAFAAUAAAAhABUAAgACAAUAAAAiABUAAgACAAUAAAAjABUAAgACAAUAAAAkABUAAgACAAUAAAAlABUAAgACAAUAAAAmABUAAgACAAUAAAAnABUAAgACAAUAAAAgABQAAgABAAQAAAAhABQAAgACAAQAAAAiABQAAgACAAQAAAAjABQAAgAFAAUAAAAkABQAAgACAAUAAAAlABQAAgACAAUAAAAmABQAAgACAAUAAAAnABQAAgACAAUAAAAjABMAAgABAAQAAAAkABMAAgACAAQAAAAlABMAAgACAAQAAAAmABMAAgACAAQAAAAnABMAAgACAAQAAAAAAAAAAgACAAUAAAABAAAAAgACAAUAAAACAAAAAgACAAUAAAADAAAAAgACAAUAAAAEAAAAAgACAAUAAAAFAAAAAgACAAUAAAAGAAAAAgACAAUAAAAHAAAAAgACAAUAAAAIAAAAAgACAAUAAAAJAAAAAgACAAUAAAAKAAAAAgAEAAQAAAALAAAAAgACAAYAAAAMAAAAAgADAAYAAAAJAAEAAgACAAYAAAAKAAEAAgADAAYAAAAIAAEAAgACAAYAAAAHAAEAAgAEAAQAAAAGAAEAAgACAAUAAAAFAAEAAgACAAUAAAAEAAEAAgACAAUAAAADAAEAAgACAAUAAAACAAEAAgACAAUAAAABAAEAAgACAAUAAAAAAAEAAgACAAUAAAAAAAIAAgACAAYAAAABAAIAAgACAAYAAAACAAIAAgACAAYAAAADAAIAAgACAAYAAAAEAAIAAgACAAYAAAAFAAIAAgACAAYAAAAGAAIAAgACAAYAAAAHAAIAAgADAAYAAAAgAAAAAgACAAYAAAAhAAAAAgACAAYAAAAiAAAAAgAFAAQAAAAjAAAAAgACAAUAAAAkAAAAAgACAAUAAAAlAAAAAgACAAUAAAAmAAAAAgACAAUAAAAnAAAAAgACAAUAAAAjAAEAAgACAAYAAAAkAAEAAgACAAYAAAAlAAEAAgACAAYAAAAmAAEAAgACAAYAAAAnAAEAAgACAAYAAAAfAAAAAgABAAYAAAAiAAEAAgABAAYAAAA=")
+tile_map_data = PackedByteArray()
 tile_set = ExtResource("1_ydpgq")
 
 [node name="ysort" type="TileMapLayer" parent="."]
@@ -210,9 +209,8 @@ bus = &"SFX"
 position = Vector2(429, 172.99998)
 scale = Vector2(1.125, 1.10938)
 sprite_frames = SubResource("SpriteFrames_7supi")
-animation = &"Idle"
 
-[node name="Paladin" type="Sprite2D" parent="." node_paths=PackedStringArray("DialogueLabel")]
+[node name="Paladin" type="Sprite2D" parent="."]
 position = Vector2(466, 96)
 scale = Vector2(1.125, 1.10938)
 texture = ExtResource("4_f6s5u")
@@ -667,8 +665,7 @@ offset_right = -4.0510845
 offset_bottom = 21.22282
 scale = Vector2(1.29, 1.29)
 theme_override_fonts/font = ExtResource("10_7supi")
-text = "Resume
-"
+text = "Resume"
 metadata/_edit_use_anchors_ = true
 
 [node name="ResumeButton" type="TextureButton" parent="MENU/Menu2/ResumeIcon"]
