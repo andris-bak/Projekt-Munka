@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vgam332cqdxg"
-path="res://.godot/imported/szél.png-fa84f50ed1a4f8b20d41c9b81767de62.ctex"
+uid="uid://kp4mtwqvcw8k"
+path="res://.godot/imported/grass_icon_grey.png-8abb5df2a9581841538a6f1effd1ecf8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Elements/szél.png"
-dest_files=["res://.godot/imported/szél.png-fa84f50ed1a4f8b20d41c9b81767de62.ctex"]
+source_file="res://assets/Elements/grass_icon_grey.png"
+dest_files=["res://.godot/imported/grass_icon_grey.png-8abb5df2a9581841538a6f1effd1ecf8.ctex"]
 
 [params]
 
