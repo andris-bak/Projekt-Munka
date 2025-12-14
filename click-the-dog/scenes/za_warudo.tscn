@@ -67,19 +67,19 @@ region = Rect2(192, 0, 64, 64)
 atlas = ExtResource("5_pyre6")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eroyx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfhyq"]
+atlas = ExtResource("6_wgbfl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7emra"]
 atlas = ExtResource("6_wgbfl")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8luvg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a06jk"]
 atlas = ExtResource("6_wgbfl")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sqr6f"]
-atlas = ExtResource("6_wgbfl")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hfhyq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0js5b"]
 atlas = ExtResource("6_wgbfl")
 region = Rect2(0, 0, 64, 64)
 
@@ -126,16 +126,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eroyx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8luvg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sqr6f")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_hfhyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7emra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a06jk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0js5b")
 }],
 "loop": false,
 "name": &"attack2",
@@ -192,8 +192,7 @@ bus = &"SFX"
 position = Vector2(429, 172.99998)
 scale = Vector2(1.125, 1.10938)
 sprite_frames = SubResource("SpriteFrames_7supi")
-animation = &"Idle"
-frame_progress = 0.291173
+animation = &"attack"
 
 [node name="Paladin" type="Sprite2D" parent="." node_paths=PackedStringArray("DialogueLabel")]
 position = Vector2(466, 96)
