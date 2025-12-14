@@ -33,4 +33,10 @@ public partial class Player
 		Level++;
 		Damage = Damage * 2;
 	}
+	
+	public void LevelPaladin()
+	{
+		PalaLevel++;
+		PalaDamage = PalaDamage + 150;
+	}
 }

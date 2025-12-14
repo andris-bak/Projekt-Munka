@@ -39,7 +39,19 @@ public partial class Main : Node2D
 	[Export] public CanvasLayer optionsMenuLayer;
 	[Export] public Sprite2D GoNext;
 	[Export] public ColorRect PauseOverLay;
-	
+	[Export] public Sprite2D PlayerFire;
+	[Export] public Sprite2D PlayerWater;
+	[Export] public Sprite2D PlayerAir;
+	[Export] public Sprite2D PlayerEarth;
+	[Export] public Texture2D FireOn;
+	[Export] public Texture2D FireOff;
+	[Export] public Texture2D WaterOn;
+	[Export] public Texture2D WaterOff;
+	[Export] public Texture2D AirOn;
+	[Export] public Texture2D AirOff;
+	[Export] public Texture2D EarthOn;
+	[Export] public Texture2D EarthOff;
+	[Export] public CanvasLayer Elements;
 	
 	public override void _Ready()
 	{
@@ -50,6 +62,7 @@ public partial class Main : Node2D
 		
 		bgmPlayer = GetNode<AudioStreamPlayer>("BGMPlayer");
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
+		UpdatePlayerIcons();
 		
 		GM.CurrentScene = 1;
 		
@@ -135,10 +148,8 @@ public partial class Main : Node2D
 	
 	public override void _Input(InputEvent @event)
 	{
-		// Cél: Bármely gombnyomás, amit a Godot-ban "attack_action" néven beállítunk (pl. Space, vagy egy controller gomb).
 		if (@event.IsActionPressed("attack_action"))
 		{
-			// Meghívjuk a már létező OnClickButton metódust, ami elindítja a CombatHandler.HandleClick()-et.
 			OnClickButton();
 			// Jelzi a Godot-nak, hogy feldolgoztuk az eseményt.
 			GetViewport().SetInputAsHandled(); 
@@ -157,6 +168,7 @@ public partial class Main : Node2D
 			if (MENU != null)
 			{
 				MENU.Visible = !MENU.Visible;
+				Elements.Visible = !Elements.Visible;
 				GD.Print($" menü váltva: {(MENU.Visible ? "MEGNYITVA" : "BEZÁRVA")}");
 			}
 			if(MENU.Visible == false)
@@ -167,33 +179,10 @@ public partial class Main : Node2D
 			GetViewport().SetInputAsHandled(); 
 		}
 		
-		if (@event.IsActionPressed("switchToFire"))
-		{
-			tes = Player.DamageType.FIRE;
-			GD.Print($"Fire type  működik");
-			GetViewport().SetInputAsHandled(); 
-		}
-		
-		if (@event.IsActionPressed("switchToWater"))
-		{
-			tes = Player.DamageType.WATER;
-			GD.Print($"Water type  működik");
-			GetViewport().SetInputAsHandled(); 
-		}
-		
-		if (@event.IsActionPressed("switchToAir"))
-		{
-			tes = Player.DamageType.AIR;
-			GD.Print($"AIR type  működik");
-			GetViewport().SetInputAsHandled(); 
-		}
-		
-		if (@event.IsActionPressed("switchToEarth"))
-		{
-			tes = Player.DamageType.EARTH;
-			GD.Print($"EARTH type  működik");
-			GetViewport().SetInputAsHandled(); 
-		}
+		if (@event.IsActionPressed("switchToFire"))  { SelectDamage(Player.DamageType.FIRE);  GetViewport().SetInputAsHandled(); }
+		if (@event.IsActionPressed("switchToWater")) { SelectDamage(Player.DamageType.WATER); GetViewport().SetInputAsHandled(); }
+		if (@event.IsActionPressed("switchToAir"))   { SelectDamage(Player.DamageType.AIR);   GetViewport().SetInputAsHandled(); }
+		if (@event.IsActionPressed("switchToEarth")) { SelectDamage(Player.DamageType.EARTH); GetViewport().SetInputAsHandled(); }
 	}
 	
 	public void OnClickButton()
@@ -206,6 +195,10 @@ public partial class Main : Node2D
 			GM.ClickCounter = 0;
 		}
 		int actualDamage = GM.PlayerData.Damage;
+		if(GM.Hired == true)
+		{
+			actualDamage += GM.PlayerData.PalaDamage;
+		}
 		Vector2 playerPos = PlayerSprite.Position;
 		
 		// Player pozíciók (ahol a PlayerSprite áll)
@@ -261,6 +254,16 @@ public partial class Main : Node2D
 			GD.Print($"Water type  működik");
 			actualDamage *= 5;
 		}
+		if(tes == Player.DamageType.AIR && GM.EnemyData.EnemyResistance == Enemy.DefenseType.WATER)
+		{
+			GD.Print($"Water type  működik");
+			actualDamage *= 5;
+		}
+		if(tes == Player.DamageType.EARTH && GM.EnemyData.EnemyResistance == Enemy.DefenseType.AIR)
+		{
+			GD.Print($"Water type  működik");
+			actualDamage *= 5;
+		}
 		else
 		{
 			//actualDamage = GM.PlayerData.Damage;
@@ -312,7 +315,7 @@ public partial class Main : Node2D
 			
 			// GM.Coin, GM.Counter, GM.Rnd, GM.MinHP, GM.MaxHP használata
 			GM.Coin += 1000;//GM.Counter;
-			GM.Score = 0;
+			//GM.Score = 0;
 			
 			GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
 			HPBar.MaxValue = GM.HP;
@@ -360,6 +363,21 @@ public partial class Main : Node2D
 		} // Bezárja az if(GM.HP <= 0) blokkot
 
 	} 
+	
+	private void UpdatePlayerIcons()
+	{
+		PlayerFire.Texture  = (tes == Player.DamageType.FIRE)  ? FireOn  : FireOff;
+		PlayerWater.Texture = (tes == Player.DamageType.WATER) ? WaterOn : WaterOff;
+		PlayerAir.Texture   = (tes == Player.DamageType.AIR)   ? AirOn   : AirOff;
+		PlayerEarth.Texture = (tes == Player.DamageType.EARTH) ? EarthOn : EarthOff;
+	}
+	private void SelectDamage(Player.DamageType type)
+	{
+		tes = (tes == type) ? Player.DamageType.NONE : type;
+		// ha tényleg ezt akarod használni a harcban:
+		GM.PlayerData.PlayerDamageType = tes;
+		UpdatePlayerIcons();
+	}
 	
 	public async void OnQuitButtonPressed()
 	{
@@ -416,6 +434,11 @@ public partial class Main : Node2D
 	{
 		Method.GetNext();
 		GM.CurrentScene++;
+	}
+	
+	public void ResumeButton()
+	{
+		MENU.Visible = false;
 	}
 	
 	public void HeroHire()

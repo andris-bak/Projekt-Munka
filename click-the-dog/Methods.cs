@@ -191,15 +191,13 @@ public partial class Methods : Node
 			else
 			{
 				// GM.MinHP és GM.MaxHP növelése
-				GM.MinHP = GM.MinHP * 2;
-				GM.MaxHP = GM.MaxHP * 2;
+				GM.MinHP = GM.MinHP * 2 + 200;
+				GM.MaxHP = GM.MaxHP * 2 + 200;
 				GM.Level++;
 				GM.PlayerData.LevelUp(); 
 				GM.Coin = GM.Coin - GM.LevelPrice;
 				GM.LevelPrice = GM.LevelPrice * 2;
 				GM.Counter++;
-				GM.PlayerData.PalaLevel++;
-				GM.PlayerData.PalaDamage *= 2;
 				
 				// GM.Rnd használata
 				GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP);
