@@ -650,7 +650,7 @@ public partial class Main : Node2D
 
 		// GM.PlayerData adatok betöltése
 		GM.PlayerData.Level = (int)(long)dataDict["PlayerLevel"];
-		GM.PlayerData.Damage = (int)(long)dataDict["PlayerDamage"]; 
+		GM.PlayerData.Damage = 1000; //(int)(long)dataDict["PlayerDamage"]; 
 		
 		// GM.Rnd és GM.Min/MaxHP használata
 		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
