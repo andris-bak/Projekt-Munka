@@ -1,9 +1,9 @@
-[gd_scene load_steps=54 format=4 uid="uid://bla6t6qp38sla"]
+[gd_scene load_steps=55 format=4 uid="uid://bla6t6qp38sla"]
 
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
 [ext_resource type="Texture2D" uid="uid://hl5r3nubg80w" path="res://assets/Elements/fire_icon_grey.png" id="3_0js5b"]
-[ext_resource type="AudioStream" uid="uid://c8het8swb6qft" path="res://sfx/cicahang.wav" id="8_jtjaw"]
+[ext_resource type="AudioStream" uid="uid://cb77mou88xnmk" path="res://ost/ChillMenu.wav" id="3_qg8qh"]
 [ext_resource type="Texture2D" uid="uid://b2h2qsk78oq16" path="res://characters/Paladin.png" id="4_f6s5u"]
 [ext_resource type="Texture2D" uid="uid://bk7mpgoaf53y6" path="res://assets/Elements/water_icon_grey.png" id="5_510jb"]
 [ext_resource type="Texture2D" uid="uid://b0a3fiooljiv4" path="res://characters/maincharacter_left-Sheet.png" id="5_pyre6"]
@@ -14,13 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://ben7vftxjdfoo" path="res://characters/maincharacter_right-Sheet.png" id="6_wgbfl"]
 [ext_resource type="Texture2D" uid="uid://dtr1pbyebiyr2" path="res://assets/Elements/air_icon_grey.png" id="7_pvrf0"]
 [ext_resource type="Script" uid="uid://b80xh4x1824fe" path="res://scripts/Paladin.cs" id="7_ra36h"]
-[ext_resource type="Texture2D" uid="uid://cusiw7yhn1kcw" path="res://assets/Button/save.png" id="8_eynld"]
-[ext_resource type="Texture2D" uid="uid://c5qk8qqqsdtei" path="res://assets/Button/save_button.png" id="9_ti7n2"]
+[ext_resource type="AudioStream" uid="uid://c8het8swb6qft" path="res://sfx/cicahang.wav" id="8_jtjaw"]
+[ext_resource type="Texture2D" uid="uid://kp4mtwqvcw8k" path="res://assets/Elements/grass_icon_grey.png" id="9_oa5er"]
 [ext_resource type="FontFile" uid="uid://bnccpqkw6ljbi" path="res://fonts/Silver.ttf" id="10_7supi"]
 [ext_resource type="Texture2D" uid="uid://btvgfikj1tpy2" path="res://assets/Egyéb/dabloon.png" id="10_nxjxa"]
 [ext_resource type="Texture2D" uid="uid://cod3xur5jcbdt" path="res://assets/Button/lvlup_button_colored.png" id="10_ti7n2"]
 [ext_resource type="Texture2D" uid="uid://chrmwcn4eday1" path="res://assets/Cursors/message_dots_square.png" id="11_7glkl"]
-[ext_resource type="Texture2D" uid="uid://bypdqnrxyajj7" path="res://assets/Button/exit_button.png" id="12_g6mq7"]
 [ext_resource type="Script" uid="uid://kn7n7ofyyo7k" path="res://scripts/Cursor.cs" id="12_kttba"]
 [ext_resource type="Texture2D" uid="uid://byt8mjrbo8u1n" path="res://assets/UI/margo.png" id="12_ti7n2"]
 [ext_resource type="Texture2D" uid="uid://4b8mv4mnmp5y" path="res://assets/Cursors/cursor_default.png" id="14_3xnty"]
@@ -35,8 +34,12 @@
 [ext_resource type="Texture2D" uid="uid://dq8rb03ayrd48" path="res://assets/UI/menu.png" id="30_crbji"]
 [ext_resource type="Texture2D" uid="uid://cfcnglrnqp2pa" path="res://assets/Button/lvlup_button_grey.png" id="30_dq02k"]
 [ext_resource type="Texture2D" uid="uid://fmuuqcybl4fl" path="res://assets/UI/character_lvl.png" id="31_hshem"]
-[ext_resource type="Texture2D" uid="uid://cgsnd2n4b6xaq" path="res://assets/Button/paused_icon.png" id="34_23wv0"]
-[ext_resource type="Texture2D" uid="uid://d1hf3yv8id8sp" path="res://assets/Button/resume_icon.png" id="35_q0gfu"]
+[ext_resource type="Texture2D" uid="uid://cgsnd2n4b6xaq" path="res://assets/Button/paused_icon.png" id="38_3bjsr"]
+[ext_resource type="Texture2D" uid="uid://d1hf3yv8id8sp" path="res://assets/Button/resume_icon.png" id="39_htr88"]
+[ext_resource type="Texture2D" uid="uid://b2uqk3r3po2o" path="res://assets/Button/options_icon.png" id="40_oa5er"]
+[ext_resource type="Texture2D" uid="uid://l3vkyjwisewj" path="res://assets/Button/save_button_2.png" id="41_3bjsr"]
+[ext_resource type="Texture2D" uid="uid://bxvd8uoj0wsor" path="res://assets/Button/save_delete_button.png" id="42_htr88"]
+[ext_resource type="Texture2D" uid="uid://2j3itcaqcvcf" path="res://assets/Button/exit_button_2.png" id="43_3bjsr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_24og2"]
 atlas = ExtResource("6_nxls5")
@@ -71,21 +74,20 @@ atlas = ExtResource("5_pyre6")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hfhyq"]
-
 atlas = ExtResource("6_wgbfl")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7emra"]
 atlas = ExtResource("6_wgbfl")
-region = Rect2(0, 0, 64, 64)
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a06jk"]
 atlas = ExtResource("6_wgbfl")
-region = Rect2(64, 0, 64, 64)
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0js5b"]
 atlas = ExtResource("6_wgbfl")
-region = Rect2(128, 0, 64, 64)
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7supi"]
 animations = [{
@@ -127,7 +129,7 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 15.0
-}], {
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hfhyq")
@@ -148,7 +150,7 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aluu1"]
 
-[node name="za warudo" type="Node2D"]
+[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "MENU", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "GoNext", "PauseOverLay", "PlayerFire", "PlayerWater", "PlayerAir", "PlayerEarth", "Elements")]
 script = ExtResource("1_qvfia")
 CoinLabel = NodePath("Coins")
 HPLabel = NodePath("Health")
@@ -177,7 +179,7 @@ WaterOff = ExtResource("5_510jb")
 AirOn = ExtResource("28_7glkl")
 AirOff = ExtResource("7_pvrf0")
 EarthOn = ExtResource("27_dq02k")
-EarthOff = ExtResource("27_dq02k")
+EarthOff = ExtResource("9_oa5er")
 Elements = NodePath("Elements")
 
 [node name="ground" type="TileMapLayer" parent="."]
@@ -185,7 +187,7 @@ tile_map_data = PackedByteArray("AAATAAoAAgACAAEAAAAUAAoAAgACAAEAAAAUAAsAAgACAAE
 tile_set = ExtResource("1_ydpgq")
 
 [node name="cliff" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray()
+tile_map_data = PackedByteArray("AAAAABYAAgACAAUAAAABABYAAgACAAUAAAACABYAAgACAAUAAAADABYAAgACAAUAAAAEABYAAgACAAUAAAAFABYAAgAEAAUAAAAGABYAAgACAAQAAAAAABUAAgACAAUAAAABABUAAgACAAUAAAACABUAAgAEAAUAAAADABUAAgACAAQAAAAAABQAAgACAAQAAAABABQAAgACAAQAAAAHABYAAgACAAQAAAAEABUAAgACAAQAAAAIABYAAgADAAQAAAAFABUAAgADAAQAAAACABQAAgADAAQAAAAdABYAAgABAAQAAAAeABYAAgAFAAUAAAAfABYAAgACAAUAAAAgABYAAgACAAUAAAAhABYAAgACAAUAAAAiABYAAgACAAUAAAAjABYAAgACAAUAAAAkABYAAgACAAUAAAAlABYAAgACAAUAAAAmABYAAgACAAUAAAAnABYAAgACAAUAAAAeABUAAgABAAQAAAAfABUAAgACAAQAAAAgABUAAgAFAAUAAAAhABUAAgACAAUAAAAiABUAAgACAAUAAAAjABUAAgACAAUAAAAkABUAAgACAAUAAAAlABUAAgACAAUAAAAmABUAAgACAAUAAAAnABUAAgACAAUAAAAgABQAAgABAAQAAAAhABQAAgACAAQAAAAiABQAAgACAAQAAAAjABQAAgAFAAUAAAAkABQAAgACAAUAAAAlABQAAgACAAUAAAAmABQAAgACAAUAAAAnABQAAgACAAUAAAAjABMAAgABAAQAAAAkABMAAgACAAQAAAAlABMAAgACAAQAAAAmABMAAgACAAQAAAAnABMAAgACAAQAAAAAAAAAAgACAAUAAAABAAAAAgACAAUAAAACAAAAAgACAAUAAAADAAAAAgACAAUAAAAEAAAAAgACAAUAAAAFAAAAAgACAAUAAAAGAAAAAgACAAUAAAAHAAAAAgACAAUAAAAIAAAAAgACAAUAAAAJAAAAAgACAAUAAAAKAAAAAgAEAAQAAAALAAAAAgACAAYAAAAMAAAAAgADAAYAAAAJAAEAAgACAAYAAAAKAAEAAgADAAYAAAAIAAEAAgACAAYAAAAHAAEAAgAEAAQAAAAGAAEAAgACAAUAAAAFAAEAAgACAAUAAAAEAAEAAgACAAUAAAADAAEAAgACAAUAAAACAAEAAgACAAUAAAABAAEAAgACAAUAAAAAAAEAAgACAAUAAAAAAAIAAgACAAYAAAABAAIAAgACAAYAAAACAAIAAgACAAYAAAADAAIAAgACAAYAAAAEAAIAAgACAAYAAAAFAAIAAgACAAYAAAAGAAIAAgACAAYAAAAHAAIAAgADAAYAAAAgAAAAAgACAAYAAAAhAAAAAgACAAYAAAAiAAAAAgAFAAQAAAAjAAAAAgACAAUAAAAkAAAAAgACAAUAAAAlAAAAAgACAAUAAAAmAAAAAgACAAUAAAAnAAAAAgACAAUAAAAjAAEAAgACAAYAAAAkAAEAAgACAAYAAAAlAAEAAgACAAYAAAAmAAEAAgACAAYAAAAnAAEAAgACAAYAAAAfAAAAAgABAAYAAAAiAAEAAgABAAYAAAA=")
 tile_set = ExtResource("1_ydpgq")
 
 [node name="ysort" type="TileMapLayer" parent="."]
@@ -209,8 +211,9 @@ bus = &"SFX"
 position = Vector2(429, 172.99998)
 scale = Vector2(1.125, 1.10938)
 sprite_frames = SubResource("SpriteFrames_7supi")
+animation = &"attack"
 
-[node name="Paladin" type="Sprite2D" parent="."]
+[node name="Paladin" type="Sprite2D" parent="." node_paths=PackedStringArray("DialogueLabel")]
 position = Vector2(466, 96)
 scale = Vector2(1.125, 1.10938)
 texture = ExtResource("4_f6s5u")
@@ -262,59 +265,8 @@ _hoverCursorTexture = ExtResource("15_7glkl")
 _defaultCursorTexture = ExtResource("14_3xnty")
 metadata/_edit_use_anchors_ = true
 
-[node name="Save" type="Sprite2D" parent="."]
-position = Vector2(19, 17)
-scale = Vector2(2.18976, 2.13012)
-texture = ExtResource("8_eynld")
-
-[node name="Savebutton" type="TextureButton" parent="Save"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.531
-anchor_right = 0.5
-anchor_bottom = 0.531
-offset_left = -15.0
-offset_top = -14.496
-offset_right = -1.0
-offset_bottom = -1.496
-metadata/_edit_use_anchors_ = true
-
-[node name="ExitButton" type="Sprite2D" parent="."]
-position = Vector2(623, 15)
-scale = Vector2(2.3125, 2.28039)
-texture = ExtResource("12_g6mq7")
-
-[node name="Exit" type="TextureButton" parent="ExitButton"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.531
-anchor_right = 0.5
-anchor_bottom = 0.531
-offset_left = -15.0
-offset_top = -14.496
-offset_right = -1.0
-offset_bottom = -1.496
-metadata/_edit_use_anchors_ = true
-
-[node name="DeleteSave" type="Sprite2D" parent="."]
-position = Vector2(69, 17)
-scale = Vector2(2.0625, 2.0625)
-texture = ExtResource("9_ti7n2")
-
-[node name="Delete" type="TextureButton" parent="DeleteSave"]
-anchors_preset = -1
-anchor_left = -0.0151515
-anchor_top = -0.0151515
-anchor_right = -0.0151515
-anchor_bottom = -0.0151515
-offset_left = -7.75758
-offset_top = -7.75758
-offset_right = 8.24242
-offset_bottom = 8.24242
-metadata/_edit_use_anchors_ = true
-
 [node name="Dabloon" type="Sprite2D" parent="."]
-position = Vector2(13, 47.000004)
+position = Vector2(16, 16)
 scale = Vector2(1.4375, 1.4375)
 texture = ExtResource("10_nxjxa")
 
@@ -340,34 +292,37 @@ offset_top = 200.00002
 offset_right = 313.12
 offset_bottom = 219.00002
 scale = Vector2(1.41, 1.41)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_7supi")
 text = "Health: "
 
 [node name="Level" type="Label" parent="."]
-offset_left = 31.999998
-offset_top = 67.0
-offset_right = 95.59999
-offset_bottom = 106.0
+offset_left = 47.99999
+offset_top = 40.0
+offset_right = 111.59999
+offset_bottom = 79.0
 scale = Vector2(1.095, 1.095)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_7supi")
 theme_override_font_sizes/font_size = 24
 text = " Lvl:"
 
 [node name="Coins" type="Label" parent="."]
-offset_left = 26.0
-offset_top = 33.999996
-offset_right = 103.0
-offset_bottom = 65.0
+offset_left = 32.0
+offset_right = 109.0
+offset_bottom = 31.000004
 scale = Vector2(1.18, 1.18)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_7supi")
 theme_override_font_sizes/font_size = 27
 
 [node name="Price" type="Label" parent="."]
-offset_left = 2.0
-offset_top = 88.0
-offset_right = 65.0
-offset_bottom = 111.0
+offset_left = 8.000001
+offset_top = 63.999996
+offset_right = 71.0
+offset_bottom = 87.0
 scale = Vector2(1.095, 1.095)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_7supi")
 text = "Price:"
 
@@ -378,11 +333,12 @@ offset_top = 244.0
 offset_right = 333.12
 offset_bottom = 263.0
 scale = Vector2(1.41, 1.41)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_7supi")
 text = "Time: "
 
 [node name="LvlupButtonColored" type="Sprite2D" parent="."]
-position = Vector2(86, 78)
+position = Vector2(40, 56)
 texture = ExtResource("10_ti7n2")
 
 [node name="TextureButton" type="TextureButton" parent="LvlupButtonColored"]
@@ -447,9 +403,33 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CharacterLvl" type="Sprite2D" parent="."]
-position = Vector2(15, 76.00001)
+position = Vector2(16.000004, 48)
 scale = Vector2(2.0625, 2.0625)
 texture = ExtResource("31_hshem")
+
+[node name="Elements" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="BackGround" type="Sprite2D" parent="Elements"]
+position = Vector2(321.00003, 33)
+scale = Vector2(2.3725774, 1.6500001)
+texture = ExtResource("22_3xnty")
+
+[node name="PlayerFire" type="Sprite2D" parent="Elements"]
+position = Vector2(289.00003, 32)
+texture = ExtResource("26_7glkl")
+
+[node name="PlayerWater" type="Sprite2D" parent="Elements"]
+position = Vector2(310.00003, 32)
+texture = ExtResource("29_hshem")
+
+[node name="PlayerEarth" type="Sprite2D" parent="Elements"]
+position = Vector2(352.00003, 32)
+texture = ExtResource("27_dq02k")
+
+[node name="PlayerAir" type="Sprite2D" parent="Elements"]
+position = Vector2(330.00003, 32)
+texture = ExtResource("28_7glkl")
 
 [node name="MENU" type="CanvasLayer" parent="."]
 layer = 0
@@ -597,145 +577,81 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Menu2" type="Sprite2D" parent="MENU"]
 position = Vector2(317, 183)
-scale = Vector2(2.985916, 3.1416664)
+scale = Vector2(2.7, 2.7)
 texture = ExtResource("30_crbji")
 
-[node name="ExitButton" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(22.773586, 45.19895)
-scale = Vector2(1.143278, 1.1124623)
-texture = ExtResource("12_g6mq7")
-
-[node name="Exit" type="TextureButton" parent="MENU/Menu2/ExitButton"]
-anchors_preset = -1
-anchor_left = -1.6057755
-anchor_top = 0.518
-anchor_right = 0.518
-anchor_bottom = 0.518
-offset_left = -15.025492
-offset_top = -14.868872
-offset_right = -0.96463966
-offset_bottom = -1.134901
-metadata/_edit_use_anchors_ = true
-
-[node name="ExitLabel" type="Label" parent="MENU/Menu2/ExitButton"]
-anchors_preset = -1
-anchor_left = -1.1750001
-anchor_top = 0.5
-anchor_right = -1.1750001
-anchor_bottom = 0.5
-offset_left = -25.140177
-offset_top = -18.014355
-offset_right = -5.611208
-offset_bottom = 0.98564625
-scale = Vector2(1.335, 1.335)
-theme_override_fonts/font = ExtResource("10_7supi")
-text = "Exit"
-
 [node name="PausedIcon" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(22.103775, -43.607433)
-texture = ExtResource("34_23wv0")
+position = Vector2(16.745287, -42.015915)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("38_3bjsr")
 
 [node name="PauseLabel" type="Label" parent="MENU/Menu2/PausedIcon"]
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.133
-anchor_right = 0.5
-anchor_bottom = 0.133
-offset_left = -60.580177
-offset_top = -12.313673
-offset_right = -20.580177
-offset_bottom = 10.686331
+anchor_left = -1.6040001
+anchor_top = 0.5
+anchor_right = -1.6040001
+anchor_bottom = 0.5
+offset_left = -19.966885
+offset_top = -15.55967
+offset_right = 10.033115
+offset_bottom = 3.4403296
 scale = Vector2(1.3, 1.3)
 theme_override_fonts/font = ExtResource("10_7supi")
+theme_override_font_sizes/font_size = 15
 text = "Paused"
 
-[node name="ResumeIcon" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(23.778303, 29.283823)
-texture = ExtResource("35_q0gfu")
-
-[node name="ResumeLabel" type="Label" parent="MENU/Menu2/ResumeIcon"]
-anchors_preset = -1
-anchor_left = -1.1789999
-anchor_top = 0.5
-anchor_right = -1.179
-anchor_bottom = 0.49999952
-offset_left = -34.051086
-offset_top = -19.777187
-offset_right = -4.0510845
-offset_bottom = 21.22282
-scale = Vector2(1.29, 1.29)
-theme_override_fonts/font = ExtResource("10_7supi")
-text = "Resume"
-metadata/_edit_use_anchors_ = true
-
-[node name="ResumeButton" type="TextureButton" parent="MENU/Menu2/ResumeIcon"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -17.04245
-offset_top = -17.549068
-offset_right = 0.0377388
-offset_bottom = -0.99734116
-metadata/_edit_use_anchors_ = true
-
 [node name="Music" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(0.33490533, -7.9575615)
-scale = Vector2(1.1149656, 0.7324068)
+position = Vector2(16.410376, -24.509285)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("40_oa5er")
 
 [node name="OpenMenu" type="TextureButton" parent="MENU/Menu2/Music"]
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = -26.510002
-anchor_right = 0.5
-anchor_bottom = -26.510002
-offset_left = -23.328356
-offset_top = -12.169205
-offset_right = 21.671621
-offset_bottom = 12.168272
+anchor_left = -2.295
+anchor_top = 0.19800001
+anchor_right = 0.86100006
+anchor_bottom = 0.84900004
+offset_left = -11.107777
+offset_top = -11.420281
+offset_right = -5.122303
+offset_bottom = -5.169614
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="MENU/Menu2/Music/OpenMenu"]
-layout_mode = 1
+[node name="Label" type="Label" parent="MENU/Menu2/Music"]
 anchors_preset = -1
-anchor_left = 0.37545627
-anchor_top = 0.54568416
-anchor_right = 0.37545627
-anchor_bottom = 0.54568416
-offset_left = -20.5
-offset_top = -8.5
-offset_right = 14.5
-offset_bottom = 10.5
+anchor_left = 0.43103912
+anchor_top = 0.7694178
+anchor_right = 0.43103912
+anchor_bottom = 0.7694178
+offset_left = -54.012825
+offset_top = -20.925581
+offset_right = -19.012825
+offset_bottom = -1.9255686
 scale = Vector2(1.145, 1.145)
 theme_override_fonts/font = ExtResource("10_7supi")
+theme_override_font_sizes/font_size = 15
 text = "Options"
 metadata/_edit_use_anchors_ = true
 
-[node name="DelSave" type="Label" parent="MENU/Menu2"]
-offset_left = -29.8066
-offset_top = 0.95490646
-offset_right = 4.1933994
-offset_bottom = 19.954906
-scale = Vector2(1.11, 1.11)
-theme_override_fonts/font = ExtResource("10_7supi")
-text = "DelSave"
-
 [node name="Save" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(20.764149, -8.912466)
-scale = Vector2(1.2414011, 1.2075905)
-texture = ExtResource("8_eynld")
+position = Vector2(11.386791, -5.7294407)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("41_3bjsr")
 
 [node name="Savebutton" type="TextureButton" parent="MENU/Menu2/Save"]
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -14.2049465
-offset_top = -13.798864
-offset_right = -1.7950497
-offset_bottom = -2.2011356
+anchor_left = -1.429
+anchor_top = 0.23600002
+anchor_right = 0.76400006
+anchor_bottom = 0.744
+offset_left = -10.3509655
+offset_top = -10.503087
+offset_right = -6.0190525
+offset_bottom = -5.668128
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="SaveLabel" type="Label" parent="MENU/Menu2/Save"]
@@ -744,66 +660,115 @@ anchor_left = -0.90300006
 anchor_top = 0.5
 anchor_right = -0.90300006
 anchor_bottom = 0.5
-offset_left = -25.20971
-offset_top = -18.01622
-offset_right = -3.8961039
-offset_bottom = 0.98378086
+offset_left = -17.67434
+offset_top = -16.424706
+offset_right = 3.639266
+offset_bottom = 2.5752945
 scale = Vector2(1.21, 1.21)
 theme_override_fonts/font = ExtResource("10_7supi")
+theme_override_font_sizes/font_size = 15
 text = "Save"
 
 [node name="DeleteSave" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(21.433962, 8.594165)
-scale = Vector2(1.1359076, 1.1307193)
-texture = ExtResource("9_ti7n2")
+position = Vector2(16.410387, 11.777194)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("42_htr88")
+
+[node name="DelSave" type="Label" parent="MENU/Menu2/DeleteSave"]
+offset_left = -44.793625
+offset_top = -7.161804
+offset_right = -10.793625
+offset_bottom = 11.838196
+scale = Vector2(1.11, 1.11)
+theme_override_fonts/font = ExtResource("10_7supi")
+theme_override_font_sizes/font_size = 15
+text = "DelSave"
 
 [node name="Delete" type="TextureButton" parent="MENU/Menu2/DeleteSave"]
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.509
-anchor_right = 0.5
-anchor_bottom = 0.509
-offset_left = -16.255388
-offset_top = -16.307625
-offset_right = 0.55021477
-offset_bottom = 0.30113506
+anchor_left = -2.282
+anchor_top = 0.23
+anchor_right = 0.79700005
+anchor_bottom = 0.80300003
+offset_left = -10.389877
+offset_top = -10.531133
+offset_right = -5.487215
+offset_bottom = -5.3472805
 metadata/_edit_use_anchors_ = true
 
-[node name="Elements" type="CanvasLayer" parent="."]
-layer = 0
+[node name="ResumeIcon" type="Sprite2D" parent="MENU/Menu2"]
+position = Vector2(17.750015, 30.238731)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("39_htr88")
 
-[node name="BackGround" type="Sprite2D" parent="Elements"]
-position = Vector2(329, 34)
-scale = Vector2(2.3725774, 1.6500001)
-texture = ExtResource("22_3xnty")
+[node name="ResumeLabel" type="Label" parent="MENU/Menu2/ResumeIcon"]
+anchors_preset = -1
+anchor_left = -1.179
+anchor_top = 0.49999952
+anchor_right = -1.179
+anchor_bottom = 0.49999952
+offset_left = -28.60887
+offset_top = -16.594166
+offset_right = 1.3911304
+offset_bottom = 24.405842
+scale = Vector2(1.29, 1.29)
+theme_override_fonts/font = ExtResource("10_7supi")
+theme_override_font_sizes/font_size = 15
+text = "Resume
+"
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerFire" type="Sprite2D" parent="Elements"]
-position = Vector2(295, 32)
-texture = ExtResource("26_7glkl")
+[node name="ResumeButton" type="TextureButton" parent="MENU/Menu2/ResumeIcon"]
+anchors_preset = -1
+anchor_left = -2.4060001
+anchor_top = 0.13900001
+anchor_right = 0.818
+anchor_bottom = 0.79300004
+offset_left = -10.080399
+offset_top = -10.392789
+offset_right = -5.6458845
+offset_bottom = -6.0419703
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerWater" type="Sprite2D" parent="Elements"]
-position = Vector2(316, 32)
-texture = ExtResource("29_hshem")
+[node name="ExitButton" type="Sprite2D" parent="MENU/Menu2"]
+position = Vector2(11.72171, 47.42707)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("43_3bjsr")
 
-[node name="PlayerEarth" type="Sprite2D" parent="Elements"]
-position = Vector2(358, 32)
-texture = ExtResource("27_dq02k")
+[node name="Exit" type="TextureButton" parent="MENU/Menu2/ExitButton"]
+anchors_preset = -1
+anchor_left = -1.5301024
+anchor_top = 0.20174044
+anchor_right = 0.76155055
+anchor_bottom = 0.7954227
+offset_left = -10.077898
+offset_top = -10.196872
+offset_right = -5.54064
+offset_bottom = -5.806902
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerAir" type="Sprite2D" parent="Elements"]
-position = Vector2(336, 32)
-texture = ExtResource("28_7glkl")
+[node name="ExitLabel" type="Label" parent="MENU/Menu2/ExitButton"]
+anchors_preset = -1
+anchor_left = -1.1750001
+anchor_top = 0.5
+anchor_right = -1.1750001
+anchor_bottom = 0.5
+offset_left = -14.255739
+offset_top = -15.627087
+offset_right = 5.2732296
+offset_bottom = 3.3729134
+scale = Vector2(1.335, 1.335)
+theme_override_fonts/font = ExtResource("10_7supi")
+theme_override_font_sizes/font_size = 15
+text = "Exit"
 
 [connection signal="animation_finished" from="MC" to="." method="OnPlayerAnimationFinished"]
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/Click" to="." method="OnClickButton"]
-[connection signal="pressed" from="Save/Savebutton" to="." method="SaveGame"]
-[connection signal="pressed" from="ExitButton/Exit" to="." method="OnQuitButtonPressed"]
-[connection signal="pressed" from="DeleteSave/Delete" to="." method="DeleteSave"]
 [connection signal="pressed" from="LvlupButtonColored/TextureButton" to="." method="OnLevelClickButton"]
 [connection signal="pressed" from="GoNext/ChangeMapButton" to="." method="OnChangeMapPressed"]
-[connection signal="pressed" from="MENU/OptionsMenuLayer/CloseButton" to="." method="OnMenuClosed"]
-[connection signal="pressed" from="MENU/Menu2/ExitButton/Exit" to="." method="OnQuitButtonPressed"]
-[connection signal="pressed" from="MENU/Menu2/ResumeIcon/ResumeButton" to="." method="ResumeButton"]
 [connection signal="pressed" from="MENU/Menu2/Music/OpenMenu" to="." method="OnOptionsMenuOpened"]
 [connection signal="pressed" from="MENU/Menu2/Save/Savebutton" to="." method="SaveGame"]
 [connection signal="pressed" from="MENU/Menu2/DeleteSave/Delete" to="." method="DeleteSave"]
+[connection signal="pressed" from="MENU/Menu2/ResumeIcon/ResumeButton" to="." method="ResumeButton"]
+[connection signal="pressed" from="MENU/Menu2/ExitButton/Exit" to="." method="OnQuitButtonPressed"]
