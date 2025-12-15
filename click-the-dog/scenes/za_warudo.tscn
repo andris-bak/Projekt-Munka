@@ -297,10 +297,10 @@ theme_override_fonts/font = ExtResource("10_7supi")
 text = "Health: "
 
 [node name="Level" type="Label" parent="."]
-offset_left = 47.99999
-offset_top = 40.0
-offset_right = 111.59999
-offset_bottom = 79.0
+offset_left = 12.000004
+offset_top = 63.999992
+offset_right = 85.05937
+offset_bottom = 91.99999
 scale = Vector2(1.095, 1.095)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_7supi")
@@ -317,10 +317,10 @@ theme_override_fonts/font = ExtResource("10_7supi")
 theme_override_font_sizes/font_size = 27
 
 [node name="Price" type="Label" parent="."]
-offset_left = 8.000001
-offset_top = 63.999996
-offset_right = 71.0
-offset_bottom = 87.0
+offset_left = 16.0
+offset_top = 87.99999
+offset_right = 79.0
+offset_bottom = 110.99999
 scale = Vector2(1.095, 1.095)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_7supi")
