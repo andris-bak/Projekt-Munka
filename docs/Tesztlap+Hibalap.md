@@ -232,7 +232,7 @@ Nem működött a szint lépés a játékban, mivel probléma volt a szint növe
 Miután legyőztünk egy ellenséget, nem növekedett a pénzünk a játékban. Létre kellet hozni egy új metódust. Miután az ellenség életereje 0-ra esett, egy másik változóhoz hozzá adtuk az előre megszabott értéket, így már müködöt is a kód.
 
 ### B006
-Meg nyílt maga a kód, viszont teljesen össze omlott az egész, úgyhogy senki nem nyúlt hozzá. Kimásoltuk az előző mentést, beillesztettük, és gond nélkül lefutott minden és a játék elindult. Mai napig nem tudjuk, mi lehetett a baj, de orvosoltuk.
+Megnyílt maga a kód, viszont teljesen össze omlott az egész, úgyhogy senki nem nyúlt hozzá. Kimásoltuk az előző mentést, beillesztettük, és gond nélkül lefutott minden és a játék elindult. Mai napig nem tudjuk, mi lehetett a baj, de orvosoltuk.
 
 ### B007
 A problémánk az volt, hogy nem akarta érzékelni a többi ellenséget a kód. Így minden képet át raktunk egy másik Scene-be, és egy Random változó segitségével mindig más és más Scene-t tölt be a játék, ha az előző ellenség életereje 0-ra csökken!
@@ -277,7 +277,7 @@ Rossz helyen volt a metódus, és ezért nem tudod lefutni rendesen, ami azt ere
 Nem töltődött vissza az ellenség élet ereje, mivel nem volt hozzá megfelelő Timer. Be lett rakva egy a megfelelő helyre és müködött.
 
 ### B021
-Logikai hiba történt, mivel túl ment a maximum élet erőn. Le kellett korlátozni egy változóval a regenerációt.
+Logikai hiba történt, mivel túl ment a maximum életerőn. Le kellett korlátozni egy változóval a regenerációt.
 
 ### B022
 Random változóval akartuk megoldani, de mivel nem volt globális, ezért nem müködött. Miután globális lett, egy `switch case` logikával megoldottuk a problémát.
@@ -310,7 +310,7 @@ nem tudjuk mi lehet baj nem akarnak müködni az inputok
 
 | Elem | Érték | Állapot |
 | :--- | :--- | :--- |
-| **Összes talált hiba** | 25 | Teljes |
+| **Összes talált hiba** | 29 | Teljes |
 | **Kritikus hibák** | 1 (B006) | Javítva |
 | **Fontos hibák** | 16 | Javítva |
 | **Jelenlegi állapot** | **0 nyitott hiba** | **A projekt készen áll az MVP kiadásra.** |
@@ -330,6 +330,7 @@ A projekt tesztelése és hibajavítása során a csapat számos értékes tapas
 **Javaslat a jövőre:** A következő projekt során a csapatnak érdemes lenne a fejlesztés korai szakaszában a UI és hitbox beállításokat külön, dedikált tesztekkel ellenőrizni, mielőtt a mélyebb logikai implementációba belekezdenek.
 
 ---
+
 
 
 
