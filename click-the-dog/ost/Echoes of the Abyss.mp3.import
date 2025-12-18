@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfnw7k3dw6xby"
+path="res://.godot/imported/Echoes of the Abyss.mp3-23872564d48bc038db10ee893aca497f.mp3str"
+
+[deps]
+
+source_file="res://ost/Echoes of the Abyss.mp3"
+dest_files=["res://.godot/imported/Echoes of the Abyss.mp3-23872564d48bc038db10ee893aca497f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

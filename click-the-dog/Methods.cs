@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Globalization;
 
 public partial class Methods : Node
 {
@@ -38,9 +39,11 @@ public partial class Methods : Node
 			 GD.Load<PackedScene>("res://scenes/slime_2.tscn"), 
 			 GD.Load<PackedScene>("res://scenes/slime_3.tscn"),
 			 GD.Load<PackedScene>("res://scenes/clowndog.tscn"),
+			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"),
+			 GD.Load<PackedScene>("res://scenes/bone_dog_2.tscn"),
 			
 			//Boss:
-			 GD.Load<PackedScene>("res://scenes/bonedog.tscn"), 
+			 GD.Load<PackedScene>("res://scenes/bone_dog_3.tscn") 
 		};
 	}
 	
@@ -86,7 +89,7 @@ public partial class Methods : Node
 		{
 			_levelPrice.Text = $"Price: {GM.LevelPrice}";//"Price: " + GM.LevelPrice.ToString();
 		}
-		if(GM.Level == 12)
+		if(GM.Level == 24)
 		{
 			_levelPrice.Text = "Elérted a maximális szintet!";
 		}
@@ -279,5 +282,28 @@ public partial class Methods : Node
 			GM.Coin -= 150;
 			Coin();
 		}
+	}
+	
+	// Teszteléshez:
+	public static string BuildBossTimeText(bool isBossFight, float bossTimeLeft)
+	{
+		if (!isBossFight) return "";
+		return $"IDŐ: {bossTimeLeft.ToString("0.00", CultureInfo.InvariantCulture)} mp";
+	}
+
+	// 0 = fehér, 1 = piros (így nem kell Godot.Color a tesztekben)
+	public static int GetBossTimeColorCode(bool isBossFight, float bossTimeLeft)
+	{
+		if (!isBossFight) return 0;
+
+		if (bossTimeLeft <= 5.0f && bossTimeLeft >= 0.0f) return 1;
+		if (bossTimeLeft >= 5.0f && bossTimeLeft <= 15.0f) return 0;
+
+		return 0;
+	}
+
+	public static int CalculateBossLossRemainingCoin(int coin)
+	{
+		return Math.Max(0, coin - 1000);
 	}
 }

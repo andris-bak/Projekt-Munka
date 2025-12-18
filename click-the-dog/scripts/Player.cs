@@ -22,7 +22,7 @@ public partial class Player
 	public Player()
 	{
 		Level = 1;
-		Damage = 1;
+		Damage = 1000;
 		PlayerDamageType = DamageType.NONE;
 		PalaLevel = 1;
 		PalaDamage = 1;

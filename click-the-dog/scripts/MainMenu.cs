@@ -35,24 +35,15 @@ public partial class MainMenu : Node2D
 	private void OnLoadGameButtonPressed()
 	{
 		GD.Print("Mentett játék betöltése...");
-		var mainScene = GD.Load<PackedScene>("res://scenes/za_warudo_2.tscn");
-		//if(GM.CurrentScene == 1)
-		//{
-		//	mainScene = GD.Load<PackedScene>("res://scenes/za_warudo.tscn");
-		//	GetTree().ChangeSceneToPacked(mainScene);
-		//}
-		//if(GM.CurrentScene == 2)
-		//{
-		//	mainScene = GD.Load<PackedScene>("res://scenes/za_warudo_2.tscn");	
-		//}
+		var mainScene = GD.Load<PackedScene>("res://scenes/za_warudo_3.tscn");
 		GetTree().ChangeSceneToPacked(mainScene);
 	}
 	
 	public async void OnStartButtonPressed()
 	{
-		//FadeController fade = GetNode<FadeController>("/root/FadeController");
-		//await fade.FadeToScene("res://scenes/za_warudo.tscn");
-		GetTree().ChangeSceneToFile("res://scenes/za_warudo.tscn");
+		FadeController fade = GetNode<FadeController>("/root/FadeController");
+		await fade.FadeToScene("res://scenes/za_warudo.tscn");
+		//GetTree().ChangeSceneToFile("res://scenes/za_warudo.tscn");
 	}
 
 	public async void OnQuitButtonPressed()

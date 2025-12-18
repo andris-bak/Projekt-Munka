@@ -21,7 +21,7 @@ public partial class GameManager : Node
 	public float regenTimer {get; set;} = 0.0f;
 	public int element {get; set;} = -1;
 	public bool BossDefeated {get; set;} = false;
-	public int CurrentScene {get; set;} = 0;
+	public int CurrentScene {get; set;} = 1;
 	public bool Hired {get;set;} = false;	
 	
 	public Player PlayerData { get; set; }

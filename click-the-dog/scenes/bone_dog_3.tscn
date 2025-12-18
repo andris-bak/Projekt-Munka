@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://dnhu0ejx2kba"]
+
+[ext_resource type="Texture2D" uid="uid://cobwd5pkrjofj" path="res://enemies/skeleton_dog3-Sheet.png" id="1_kgyub"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxqqu"]
+atlas = ExtResource("1_kgyub")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v1mp"]
+atlas = ExtResource("1_kgyub")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cfkq"]
+atlas = ExtResource("1_kgyub")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2kvy"]
+atlas = ExtResource("1_kgyub")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foy0l"]
+atlas = ExtResource("1_kgyub")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3f2l"]
+atlas = ExtResource("1_kgyub")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkqv8"]
+atlas = ExtResource("1_kgyub")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lm4o"]
+atlas = ExtResource("1_kgyub")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ak1p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxqqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v1mp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cfkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2kvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foy0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3f2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkqv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lm4o")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="BoneDog3" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(307, 126)
+scale = Vector2(1.8125, 1.8125)
+sprite_frames = SubResource("SpriteFrames_6ak1p")
+animation = &"Idle"

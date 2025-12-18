@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://bla6t6qp38sla"]
+[gd_scene load_steps=56 format=4 uid="uid://bla6t6qp38sla"]
 
 [ext_resource type="Script" uid="uid://ctkmhke2vqh47" path="res://scripts/Main.cs" id="1_qvfia"]
 [ext_resource type="TileSet" uid="uid://dih0qbocxqfay" path="res://scenes/main_tileset.tres" id="1_ydpgq"]
@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://fmuuqcybl4fl" path="res://assets/UI/character_lvl.png" id="31_hshem"]
 [ext_resource type="Texture2D" uid="uid://cgsnd2n4b6xaq" path="res://assets/Button/paused_icon.png" id="38_3bjsr"]
 [ext_resource type="Texture2D" uid="uid://d1hf3yv8id8sp" path="res://assets/Button/resume_icon.png" id="39_htr88"]
+[ext_resource type="Texture2D" uid="uid://bp00i15gm0yye" path="res://assets/Egyéb/sign.png" id="40_510jb"]
 [ext_resource type="Texture2D" uid="uid://b2uqk3r3po2o" path="res://assets/Button/options_icon.png" id="40_oa5er"]
 [ext_resource type="Texture2D" uid="uid://l3vkyjwisewj" path="res://assets/Button/save_button_2.png" id="41_3bjsr"]
 [ext_resource type="Texture2D" uid="uid://bxvd8uoj0wsor" path="res://assets/Button/save_delete_button.png" id="42_htr88"]
@@ -150,13 +151,14 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aluu1"]
 
-[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "MENU", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "GoNext", "PauseOverLay", "PlayerFire", "PlayerWater", "PlayerAir", "PlayerEarth", "Elements")]
+[node name="za warudo" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "Sign", "MENU", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "GoNext", "PauseOverLay", "PlayerFire", "PlayerWater", "PlayerAir", "PlayerEarth", "Elements")]
 script = ExtResource("1_qvfia")
 CoinLabel = NodePath("Coins")
 HPLabel = NodePath("Health")
 bossLabel = NodePath("Time")
 LevelLabel = NodePath("Level")
 LevelPrice = NodePath("Price")
+Sign = NodePath("Sign")
 MENU = NodePath("MENU")
 Shield = NodePath("Shield")
 Fire = NodePath("Fire")
@@ -264,6 +266,21 @@ script = ExtResource("12_kttba")
 _hoverCursorTexture = ExtResource("15_7glkl")
 _defaultCursorTexture = ExtResource("14_3xnty")
 metadata/_edit_use_anchors_ = true
+
+[node name="ExitButton" type="Sprite2D" parent="."]
+position = Vector2(623, 15)
+scale = Vector2(2.3125, 2.28039)
+
+[node name="Exit" type="TextureButton" parent="ExitButton"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.531
+anchor_right = 0.5
+anchor_bottom = 0.531
+offset_left = -15.0
+offset_top = -14.496
+offset_right = -1.0
+offset_bottom = -1.496
 
 [node name="Dabloon" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
@@ -581,7 +598,7 @@ scale = Vector2(2.7, 2.7)
 texture = ExtResource("30_crbji")
 
 [node name="PausedIcon" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(16.745287, -42.015915)
+position = Vector2(22.103775, -43.607433)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("38_3bjsr")
 
@@ -620,54 +637,22 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="MENU/Menu2/Music"]
-anchors_preset = -1
-anchor_left = 0.43103912
-anchor_top = 0.7694178
-anchor_right = 0.43103912
-anchor_bottom = 0.7694178
-offset_left = -54.012825
-offset_top = -20.925581
-offset_right = -19.012825
-offset_bottom = -1.9255686
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.587044
+offset_top = -17.64117
+offset_right = -20.587044
+offset_bottom = 0.35883045
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1.145, 1.145)
 theme_override_fonts/font = ExtResource("10_7supi")
 theme_override_font_sizes/font_size = 15
 text = "Options"
 metadata/_edit_use_anchors_ = true
-
-[node name="Save" type="Sprite2D" parent="MENU/Menu2"]
-position = Vector2(11.386791, -5.7294407)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("41_3bjsr")
-
-[node name="Savebutton" type="TextureButton" parent="MENU/Menu2/Save"]
-anchors_preset = -1
-anchor_left = -1.429
-anchor_top = 0.23600002
-anchor_right = 0.76400006
-anchor_bottom = 0.744
-offset_left = -10.3509655
-offset_top = -10.503087
-offset_right = -6.0190525
-offset_bottom = -5.668128
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="SaveLabel" type="Label" parent="MENU/Menu2/Save"]
-anchors_preset = -1
-anchor_left = -0.90300006
-anchor_top = 0.5
-anchor_right = -0.90300006
-anchor_bottom = 0.5
-offset_left = -17.67434
-offset_top = -16.424706
-offset_right = 3.639266
-offset_bottom = 2.5752945
-scale = Vector2(1.21, 1.21)
-theme_override_fonts/font = ExtResource("10_7supi")
-theme_override_font_sizes/font_size = 15
-text = "Save"
 
 [node name="DeleteSave" type="Sprite2D" parent="MENU/Menu2"]
 position = Vector2(16.410387, 11.777194)
@@ -762,13 +747,95 @@ theme_override_fonts/font = ExtResource("10_7supi")
 theme_override_font_sizes/font_size = 15
 text = "Exit"
 
+[node name="Save" type="Sprite2D" parent="MENU/Menu2"]
+position = Vector2(17.037037, -7.4074073)
+texture = ExtResource("41_3bjsr")
+
+[node name="SaveLabel" type="Label" parent="MENU/Menu2/Save"]
+anchors_preset = -1
+anchor_left = -0.933
+anchor_top = 0.5
+anchor_right = -0.933
+anchor_bottom = 0.5
+offset_left = -22.109035
+offset_top = -15.777779
+offset_right = 17.89098
+offset_bottom = 7.2222214
+theme_override_fonts/font = ExtResource("10_7supi")
+text = "Save"
+
+[node name="TextureButton" type="TextureButton" parent="MENU/Menu2/Save"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.925926
+offset_top = -14.296296
+offset_right = -0.9629593
+offset_bottom = -0.22222233
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sign" type="CanvasLayer" parent="."]
+layer = 0
+visible = false
+
+[node name="Hero" type="TextureButton" parent="Sign"]
+anchors_preset = -1
+anchor_left = 0.20700002
+anchor_top = 0.39800003
+anchor_right = 0.20700002
+anchor_bottom = 0.39800003
+offset_left = -22.480011
+offset_top = -17.280014
+offset_right = 22.519989
+offset_bottom = 51.719986
+
+[node name="Sign" type="Sprite2D" parent="Sign"]
+position = Vector2(128.00003, 145)
+scale = Vector2(1.46875, 1.453125)
+texture = ExtResource("40_510jb")
+
+[node name="Label" type="Label" parent="Sign/Sign"]
+anchors_preset = -1
+anchor_left = 0.54700005
+anchor_top = 0.42700002
+anchor_right = 0.54700005
+anchor_bottom = 0.42700002
+offset_left = -41.135674
+offset_top = -39.7151
+offset_right = 16.864326
+offset_bottom = 9.284903
+scale = Vector2(0.315, 0.315)
+text = "Hero 
+for hire"
+metadata/_edit_use_anchors_ = true
+
+[node name="Dabloon" type="Sprite2D" parent="Sign/Sign"]
+position = Vector2(-43.574493, -5.50538)
+scale = Vector2(1.0438826, 1.0551072)
+texture = ExtResource("10_nxjxa")
+
+[node name="Label" type="Label" parent="Sign/Sign/Dabloon"]
+anchors_preset = -1
+anchor_left = 1.7990001
+anchor_top = 0.5
+anchor_right = 1.7990001
+anchor_bottom = 0.5
+offset_left = -19.000555
+offset_top = -14.522295
+offset_right = 16.219843
+offset_bottom = 8.477705
+scale = Vector2(0.625, 0.625)
+text = "150"
+
 [connection signal="animation_finished" from="MC" to="." method="OnPlayerAnimationFinished"]
 [connection signal="pressed" from="Paladin/beszed" to="Paladin" method="OnPaladinPressed"]
 [connection signal="pressed" from="Enemy/Click" to="." method="OnClickButton"]
 [connection signal="pressed" from="LvlupButtonColored/TextureButton" to="." method="OnLevelClickButton"]
 [connection signal="pressed" from="GoNext/ChangeMapButton" to="." method="OnChangeMapPressed"]
 [connection signal="pressed" from="MENU/Menu2/Music/OpenMenu" to="." method="OnOptionsMenuOpened"]
-[connection signal="pressed" from="MENU/Menu2/Save/Savebutton" to="." method="SaveGame"]
 [connection signal="pressed" from="MENU/Menu2/DeleteSave/Delete" to="." method="DeleteSave"]
 [connection signal="pressed" from="MENU/Menu2/ResumeIcon/ResumeButton" to="." method="ResumeButton"]
 [connection signal="pressed" from="MENU/Menu2/ExitButton/Exit" to="." method="OnQuitButtonPressed"]

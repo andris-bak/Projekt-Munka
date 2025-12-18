@@ -5,6 +5,7 @@ public partial class Main : Node2D
 {
 	public GameManager GM;
 	public Methods Method;
+	public string ScenePath = "res://scenes/za_warudo.tscn";
 	
 	// Jelenethez kötött Node hivatkozások
 	public AudioStreamPlayer bgmPlayer; 
@@ -64,8 +65,6 @@ public partial class Main : Node2D
 		hitSound = GetNode<AudioStreamPlayer>("hitfx");
 		UpdatePlayerIcons();
 		
-		GM.CurrentScene = 1;
-		
 		GM.HP = GM.EnemyData.Health;
 		LoadGame();
 		HPBar.MaxValue = GM.HP;
@@ -76,6 +75,12 @@ public partial class Main : Node2D
 		UpdateLevel();
 		UpdateLevelPrice();
 		UpdateTimerLabel();
+		
+		if(GM.Hired)
+		{
+			//EnsurePaladinExists();
+			//SpawnPaladinFromSave();
+		}
 		
 		if(bgmPlayer != null)
 		{
@@ -111,10 +116,7 @@ public partial class Main : Node2D
 	}
 	
 	public override void _Process(double delta)
-	{
-	//	if (GetTree().Paused)
-	//	return;
-		
+	{		
 		ChangePosition(); 
 		// --- IDŐZÍTŐ LOGIKA ---
 		if (GM.IsBossFight)
@@ -175,8 +177,7 @@ public partial class Main : Node2D
 			{
 				optionsMenuLayer.Visible = false;
 			}
-			
-			GetViewport().SetInputAsHandled(); 
+			GetViewport().SetInputAsHandled();
 		}
 		
 		if (@event.IsActionPressed("switchToFire"))  { SelectDamage(Player.DamageType.FIRE);  GetViewport().SetInputAsHandled(); }
@@ -358,10 +359,9 @@ public partial class Main : Node2D
 			}
 			UpdateCoinLabel();
 			UpdateHP();
-			ChangeShield(); // Pajzs frissítése/cseréje
+			ChangeShield(); 
 			ChangeEnemyScene(); 
 		} // Bezárja az if(GM.HP <= 0) blokkot
-
 	} 
 	
 	private void UpdatePlayerIcons()
@@ -371,6 +371,7 @@ public partial class Main : Node2D
 		PlayerAir.Texture   = (tes == Player.DamageType.AIR)   ? AirOn   : AirOff;
 		PlayerEarth.Texture = (tes == Player.DamageType.EARTH) ? EarthOn : EarthOff;
 	}
+	
 	private void SelectDamage(Player.DamageType type)
 	{
 		tes = (tes == type) ? Player.DamageType.NONE : type;
@@ -462,11 +463,19 @@ public partial class Main : Node2D
 		}
 	}
 	
+	
 	public async void OnChangeMapPressed()
 	{
-		FadeController fade = GetNode<FadeController>("/root/FadeController");
-		await fade.FadeToScene("res://scenes/za_warudo_2.tscn");
-		//GetTree().ChangeSceneToFile("res://scenes/za_warudo_2.tscn");
+		if(GM.CurrentScene <= 2)
+		{
+			FadeController fade = GetNode<FadeController>("/root/FadeController");
+			await fade.FadeToScene("res://scenes/za_warudo_2.tscn");
+		}
+		if(GM.CurrentScene >= 3)
+		{
+			FadeController fade = GetNode<FadeController>("/root/FadeController");
+			await fade.FadeToScene("res://scenes/za_warudo_3.tscn");
+		}
 	}
 	
 	// --- METÓDUS: Boss győzelem (Idő lejárt) ---
@@ -491,7 +500,6 @@ public partial class Main : Node2D
 			 currentEnemy.QueueFree();
 			 currentEnemy = null;
 		}
-
 		// 2. SEGÉD: Kérünk egy új ellenséget a Methodstól
 		Node2D newEnemy = Method.ChangeEnemy(); 
 		
@@ -595,7 +603,11 @@ public partial class Main : Node2D
 			{"Counter", GM.Counter},
 			{"PlayerLevel", GM.PlayerData.Level},
 			{"PlayerDamage", GM.PlayerData.Damage},
-			{"Pálya", GM.CurrentScene}
+			{"PaladinDamage", GM.PlayerData.PalaDamage},
+			{"PaladinLevel", GM.PlayerData.PalaLevel},
+			{"CurrentScene", GM.CurrentScene},
+			{"Hired", GM.Hired},
+			{"ScenePath", GetTree().CurrentScene.SceneFilePath}
 		};
 		
 		string jsonString = Json.Stringify(dataDict);
@@ -647,13 +659,26 @@ public partial class Main : Node2D
 		GM.MinHP = (int)(long)dataDict["MinHP"];
 		GM.MaxHP = (int)(long)dataDict["MaxHP"];
 		GM.Counter = (int)(long)dataDict["Counter"];
+		GM.CurrentScene = (int)(long)dataDict["CurrentScene"];
+		GM.Hired = (bool)dataDict["Hired"];
+		
 
 		// GM.PlayerData adatok betöltése
 		GM.PlayerData.Level = (int)(long)dataDict["PlayerLevel"];
 		GM.PlayerData.Damage = 1000; //(int)(long)dataDict["PlayerDamage"]; 
+		GM.PlayerData.Damage = (int)(long)dataDict["PlayerDamage"]; 
+		GM.PlayerData.PalaDamage = (int)(long)dataDict["PaladinDamage"];
+		GM.PlayerData.PalaLevel = (int)(long)dataDict["PaladinLevel"];  
 		
-		// GM.Rnd és GM.Min/MaxHP használata
-		GM.HP = GM.Rnd.Next(GM.MinHP, GM.MaxHP); 
+		if (dataDict.ContainsKey("ScenePath"))
+			ScenePath = dataDict["ScenePath"].AsString();
+		else
+			ScenePath = "res://scenes/za_warudo.tscn";
+		// HP betöltése (ha nincs a mentésben, akkor MaxHP)
+		if (dataDict.ContainsKey("HP"))
+			GM.HP = (int)(long)dataDict["HP"];
+		else
+			GM.HP = GM.MaxHP;
 
 		UpdateCoinLabel();
 		UpdateLevel();
@@ -704,9 +729,8 @@ public partial class Main : Node2D
 			PlayerSprite.Position = new Vector2(429,173);
 			PlayerSprite.Play("Idle");
 		}
-		
 		// Mozgás a Paladinnak 
-		if(GM.Hired == true)
+		if(GM.Hired == true && PaladinSprite != null)
 		{
 			if (Input.IsActionJustPressed("switchLeft"))
 			{
@@ -719,6 +743,41 @@ public partial class Main : Node2D
 				PaladinSprite.Play("Idle2");
 			}
 		}
+		
+	}
+	public void SpawnPaladinFromSave()
+	{
+		//if(GM.CurrentScene == 2)
+		//{
+			PackedScene newCharacterScene = characterScenes[0];
+			Node2D newCharacter = newCharacterScene.Instantiate<Node2D>();
+			PaladinSprite = newCharacter.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
+			AddChild(newCharacter);
+			// alap pozíció betöltéskor
+			PaladinSprite.Position = new Vector2(205, 173);
+			PaladinSprite.Play("Idle2");
+		//}
+	}
 	
+	private void EnsurePaladinExists()
+	{
+		if (PaladinSprite != null) return;
+
+		PackedScene newCharacterScene = characterScenes[0];
+		Node2D newCharacter = newCharacterScene.Instantiate<Node2D>();
+		PaladinSprite = newCharacter.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
+		AddChild(newCharacter);
+
+		// induló pozíció igazodjon a playerhez
+		if (PlayerSprite.Position == new Vector2(429, 173))
+		{
+			PaladinSprite.Position = new Vector2(205, 173);
+			PaladinSprite.Play("Idle2");
+		}
+		else
+		{
+			PaladinSprite.Position = new Vector2(429, 173);
+			PaladinSprite.Play("Idle");
+		}
 	}
 }
