@@ -1,4 +1,4 @@
-#  Rendszerterv: Click the Dog (CTD) - Teljes Technikai Dokumentáció
+# Rendszerterv: Click the Dog (CTD) - Teljes Technikai Dokumentáció
 
 **Projekt:** Click the Dog (CTD) – Battle Clicker Game  
 
@@ -6,7 +6,7 @@
 
 **Tagok:** Venyige Márk, Bak András Mátyás, Kovács Krisztián, Jabur Emil  
 
-**Verzió:** 1.1 (Bővített technikai kiadás)  
+**Verzió:** 1.3 (Expanzív technikai kiadás)  
 
 **Dátum:** 2025. december
 
@@ -14,18 +14,17 @@
 
 ## 1. Rendszerarchitektúra és Osztályszerkezet
 
-A játék a Godot Engine objektumorientált, jelenet-alapú rendszerét használja. Minden egység (Entity) külön szkripttel és felelősségi körrel rendelkezik.
+A játék a Godot Engine objektumorientált, jelenet-alapú rendszerét használja. A rendszer dekapcsolt (decoupled), ami lehetővé teszi az egyes modulok független tesztelését.
 
 ### Osztályhierarchia és felelősségek
 1. **GameManager (Singleton):** - A globális állapot tárolása: $Level$, $Gold$, $XP$.
-   - A mentési folyamatok kezelése.
-2. **CombatHandler:** - A harci logika matematikai magja.
-   - Kiszámolja a sebzést a következő képlet alapján:
-     $$TotalDamage = (BaseDamage + LevelBonus) \times ElementMultiplier \times ShieldPenalty$$
-3. **PlayerController:** - Figyeli a billentyűzetet (`Q`, `E`) és az egeret.
-   - Meghívja a mozgási animációkat és a támadási jeleket.
-4. **Enemy (Base Class):** - Életerő-kezelés: $HP_{new} = \max(0, HP_{old} - TotalDamage)$.
-   - Regenerációs ciklus futtatása `Timer` segítségével.
+   - A jelenetek közötti adatátvitel és a mentési folyamatok központi vezérlése.
+2. **CombatHandler (Logikai modul):** - A harci logika matematikai magja.
+   - Kiszámolja a sebzést a környezeti változók alapján.
+3. **PlayerController (Input modul):** - Kezeli a sávváltás (Lane switching) állapotgépét (State Machine).
+   - Állapotok: `IDLE`, `MOVING`, `ATTACKING`.
+4. **Enemy (Base Class):** - Életerő-kezelés és vizuális visszacsatolás.
+   - Dinamikus pajzs-generálás és regenerációs ciklus.
 
 
 
@@ -33,72 +32,105 @@ A játék a Godot Engine objektumorientált, jelenet-alapú rendszerét használ
 
 ## 2. Szekvenciadiagram (Interakciók folyamata)
 
-Ez a diagram szemlélteti, mi történik a háttérben egyetlen sikeres kattintás során:
+Az alábbi folyamat szemlélteti a komponensek közötti üzenetváltást egy kattintás során.
 
 
 
-1. **Player (Input):** Kattint az ellenségre.
-2. **CombatHandler:** Lekéri a játékos pozícióját a `PlayerController`-től és az ellenség pajzsállapotát az `Enemy`-től.
-3. **Logic Check:** Ha a pozíciók ütköznek (Pajzs aktív), a folyamat megszakad.
-4. **Calculation:** Ha a pajzs nem véd, a `GameManager`-től lekéri a szintbónuszokat és kiszámolja a végső értéket.
-5. **Enemy Update:** Az `Enemy` levonja a HP-t és visszajelez az UI-nak (ProgressBar).
-6. **GameManager:** Ha a HP eléri a 0-át, jóváírja a jutalmat ($Gold$).
+### A folyamat lépései:
+1. **Input:** A játékos kattint.
+2. **Sávellenőrzés:** A `CombatHandler` összeveti a játékos sávját az `Enemy` pajzsának sávjával.
+3. **Számítás:** Ha nincs blokkolás, a sebzés kiszámítása:
+   $$TotalDamage = (BaseDamage + LevelBonus) \times ElementMultiplier$$
+4. **Frissítés:** Az `Enemy` levonja a HP-t, a `ProgressBar` pedig interpolált (lerp) mozgással frissül.
+5. **Halál-esemény:** Ha $HP \le 0$, a `GameManager` új ellenséget generál.
 
 ---
 
-## 3.  Teszt Esetek Listája (80 Eset - 1-20 Prefixelt)
+## 3. Játékegyensúly és Scaling Matematika
 
-| ID | Tesztelő | Leírás | Hivatkozás (Bug) |
+A játék hosszú távú játszhatóságát a progresszív nehézségi görbe biztosítja. Az ellenségek életereje exponenciálisan növekszik:
+
+* **Ellenség HP képlete:**
+  $$HP_{enemy} = BaseHP \times 1.15^{(Level - 1)}$$
+* **Arany jutalom kalkuláció:**
+  $$Gold_{reward} = \lfloor Level \times 5 \times (1 + RandomBonus) \rfloor$$
+
+Ez a skálázás garantálja, hogy a játékosnak folyamatosan fejlesztenie kell a szintjét a haladáshoz.
+
+
+
+---
+
+## 4. Adatkezelés és Mentési Rendszer
+
+A játék a felhasználói adatokat lokálisan tárolja. A mentési ciklus a következő esetekben fut le:
+1. Minden 10. (Boss) ellenség legyőzése után.
+2. A játékból való kilépéskor (felhasználói jóváhagyással - B014).
+
+
+
+---
+
+## 5. Teszt Esetek Listája (80 Eset - 1-20 Prefixelt)
+
+| ID | Tesztelő | Fókuszterület | Hivatkozás (Bug) |
 | :--- | :--- | :--- | :--- |
-| **TM01-TM20** | Venyige M. | Alap harci mechanika, regeneráció és kritikus hibák tesztje. | B018, B002, B006, **-** |
-| **TA01-TA20** | Bak A. M. | Mozgásmechanika (Q/E), menürendszer és UI elhelyezkedés. | B010, B012, B024, **-** |
-| **TK01-TK20** | Kovács K. | Ellenség betöltési logika, ProgressBar vizualizáció és pálya tesztek. | B007, B023, B015, **-** |
-| **TE01-TE20** | Jabur E. | Gazdasági egyensúly, szintlépés és kurzor-interakciók. | B005, B008, B025, **-** |
-
-*Megjegyzés: A "-" jelzéssel ellátott sorok (összesen 16+) olyan funkciókat jelölnek, amelyek az első teszteléskor hiba nélkül működtek.*
+| **TM01-TM20** | Venyige M. | Alap harci mechanika, stabilitás. | B018, B002, B006, **-** |
+| **TA01-TA20** | Bak A. M. | Mozgásmechanika, UI horgonyok. | B010, B012, B024, **-** |
+| **TK01-TK20** | Kovács K. | Betöltési logika, Pálya koordináták. | B007, B023, B015, **-** |
+| **TE01-TE20** | Jabur E. | Gazdasági egyensúly, Szintlépési görbe. | B005, B008, B025, **-** |
 
 ---
 
-## 4.  Kiemelt Hibalista és Megoldások
+## 6. Kockázati Terv és Mitigáció (Risk Management)
 
-| ID | Hiba leírása | Megoldás állapota | Technikai javítás |
+| Kockázat | Valószínűség | Hatás | Megoldás (Mitigáció) |
 | :--- | :--- | :--- | :--- |
-| **B006** | Kritikus összeomlás | Javítva | Fájl elérési utak abszolút koordinálása. |
-| **B018** | Pajzs áttörése | Javítva | `if` ág bővítése a karakter pozíciójának ellenőrzésével. |
-| **B029** | Input leállás | **Vizsgálat alatt** | `_input` és `_unhandled_input` prioritások ütközése. |
+| **Adatvesztés (Mentési hiba)** | Közepes | Magas | Automatikus `.bak` fájl létrehozása minden mentéskor. |
+| **Input lag (B029)** | Alacsony | Közepes | Az input feldolgozás áthelyezése a `_physics_process`-be. |
+| **Teljesítmény romlás** | Alacsony | Alacsony | Objektum-poolozás (Object Pooling) használata az ellenségeknél. |
 
 ---
 
-##  5. Projekt Roadmap (Ütemterv)
+## 7. Rendszerkövetelmények
 
-### M1: Alaprendszer (Hónap 1)
-- Jelenetek közötti navigáció és alap sebzés-modell.
-- **Eredmény:** Működő kattintás és HP csökkenés.
+### Minimum követelmények:
+* **Operációs rendszer:** Windows 10 / Linux (Ubuntu 20.04+)
+* **Processzor:** Dual Core 2.0 GHz
+* **Memória:** 2 GB RAM
+* **Grafika:** OpenGL 3.3 kompatibilis kártya
 
-### M2: Taktikai Mélység (Hónap 2)
-- Mozgás sávok között (`Q`, `E`) és pajzs generálás.
-- **Eredmény:** Pozícionálást igénylő harcrendszer.
+### Fejlesztői környezet:
+* Godot Engine 4.x (Standard Edition)
+* VS Code (GDScript kiterjesztéssel)
 
-### M3: Gazdasági Rendszer (Hónap 3)
+---
+
+## 8. Projekt Roadmap (Ütemterv)
+
+### M1: Alaprendszer (KÉSZ)
+- Jelenetek közötti navigáció, alap sebzés-modell.
+
+### M2: Taktikai Mélység (KÉSZ)
+- Sávváltás (`Q`, `E`) és pajzs generálás.
+
+### M3: Gazdasági Rendszer (KÉSZ)
 - Szintlépés, Boss-ciklusok és mentési mechanika.
-- **Eredmény:** Menthető és fejleszthető játékos profil.
 
 ### M4: QA és Polírozás (Jelenleg)
-- A 80 teszt eset alapján történő finomhangolás.
-- **Eredmény:** Stabil, bugmentes (28/29) MVP.
+- Optimalizálás, utolsó hibák (B029) elhárítása és MVP kiadás.
 
 ---
 
-## 6. Használati és Karbantartási Útmutató
+## 9. Üzemeltetési Útmutató
 
 ### Fejlesztőknek:
-- Új ellenség hozzáadásához az `EnemyBase` jelenetet örököltessük.
-- Az elementális típusokat a `GlobalConstants` szkriptben definiáljuk.
+- Új elem (pl. "Villám") hozzáadásához a `GlobalConstants.Elements` enumot kell bővíteni.
+- A sebzés-lebegő szövegek (Floating Combat Text) a `UI_Layer` jelenetben módosíthatók.
 
 ### Tesztelőknek:
-- **Szélsőérték teszt:** A HP regeneráció soha nem emelheti a HP-t a `Max_HP` fölé.
-- **Pajzs teszt:** Mindig ellenőrizzük, hogy a karakter textúrája és a sebzés-tiltás logikája szinkronban van-e (bal oldalon állva bal oldali pajzs blokkol-e).
+- **Szélsőérték teszt:** Ellenőrizni kell, hogy $Gold < 0$ állapot nem fordulhat-e elő vásárláskor.
+- **Stressz teszt:** 10 perc folyamatos, gyors kattintás mellett figyelni a memóriahasználatot (Memory leak ellenőrzés).
 
 ---
-
-**M.A.K.E Kft. - Minőség és Innováció**
+**M.A.K.E Kft. - 2025**
