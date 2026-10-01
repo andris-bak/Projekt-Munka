@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClickTheDOG.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9206a06d4d7b70c035245b22059095f5ae18fcea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+188884e6dacf0c75127d9be51384c603ac639427")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClickTheDOG.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClickTheDOG.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

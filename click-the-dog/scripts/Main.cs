@@ -665,7 +665,7 @@ public partial class Main : Node2D
 
 		// GM.PlayerData adatok betöltése
 		GM.PlayerData.Level = (int)(long)dataDict["PlayerLevel"];
-		GM.PlayerData.Damage = 1000; //(int)(long)dataDict["PlayerDamage"]; 
+		GM.PlayerData.Damage = (int)(long)dataDict["PlayerDamage"]; 
 		GM.PlayerData.Damage = (int)(long)dataDict["PlayerDamage"]; 
 		GM.PlayerData.PalaDamage = (int)(long)dataDict["PaladinDamage"];
 		GM.PlayerData.PalaLevel = (int)(long)dataDict["PaladinLevel"];  

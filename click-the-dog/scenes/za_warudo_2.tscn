@@ -257,7 +257,7 @@ offset_top = 200.00002
 offset_right = 313.12
 offset_bottom = 219.00002
 scale = Vector2(1.41, 1.41)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("9_w6ytf")
 text = "Health: "
 
@@ -267,7 +267,7 @@ offset_top = 63.999992
 offset_right = 85.059364
 offset_bottom = 91.99999
 scale = Vector2(1.095, 1.095)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("9_w6ytf")
 theme_override_font_sizes/font_size = 24
 text = " Lvl: "
@@ -277,7 +277,7 @@ offset_left = 32.0
 offset_right = 109.0
 offset_bottom = 31.0
 scale = Vector2(1.18, 1.18)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("9_w6ytf")
 theme_override_font_sizes/font_size = 27
 
@@ -287,7 +287,7 @@ offset_top = 88.0
 offset_right = 79.0
 offset_bottom = 111.0
 scale = Vector2(1.095, 1.095)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("9_w6ytf")
 text = "Price:"
 
@@ -298,7 +298,7 @@ offset_top = 244.0
 offset_right = 333.12
 offset_bottom = 263.0
 scale = Vector2(1.41, 1.41)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("9_w6ytf")
 text = "Time: "
 
@@ -326,25 +326,25 @@ position = Vector2(205.5, 178.5)
 
 [node name="Fire" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(320, 268)
+position = Vector2(320, 276)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("26_dxajx")
 
 [node name="Earth" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(320, 268)
+position = Vector2(320, 276)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("27_x02lv")
 
 [node name="Air" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(320, 268)
+position = Vector2(320, 276)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("28_q3mx2")
 
 [node name="Water" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(320, 268)
+position = Vector2(320, 276)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("29_fxjoi")
 

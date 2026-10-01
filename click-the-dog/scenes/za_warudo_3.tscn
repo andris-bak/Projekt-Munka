@@ -149,7 +149,7 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8ie2k"]
 
-[node name="za_warudo_3" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "Sign", "MENU", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "optionsMenuLayer", "GoNext", "PauseOverLay", "PlayerFire", "PlayerWater", "PlayerAir", "PlayerEarth", "Elements")]
+[node name="za_warudo_3" type="Node2D" node_paths=PackedStringArray("CoinLabel", "HPLabel", "bossLabel", "LevelLabel", "LevelPrice", "Sign", "Shield", "Fire", "Earth", "Air", "Water", "HPBar", "PlayerSprite", "GoNext", "PlayerFire", "PlayerWater", "PlayerAir", "PlayerEarth", "Elements")]
 script = ExtResource("1_j7tr0")
 CoinLabel = NodePath("Coins")
 HPLabel = NodePath("Health")
@@ -157,7 +157,6 @@ bossLabel = NodePath("Time")
 LevelLabel = NodePath("Level")
 LevelPrice = NodePath("Price")
 Sign = NodePath("Sign")
-MENU = NodePath("Sign")
 Shield = NodePath("Shield")
 Fire = NodePath("Fire")
 Earth = NodePath("Earth")
@@ -165,9 +164,7 @@ Air = NodePath("Air")
 Water = NodePath("Water")
 HPBar = NodePath("ProgressBar")
 PlayerSprite = NodePath("MC")
-optionsMenuLayer = NodePath("MENU/OptionsMenuLayer")
 GoNext = NodePath("GoNext")
-PauseOverLay = NodePath("MENU/PauseOverLay")
 PlayerFire = NodePath("Elements/PlayerFire")
 PlayerWater = NodePath("Elements/PlayerWater")
 PlayerAir = NodePath("Elements/PlayerAir")
@@ -809,9 +806,3 @@ text = "Exit"
 [connection signal="pressed" from="LvlupButtonColored/LVL" to="." method="UpdateLevel"]
 [connection signal="pressed" from="GoNext/ChangeMapButton" to="." method="OnChangeMapPressed"]
 [connection signal="pressed" from="Sign/Hero" to="." method="HeroHire"]
-[connection signal="pressed" from="MENU/OptionsMenuLayer/CloseButton" to="." method="OnMenuClosed"]
-[connection signal="pressed" from="MENU/Menu2/Music/OpenMenu" to="." method="OnOptionsMenuOpened"]
-[connection signal="pressed" from="MENU/Menu2/Save/Savebutton" to="." method="SaveGame"]
-[connection signal="pressed" from="MENU/Menu2/DeleteSave/Delete" to="." method="DeleteSave"]
-[connection signal="pressed" from="MENU/Menu2/ResumeIcon/ResumeButton" to="." method="ResumeButton"]
-[connection signal="pressed" from="MENU/Menu2/ExitButton/Exit" to="." method="OnQuitButtonPressed"]
