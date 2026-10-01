@@ -835,6 +835,7 @@ text = "150"
 [connection signal="pressed" from="Enemy/Click" to="." method="OnClickButton"]
 [connection signal="pressed" from="LvlupButtonColored/TextureButton" to="." method="OnLevelClickButton"]
 [connection signal="pressed" from="GoNext/ChangeMapButton" to="." method="OnChangeMapPressed"]
+[connection signal="pressed" from="MENU/OptionsMenuLayer/CloseButton" to="." method="OnMenuClosed"]
 [connection signal="pressed" from="MENU/Menu2/Music/OpenMenu" to="." method="OnOptionsMenuOpened"]
 [connection signal="pressed" from="MENU/Menu2/DeleteSave/Delete" to="." method="DeleteSave"]
 [connection signal="pressed" from="MENU/Menu2/ResumeIcon/ResumeButton" to="." method="ResumeButton"]
